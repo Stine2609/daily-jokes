@@ -1,6 +1,5 @@
-return;
 // HTTP fetch example
-fetch('http://ip.jsontest.com/')
+fetch('http://localhost:3000')
     .then((response) => response.json())
     .then((responseData) => {
         console.log('response object:', responseData)
