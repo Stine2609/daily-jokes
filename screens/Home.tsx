@@ -1,14 +1,11 @@
-import React from "react";
 import { Text, View } from "react-native";
-import GradientBackground from "../components/GradientBackground";
 import Button1 from "../components/Button1";
+import ScreenView from "../components/ScreenView";
 
 export default function Home() {
     return(
-        <View>
-            <Text>Testy</Text>
+        <ScreenView>
             <Button1 />
-            <GradientBackground />
-        </View>
+        </ScreenView>
     )
 }
