@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'Digitalt',
         letterSpacing: 3,
-        
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: {width: 0, height: 2},
-        textShadowRadius: 10
+
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: 0, height: 2.5},
+        textShadowRadius: 4
     }
 })
