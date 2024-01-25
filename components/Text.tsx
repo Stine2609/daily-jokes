@@ -4,11 +4,13 @@ import { useFonts } from 'expo-font';
 
 interface TextProps {
     children?: ReactNode;
-    style?: StyleProp<TextStyle>
+    style?: StyleProp<TextStyle>;
+    shadow?: Boolean;
+    size?: number;
 }
 
 export default function Text(props: TextProps) {
-    const {children, style} = props;
+    const {children, style, shadow, size} = props;
 
     const [fontsLoaded] = useFonts({
         'Digitalt': require('../assets/fonts/Digitalt.otf'),
@@ -20,7 +22,12 @@ export default function Text(props: TextProps) {
     }
 
     return(
-        <RNText style={[styles.text, style]}>
+        <RNText style={[
+            style,
+            styles.text,
+            shadow ? styles.shadow : null,
+            size ? {fontSize: size} : null,
+        ]}>
             {children}
         </RNText>
     )
@@ -30,7 +37,11 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'Digitalt',
         letterSpacing: 3,
+        color: "white",
+        fontSize: 18,
+    },
 
+    shadow: {
         textShadowColor: 'rgba(0, 0, 0, 0.5)',
         textShadowOffset: {width: 0, height: 2.5},
         textShadowRadius: 4

@@ -1,6 +1,7 @@
-import { Text } from "react-native";
+import Text from "../components/Text";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./Home";
+import HeaderOptions from "../components/header/HeaderOptions";
 
 const Stack = createStackNavigator();
 
@@ -10,21 +11,7 @@ export default function AppNavigationStack() {
             <Stack.Screen
 				name="Home"
 				component={Home}
-				options={({ route }) => ({
-					headerTitle: () => (
-                        <Text>Home screen</Text>
-					),
-					headerTitleAlign: "center",
-					// headerStyle: standardHeaderStyle,
-					headerLeft: () => (
-						<>
-						</>
-					),
-					headerRight: () => (
-						<>
-						</>
-					),
-				})}
+				options={HeaderOptions}
 			/>
         </Stack.Navigator>
     )
