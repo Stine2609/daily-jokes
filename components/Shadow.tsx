@@ -3,28 +3,33 @@
  * Inserted before the contents of the component in which it is used
  */
 
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, DimensionValue } from "react-native";
 
 interface ShadowProps{
     /** 
-    * @property The full height of the container + the height of the shadow
+    * @property The height of the container on which the shadow is applied
     */
     height: number;
     /** 
-    * @property The full width of the container + the width of the horizontal border on both sides
+    * @property The height of the shadow
     */
-    width: number;
+    shadowHeight?: number;
+    /** 
+    * @property The full width of the container + the width of the horizontal border on both sides
+    * can be a percentage value
+    */
+    width: DimensionValue;
     backgroundColor?: string;
     borderRadius: number;
 }
 
 export default function Shadow(props:ShadowProps) {
-    const { height, width, borderRadius, backgroundColor = "rgba(0,0,0, 0.15)"} = props;
+    const { height, shadowHeight = 4, width, borderRadius, backgroundColor = "rgba(0,0,0, 0.15)"} = props;
     return(
         <View style={[
             styles.container,
             {
-                height: height,
+                height: height + shadowHeight,
                 width: width,
                 borderRadius: borderRadius,
                 backgroundColor: backgroundColor,

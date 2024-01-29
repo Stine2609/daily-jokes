@@ -1,11 +1,19 @@
 import { View, StyleSheet } from "react-native"
 import TabButton from "./TabButton"
 import colors from "../Colors"
+import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native"
 
-export default function TabBar() {
+interface TabBarProps {
+    height?: number;
+}
+
+export default function TabBar(props:TabBarProps) {
+    const navigation = useNavigation<NavigationProp<ParamListBase>>();
+    const { height = 100 } = props;
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {height: height}]}>
             <TabButton
+                onPress={() => navigation.navigate("Home")}
                 label="Home"
                 background={colors.tabBar.home.background}
                 highlight={colors.tabBar.home.highlight}
@@ -31,11 +39,15 @@ export default function TabBar() {
 
 const styles = StyleSheet.create({
     container: {
-        width: "90%",
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
         flexDirection: "row",
         gap: 20,
         backgroundColor: colors.tabBar.background,
-        padding: 10,
+        // padding: 10,
         justifyContent: "center",
         alignItems: "center",
     }

@@ -1,8 +1,8 @@
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import Svg, { Polygon } from "react-native-svg";
-import Text from "./Text";
-import colors from "./Colors";
-import Shadow from "./Shadow";
+import Text from "../Text";
+import colors from "../Colors";
+import Shadow from "../Shadow";
 
 interface ButtonProps {
     leftColor?: string;
@@ -16,8 +16,8 @@ interface ButtonProps {
 export default function Button(props:ButtonProps) {
     const { leftColor = "#D6AFFE", rightColor = "#C286FF", highlightColor = "#A75CF4", borderRadius = 22, onPress, label } = props;
     return (
-        <TouchableOpacity onPress={() => {onPress}}>
-            <Shadow height={54} width={105} borderRadius={borderRadius} />
+        <TouchableOpacity onPress={onPress}>
+            <Shadow height={50} width={105} borderRadius={borderRadius} />
             <View style={[styles.container, {borderRadius: borderRadius}]}>
                 <View style={[styles.background, {backgroundColor: highlightColor}]} />
                 <View style={styles.innerButtonContainer}>

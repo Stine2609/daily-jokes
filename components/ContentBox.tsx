@@ -2,11 +2,11 @@
  * Container for displaying text and various other informations to the user
  * 
  */
-
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "./Colors";
 import Text from "./Text";
+import Shadow from "./Shadow";
 
 interface ContentBoxProps {
     children?: ReactNode;
@@ -17,23 +17,41 @@ interface ContentBoxProps {
 
 export default function ContentBox(props:ContentBoxProps) {
     const {children, title, text, textColor = colors.contentBox.text} = props;
+
+    const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
+
+    // Whenever the layout changes, check the height of the contentBox,
+    // This assures the shadow knows the height of the box, even when it become bigger than 200
+    const onLayout = (event: any) => {
+        const { height } = event.nativeEvent.layout;
+        setContainerHeight(height);
+    };
+
     return(
         <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text>{title}</Text>
-            </View>
-            {text && (
-                <View style={styles.textContainer}>
-                    <Text color={textColor}>{text}</Text>
+            <Shadow height={containerHeight} shadowHeight={4} width={"80%"} borderRadius={20} />
+            <View style={styles.contentBoxContainer} onLayout={onLayout}>
+                <View style={styles.titleContainer}>
+                    <Text>{title}</Text>
                 </View>
-            )}
-            {children}
+                {text && (
+                    <View style={styles.textContainer}>
+                        <Text color={textColor}>{text}</Text>
+                    </View>
+                )}
+                {children}
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        width: "100%",
+        alignItems: "center"
+    },
+
+    contentBoxContainer: {
         width: "80%",
         paddingHorizontal: 20,
         paddingVertical: 14,

@@ -1,17 +1,27 @@
-import { Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import ScreenView from "../components/ScreenView";
-import ToggleButton from "../components/ToggleButton";
-import PlayButton from "../components/PlayButton";
+import PlayButton from "../components/buttons/PlayButton";
 import ContentBox from "../components/ContentBox";
-import TabBar from "../components/TabBar/TabBar";
 
-export default function Home() {
+interface HomeProps {
+    navigation: {
+        navigate: (name: string) => void;
+    };
+}
+
+export default function Home({ navigation }: HomeProps) {
+
     return(
-        <ScreenView>
-            <ToggleButton label="Write" />
-            <PlayButton label="Play" />
-            <ContentBox title="Daily contest" text="Hey"/>
-            <TabBar />
+        <ScreenView style={styles.container}>
+            <ContentBox title="Daily contest" text='"The theme for today is punny jokes!"'/>
+            <PlayButton onPress={() => navigation.navigate("Daily")} label="Play" />
         </ScreenView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 50,
+        gap: 100,
+    }
+})

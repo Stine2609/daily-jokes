@@ -1,13 +1,15 @@
 import Button from "./Button";
-import colors from "./Colors";
+import colors from "../Colors";
 
 interface PlayButtonProps {
     label?: string;
+    onPress?: () => void;
 }
 
-export default function PlayButton({ label }: PlayButtonProps) {
+export default function PlayButton({ label, onPress }: PlayButtonProps) {
     return (
         <Button
+            onPress={onPress}
             label={label}
             leftColor={colors.playButton.bgLeft}
             rightColor={colors.playButton.bgRight}

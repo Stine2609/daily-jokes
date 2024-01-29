@@ -7,23 +7,23 @@ interface TabButtonProps {
     label: string;
     background: string;
     highlight: string;
+    onPress?: () => void;
 }
 
 const width = 64;
 const borderWidth = 3;
 const shadowWidth = width + borderWidth * 2;
 
-const innerButtonHeight = 64;
+const innerButtonHeight = 60;
 const backgroundHeight = innerButtonHeight + 14;
-const shadowHeight = backgroundHeight + 5;
 
 const borderRadius = 15;
 
 export default function TabButton(props:TabButtonProps) {
-    const { label, background, highlight } = props;
+    const { label, background, highlight, onPress } = props;
     return(
-        <TouchableOpacity>
-            <Shadow width={shadowWidth} height={shadowHeight} borderRadius={borderRadius} />
+        <TouchableOpacity onPress={onPress}>
+            <Shadow width={shadowWidth} height={backgroundHeight} shadowHeight={4} borderRadius={borderRadius} />
             <View style={styles.container}>
                 <View style={[styles.background, {backgroundColor: highlight}]} />
                 <View style={[styles.innerButtonContainer, {backgroundColor: background}]}>
