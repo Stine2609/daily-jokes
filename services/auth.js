@@ -45,7 +45,52 @@ export const register = async (email, password, name) => {
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error('Login failed');
+            throw new Error('Register failed');
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+export const logout = async (token) => {
+    try {
+        const response = await fetch(`${apiUrl}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Logout failed');
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+export const changePassword = async (token, newPassord) => {
+    try {
+        const response = await fetch(`${apiUrl}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: {
+                "password": newPassord,
+            },
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Logout failed');
         }
     } catch (error) {
         console.error(error);
