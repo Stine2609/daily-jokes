@@ -56,6 +56,8 @@ const colors = {
 
     text: {
         default: "white",
+        contentBox: "#3B0E72",
+        placeholder: "#9D86B9"
     },
 
     tabBar: {

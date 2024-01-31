@@ -26,8 +26,8 @@ export default function Text(props: TextProps) {
     return(
         <RNText style={[
             style,
-            styles.text,
-            shadow ? styles.shadow : null,
+            textStyles.text,
+            shadow ? textStyles.shadow : null,
             {fontSize: size},
             {color: color},
         ]}>
@@ -36,11 +36,12 @@ export default function Text(props: TextProps) {
     )
 }
 
-const styles = StyleSheet.create({
+const textStyles = StyleSheet.create({
     text: {
         fontFamily: "Digitalt",
         letterSpacing: 1,
         color: colors.text.default,
+        fontSize: 18,
     },
 
     shadow: {
@@ -49,3 +50,5 @@ const styles = StyleSheet.create({
         textShadowRadius: 4
     }
 })
+
+export { textStyles };

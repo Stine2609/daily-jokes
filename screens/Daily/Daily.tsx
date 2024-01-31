@@ -1,45 +1,32 @@
 import ScreenView from "../../components/ScreenView";
 import StylizedTitle from "../../components/StylizedTitle";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import DailyTabBar from "./DailyTabBar";
 import Write from "./Write";
 import Rate from "./Rate";
 import MyJokes from "./MyJokes";
 import { View } from "react-native";
-
-const Tab = createMaterialTopTabNavigator();
+import ContentTab from "../../components/ContentTab";
 
 export default function Daily() {
-    const initialTab = "Write";
 
     return (
-        <ScreenView style={{}}>
+        <ScreenView style={{justifyContent: "flex-start"}}>
             <StylizedTitle />
-            <View style={{width: "100%", height: "100%"}}>
-                <Tab.Navigator
-                    initialRouteName={initialTab}
-                    tabBar={(props) => <DailyTabBar {...props} />}
-                    screenOptions={({ route }) => ({
-                        swipeEnabled: true,
-                        headerShown: false,
-                        
-                    })}
-                    sceneContainerStyle={{backgroundColor: "transparent"}}
-                >
-                    <Tab.Screen 
-                        name="Write"
-                        component={Write}
-                    />
-                    <Tab.Screen 
-                        name="Rate"
-                        component={Rate}
-                    />
-                    <Tab.Screen 
-                        name="My Jokes"
-                        component={MyJokes}
-                    />
-                </Tab.Navigator>
-            </View>
+            <ContentTab 
+                tabs={[
+                    {
+                        name: "Write",
+                        component: <Write />
+                    },
+                    {
+                        name: "Rate",
+                        component: <Rate />
+                    },
+                    {
+                        name: "My Jokes",
+                        component: <MyJokes />
+                    },
+                ]}
+            />
         </ScreenView>
     )
 }
