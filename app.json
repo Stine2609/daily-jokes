@@ -34,7 +34,8 @@
             "./assets/fonts/Digitalt.otf"
           ]
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }
