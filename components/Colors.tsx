@@ -51,6 +51,7 @@ const colors = {
     contentBox: {
         background: "white",
         highlight: "#4CDAFE",
+        backgroundHighlight: "#D1D8FF",
         text: "#3B0E72",
     },
 

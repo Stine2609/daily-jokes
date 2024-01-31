@@ -59,7 +59,7 @@ export default function Button(props:ButtonProps) {
             <View style={[
                 styles.container,
                 {
-                    borderWidth: 2.5,
+                    borderWidth: borderWidth,
                     width: buttonContainerWidth,
                     height: buttonHeight + 10,
                     borderRadius: borderRadius
@@ -115,8 +115,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden", // Make sure SVG does not overflow
-        // borderBottomRightRadius: 20,
-        // borderBottomLeftRadius: 20,
     },
 
     buttonText: {

@@ -29,7 +29,11 @@ export default function ContentBox(props:ContentBoxProps) {
 
     return(
         <View style={styles.container}>
-            <Shadow height={containerHeight} shadowHeight={4} width={"80%"} borderRadius={20} />
+            <Shadow height={containerHeight} shadowHeight={8} width={"80%"} borderRadius={20} />
+            <View style={[
+                    styles.background,
+                    {height: containerHeight + 4}
+                ]} />
             <View style={styles.contentBoxContainer} onLayout={onLayout}>
                 <View style={styles.titleContainer}>
                     <Text>{title}</Text>
@@ -59,6 +63,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.contentBox.background,
         minHeight: 200,
         gap: 10
+    },
+
+    background: {
+        position: "absolute",
+        backgroundColor: colors.contentBox.backgroundHighlight,
+        width: "80%",
+        borderRadius: 20,
     },
 
     titleContainer: {

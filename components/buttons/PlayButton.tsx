@@ -14,6 +14,8 @@ export default function PlayButton({ label, onPress }: PlayButtonProps) {
             leftColor={colors.playButton.bgLeft}
             rightColor={colors.playButton.bgRight}
             highlightColor={colors.playButton.highlight}
+            heightPercentage={35}
+            widthPercentage={95}
         />
     );
 }
