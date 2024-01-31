@@ -1,3 +1,5 @@
+const environment = development;
+
 const config = {
     production: {
         apiUrl: 'https://dailyjokes.app/api/v1',
@@ -7,6 +9,6 @@ const config = {
     },
 };
 
-export const getApiUrl = (environment) => {
+export const getApiUrl = () => {
     return config[environment].apiUrl;
 };

@@ -1,8 +1,6 @@
 import { getApiUrl } from '../config.js';
 
-const currentEnvironment = 'development';
-
-const apiUrl = getApiUrl(currentEnvironment);
+const apiUrl = getApiUrl();
 
 export const pingApi = async () => {
     try {
