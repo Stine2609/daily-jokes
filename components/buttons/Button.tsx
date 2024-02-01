@@ -3,6 +3,7 @@ import Svg, { Polygon } from "react-native-svg";
 import Text from "../Text";
 import colors from "../Colors";
 import Shadow from "../Shadow";
+import {percentageOf as p} from "../../utils/utils";
 
 interface ButtonProps {
     leftColor?: string;
@@ -30,11 +31,6 @@ export default function Button(props:ButtonProps) {
         borderWidth = 2.5,
     } = props;
 
-    // Calculates percentage of a number
-    function p(perc: number, num: number) {
-        return perc / 100 * num
-    }
-
     const buttonWidth = p(widthPercentage, 100);
     const buttonContainerWidth = buttonWidth + (borderWidth * 2);
 
@@ -60,6 +56,7 @@ export default function Button(props:ButtonProps) {
                 styles.container,
                 {
                     borderWidth: borderWidth,
+                    borderTopWidth: 2.5,
                     width: buttonContainerWidth,
                     height: buttonHeight + 10,
                     borderRadius: borderRadius

@@ -9,7 +9,9 @@ export default function Write() {
         <View style={styles.container}>
             <ContentBox title="Punny Jokes">
                 <InputField placeholder="Write your joke here..." />
-                <SubmitButton label="Sumbit" />
+                <View style={{alignItems: "center"}}>
+                    <SubmitButton label="Sumbit" />
+                </View>
             </ContentBox>
         </View>
     )
