@@ -3,7 +3,7 @@
  * 
  */
 import { ReactNode, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import colors from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
@@ -13,10 +13,11 @@ interface ContentBoxProps {
     title: string;
     text?: string;
     textColor?: string;
+    style?: StyleProp<ViewStyle>;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
-    const {children, title, text, textColor = colors.contentBox.text} = props;
+    const {children, title, text, textColor = colors.contentBox.text, style} = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
 
@@ -34,7 +35,7 @@ export default function ContentBox(props:ContentBoxProps) {
                     styles.background,
                     {height: containerHeight + 4}
                 ]} />
-            <View style={styles.contentBoxContainer} onLayout={onLayout}>
+            <View style={[style, styles.contentBoxContainer]} onLayout={onLayout}>
                 <View style={styles.titleContainer}>
                     <Text>{title}</Text>
                 </View>

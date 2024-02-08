@@ -1,39 +1,43 @@
-import { ReactNode } from "react";
-import { Text as RNText, StyleProp, TextStyle, StyleSheet } from "react-native";
+import React, { ReactNode } from "react";
+import { Text as RNText, StyleProp, TextStyle, StyleSheet, LayoutChangeEvent } from "react-native";
 import colors from "./Colors";
 import { useFonts } from "expo-font";
 
 interface TextProps {
     children?: ReactNode;
     style?: StyleProp<TextStyle>;
-    shadow?: Boolean;
+    shadow?: boolean;
     size?: number;
     color?: string;
+    defaultLineHeight?: boolean;
+    onLayout?: (event: LayoutChangeEvent) => void;
 }
 
 export default function Text(props: TextProps) {
-    const {children, style, shadow = false, size = 18, color = "white"} = props;
+    const { children, style, shadow = false, size = 18, color = "white", defaultLineHeight = false, onLayout } = props;
 
     const [fontsLoaded] = useFonts({
         "Digitalt": require("../assets/fonts/Digitalt.otf"),
     });
-    
-    // Render null or a placeholder if fonts aren't loaded
+
     if (!fontsLoaded) {
         return null;
     }
 
-    return(
-        <RNText style={[
-            style,
-            textStyles.text,
-            shadow ? textStyles.shadow : null,
-            {fontSize: size},
-            {color: color},
-        ]}>
+    return (
+        <RNText
+            onLayout={onLayout}
+            style={[
+                style,
+                textStyles.text,
+                shadow ? textStyles.shadow : null,
+                { fontSize: size },
+                { color: color },
+                defaultLineHeight ? null : { lineHeight: 22 },
+            ]}>
             {children}
         </RNText>
-    )
+    );
 }
 
 const textStyles = StyleSheet.create({

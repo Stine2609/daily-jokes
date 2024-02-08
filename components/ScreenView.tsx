@@ -5,7 +5,7 @@
  */
 
 import { ReactNode } from "react";
-import { View, Dimensions, SafeAreaView, KeyboardAvoidingView, ScrollView, StyleSheet, StyleProp, TextStyle, StatusBar } from "react-native";
+import { View, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, StyleProp, TextStyle, StatusBar } from "react-native";
 import GradientBackground from "../components/GradientBackground";
 import TabBar from "./TabBar/TabBar";
 
@@ -16,7 +16,9 @@ interface ScreenViewProps {
 }
 
 const HEADER_HEIGHT = 64 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
-const TAB_BAR_HEIGHT = 100;
+export const TAB_BAR_HEIGHT = 100;
+
+export const SCREEN_HEIGHT = Dimensions.get("screen").height - (HEADER_HEIGHT + TAB_BAR_HEIGHT)
 
 export default function ScreenView(props: ScreenViewProps) {
     const {children, style, scrollView = true} = props;
@@ -50,8 +52,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
-        paddingTop: HEADER_HEIGHT + 0, // Plus some whitespace
-        paddingBottom: TAB_BAR_HEIGHT + 20, 
-        minHeight: Dimensions.get("screen").height - (HEADER_HEIGHT + TAB_BAR_HEIGHT),
+        marginTop: HEADER_HEIGHT,
+        // marginBottom: TAB_BAR_HEIGHT,
+        minHeight: SCREEN_HEIGHT - 24,
     },
 })

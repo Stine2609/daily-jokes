@@ -11,11 +11,6 @@ const colors = {
         text: "white",
     },
 
-    backButton: {
-        background: "#FFF635",
-        highlight: "#FFC90C",
-    },
-
     submitButton: {
         bgLeft: "#FFC715",
         bgRight: "#FFB213",
@@ -28,6 +23,11 @@ const colors = {
         highlight: "#4EC307",
     },
 
+    backButton: {
+        background: "#FFF635",
+        highlight: "#FFC90C",
+    },
+
     noButton: {
         background: "#FF4672",
         highlight: "#E90038",
@@ -36,6 +36,11 @@ const colors = {
     yesButton: {
         background: "#92F200",
         highlight: "#39BD01",
+    },
+
+    expandButton: {
+        background: "#C286FF",
+        highlight: "#A75CF4",
     },
 
     toggleButton: {
@@ -63,7 +68,7 @@ const colors = {
 
     tabBar: {
         border: "white",
-        background: "white",
+        background: "rgba(255,255,255,0.5)",
         home: {
             background: "#4CDAFE",
             highlight: "#09B9FF",

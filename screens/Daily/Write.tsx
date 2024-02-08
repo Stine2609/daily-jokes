@@ -1,4 +1,5 @@
 import { View, StyleSheet } from "react-native";
+import ScreenView from "../../components/ScreenView";
 import ContentBox from "../../components/ContentBox";
 import Text from "../../components/Text";
 import InputField from "../../components/InputField";

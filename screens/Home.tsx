@@ -21,7 +21,6 @@ export default function Home({ navigation }: HomeProps) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
         gap: 100,
     }
 })
