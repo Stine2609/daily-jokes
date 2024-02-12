@@ -14,8 +14,12 @@ interface PlayersDisplayProps {
 
 export default function PlayersDisplay(props: PlayersDisplayProps) {
     const {users} = props;
-    const displayedUsers = users.slice(0, 4);
-    const remainingCount = users.length - 4;
+    // If there are 5 players, display them, if there are more, display just 4
+    const displayedUsers = users.slice(0, users.length == 5 ? 5 : 4);
+    const remainingCount = users.length == 5 ? 0 : users.length - 4;
+
+    // If no users are provided, return nothing
+    if(users.length <= 0) return null;
 
     return (
         <View style={styles.container}>

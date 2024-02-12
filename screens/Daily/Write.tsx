@@ -1,9 +1,8 @@
 import { View, StyleSheet } from "react-native";
-import ScreenView from "../../components/ScreenView";
 import ContentBox from "../../components/ContentBox";
-import Text from "../../components/Text";
 import InputField from "../../components/InputField";
 import SubmitButton from "../../components/buttons/SumbitButton";
+import MascotTip from "../../components/MascotTip";
 
 export default function Write() {
     return(
@@ -14,6 +13,7 @@ export default function Write() {
                     <SubmitButton label="Sumbit" />
                 </View>
             </ContentBox>
+            <MascotTip />
         </View>
     )
 }

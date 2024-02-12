@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Animated, Modal, ScrollView } from 'react-native';
 import { PanGestureHandler, State, GestureHandlerStateChangeEvent } from 'react-native-gesture-handler';
 import ContentBox from "./ContentBox";
+import { LinearGradient } from 'expo-linear-gradient';
 import Text from "./Text";
 import NoButton from "./buttons/NoButton";
 import YesButton from "./buttons/YesButton";
@@ -13,6 +14,32 @@ export default function SwipePicker() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
     const translateX = new Animated.Value(0);
+
+    useEffect(() => {
+        // Animation sequence for swiping hint
+        const hintAnimation = Animated.sequence([
+            Animated.timing(translateX, {
+                toValue: -40, // Slightly to the left
+                delay: 1000,
+                duration: 500,
+                useNativeDriver: true,
+            }),
+            Animated.timing(translateX, {
+                toValue: 40, // Then slightly to the right
+                delay: 500,
+                duration: 700,
+                useNativeDriver: true,
+            }),
+            Animated.timing(translateX, {
+                toValue: 0, // Return to initial position
+                delay: 1000,
+                duration: 500,
+                useNativeDriver: true,
+            }),
+        ]);
+
+        hintAnimation.start();
+    }, []);
 
     // Controls the opacity of the next card
     const nextCardOpacity = translateX.interpolate({
@@ -63,6 +90,20 @@ export default function SwipePicker() {
         });
     };
 
+    // Opacity for the left (red) overlay
+    const leftOverlayOpacity = translateX.interpolate({
+        inputRange: [-100, 0],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+    });
+
+    // Opacity for the right (green) overlay
+    const rightOverlayOpacity = translateX.interpolate({
+        inputRange: [0, 100],
+        outputRange: [0, 1],
+        extrapolate: 'clamp',
+    });
+
     const joke = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 
     return (
@@ -87,7 +128,23 @@ export default function SwipePicker() {
                         position: 'absolute',
                         width: '100%',
                     }}>
-                    <ContentBox title={`Punny Jokes #${currentIndex}`}>
+                    <ContentBox style={{overflow: "hidden"}} title={`Punny Jokes #${currentIndex}`}>
+                    <Animated.View style={[styles.overlay, styles.leftOverlay, {opacity: leftOverlayOpacity}]}>
+                        <LinearGradient
+                            start={{ x: 0, y: 1 }}
+                            end={{ x: 1, y: 1 }}
+                            colors={[colors.noButton.highlight, 'transparent']}
+                            style={{flex: 1}}
+                        />
+                    </Animated.View>
+                    <Animated.View style={[styles.overlay, styles.rightOverlay, {opacity: rightOverlayOpacity}]}>
+                        <LinearGradient
+                            start={{ x: 1, y: 1 }}
+                            end={{ x: 0, y: 1 }}
+                            colors={[colors.yesButton.highlight, 'transparent']}
+                            style={{flex: 1}}
+                        />
+                    </Animated.View>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
                             <Text color={colors.text.contentBox}>
                                 {joke}
@@ -158,5 +215,18 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
         marginTop: 15,
+    },
+
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        width: '75%',
+    },
+    leftOverlay: {
+        left: 0,
+    },
+    rightOverlay: {
+        right: 0,
     },
 });
