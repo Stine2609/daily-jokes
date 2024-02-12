@@ -5,12 +5,14 @@ import Rate from "./Rate";
 import MyJokes from "./MyJokes";
 import { View } from "react-native";
 import ContentTab from "../../components/ContentTab";
+import MascotTip from "../../components/MascotTip";
 
 export default function Daily() {
 
     return (
         <ScreenView style={{justifyContent: "flex-start"}}>
             <StylizedTitle />
+            <MascotTip />
             <ContentTab 
                 tabs={[
                     {

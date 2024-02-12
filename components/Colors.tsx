@@ -68,7 +68,8 @@ const colors = {
 
     tabBar: {
         border: "white",
-        background: "rgba(255,255,255,0.5)",
+        // background: "rgba(255,255,255,0.5)",
+        background: "white",
         home: {
             background: "#4CDAFE",
             highlight: "#09B9FF",

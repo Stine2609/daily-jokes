@@ -1,22 +1,25 @@
-import { useEffect, useRef } from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "./Text";
 import PulseAnimation from "./PulseAnimation";
 
-export default function StylizedTitle() {
+interface StylizedTitleProps {
+    size?: number;
+}
+
+export default function StylizedTitle({size = 35}: StylizedTitleProps) {
     return(
         <PulseAnimation>
             <View style={styles.topContainer}>
                 <View style={styles.word1}>
-                    <Text size={55} defaultLineHeight>The</Text>
+                    <Text size={size} defaultLineHeight>The</Text>
                 </View>
                 <View style={styles.word2}>
-                    <Text size={55} defaultLineHeight>Daily</Text>
+                    <Text size={size} defaultLineHeight>Daily</Text>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
                 <View style={styles.word3}>
-                    <Text size={55} defaultLineHeight>Contest</Text>
+                    <Text size={size} defaultLineHeight>Contest</Text>
                 </View>
             </View>
         </PulseAnimation>
