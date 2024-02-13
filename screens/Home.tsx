@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import ScreenView from "../components/ScreenView";
 import PlayButton from "../components/buttons/PlayButton";
 import ContentBox from "../components/ContentBox";
 import PlayersDisplay from "../components/avatar/PlayersDisplay";
+import { useContest } from "../hooks/useContest";
 
 interface HomeProps {
     navigation: {
@@ -12,11 +14,14 @@ interface HomeProps {
 
 export default function Home({ navigation }: HomeProps) {
 
+    const topic = useContest().topic;
+
     return(
         <ScreenView style={styles.container}>
             <ContentBox
                 title="Daily contest"
-                text='"The theme for today is punny jokes!"'
+                text={`"The theme for today is ${topic}!"`}
+                isLoading={topic == ""}
             >
                 <PlayersDisplay users={[
                     {"id": 1, "avatarId": 5},
@@ -27,8 +32,8 @@ export default function Home({ navigation }: HomeProps) {
                     {"id": 6, "avatarId": 11},
                     {"id": 7, "avatarId": 1}
                 ]} />
+                <PlayButton onPress={() => navigation.navigate("Daily")} label="Play" />
             </ContentBox>
-            <PlayButton onPress={() => navigation.navigate("Daily")} label="Play" />
         </ScreenView>
     )
 }

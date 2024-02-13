@@ -6,6 +6,8 @@ interface ToggleButtonProps {
     onPress?: () => void;
 }
 
+// TODO: merge playButton, Togglebutton and SubmitButton 
+
 export default function ToggleButton({ label, onPress }: ToggleButtonProps) {
     return (
         <Button

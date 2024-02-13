@@ -3,14 +3,28 @@ import ContentBox from "../../components/ContentBox";
 import InputField from "../../components/InputField";
 import SubmitButton from "../../components/buttons/SumbitButton";
 import MascotTip from "../../components/MascotTip";
+import { create } from "../../services/joke";
 
 export default function Write() {
+
+    let submitJoke = async () => {
+        let return_value = await create({
+            userId: 9999,
+            textBody: "textbodyhere",
+            createTimeStamp: "2024-02-13-00:00:00",
+            score: 0,
+        })
+
+        console.log("poosted joke: ");
+        console.log(JSON.stringify(return_value));
+    }
+
     return(
         <View style={styles.container}>
-            <ContentBox title="Punny Jokes">
+            <ContentBox>
                 <InputField placeholder="Write your joke here..." />
                 <View style={{alignItems: "center"}}>
-                    <SubmitButton label="Sumbit" />
+                    <SubmitButton onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
             <MascotTip />

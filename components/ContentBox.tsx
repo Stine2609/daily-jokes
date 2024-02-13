@@ -7,17 +7,20 @@ import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import colors from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
+import { useContest } from "../hooks/useContest";
 
 interface ContentBoxProps {
     children?: ReactNode;
-    title: string;
+    title?: string;
     text?: string;
     textColor?: string;
     style?: StyleProp<ViewStyle>;
+    isLoading?: boolean;
+    date?: Date;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
-    const {children, title, text, textColor = colors.contentBox.text, style} = props;
+    const {children, title, text, textColor = colors.contentBox.text, style, isLoading = false, date} = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
 
@@ -28,6 +31,8 @@ export default function ContentBox(props:ContentBoxProps) {
         setContainerHeight(height);
     };
 
+    const contest = useContest(date); 
+
     return(
         <View style={styles.container}>
             <Shadow height={containerHeight} shadowHeight={8} width={"80%"} borderRadius={20} />
@@ -36,15 +41,23 @@ export default function ContentBox(props:ContentBoxProps) {
                     {height: containerHeight + 4}
                 ]} />
             <View style={[style, styles.contentBoxContainer]} onLayout={onLayout}>
-                <View style={styles.titleContainer}>
-                    <Text>{title}</Text>
-                </View>
-                {text && (
-                    <View style={styles.textContainer}>
-                        <Text color={textColor}>{text}</Text>
-                    </View>
-                )}
-                {children}
+                <>
+                    {isLoading ? (
+                        null // TODO: add loading indicator
+                    ) : (
+                        <>
+                            <View style={styles.titleContainer}>
+                                <Text>{title ? title : contest.topic }</Text>
+                            </View>
+                            {text && (
+                                <View style={styles.textContainer}>
+                                    <Text color={textColor}>{text}</Text>
+                                </View>
+                            )}
+                            {children}
+                        </>
+                    )}
+                </>
             </View>
         </View>
     )
