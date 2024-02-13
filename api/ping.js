@@ -2,7 +2,7 @@ import { getApiUrl } from '../config.js';
 
 const apiUrl = getApiUrl();
 
-export const pingApi = async () => {
+export const ping = async () => {
     try {
         const response = await fetch(`${apiUrl}/ping`, {
             method: 'GET'

@@ -1,6 +1,6 @@
 // hooks/useContestTopic.js
 import { useState, useEffect } from 'react';
-import { getContest } from "../services/contest";
+import { getContest } from "../api/contest";
 
 export const useContest = (date?: Date) => {
 
