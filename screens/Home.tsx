@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import ScreenView from "../components/ScreenView";
-import PlayButton from "../components/buttons/PlayButton";
+import Button from "../components/buttons/Button";
 import ContentBox from "../components/ContentBox";
 import PlayersDisplay from "../components/avatar/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
@@ -32,7 +32,7 @@ export default function Home({ navigation }: HomeProps) {
                     {"id": 6, "avatarId": 11},
                     {"id": 7, "avatarId": 1}
                 ]} />
-                <PlayButton onPress={() => navigation.navigate("Daily")} label="Play" />
+                <Button variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
             </ContentBox>
         </ScreenView>
     )

@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import ContentBox from "../../components/ContentBox";
 import InputField from "../../components/InputField";
-import SubmitButton from "../../components/buttons/SumbitButton";
+import Button from "../../components/buttons/Button";
 import MascotTip from "../../components/MascotTip";
 import { create } from "../../services/joke";
 
@@ -24,7 +24,7 @@ export default function Write() {
             <ContentBox>
                 <InputField placeholder="Write your joke here..." />
                 <View style={{alignItems: "center"}}>
-                    <SubmitButton onPress={submitJoke}  label="Sumbit" />
+                    <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
             <MascotTip />

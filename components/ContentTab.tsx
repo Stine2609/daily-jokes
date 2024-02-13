@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native"
 import { ReactNode, useState } from "react";
-import ToggleButton from "./buttons/ToggleButton";
+import Button from "./buttons/Button";
 
 interface ContentTabProps {
     tabs: Array<{
@@ -17,7 +17,8 @@ export default function ContentTab(props: ContentTabProps) {
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
                 {tabs.map((tab, index) =>
-                    <ToggleButton 
+                    <Button
+                        variant="toggle"
                         key={"TabButton-" + index} 
                         onPress={() => setActiveTab(index)} 
                         label={tab.name} 
