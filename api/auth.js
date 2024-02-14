@@ -26,6 +26,27 @@ export const login = async (email, password) => {
     }
 };
 
+export const loginWithToken = async (token) => {
+    try {
+        const response = await fetch(`${apiUrl}/auth/loginWithToken`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Login with token failed');
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
 export const register = async (email, password, name) => {
     try {
         const response = await fetch(`${apiUrl}/auth/register`, {

@@ -1,10 +1,8 @@
-import { login as apiLogin } from "../api/auth";
-import { storeData as secureStoreData } from "../utils/secureStorage";
-import { storeData } from "../utils/storage";
-import { getData as secureGetData } from "../utils/secureStorage";
-import { getData } from "../utils/storage";
+import { login as apiLogin, loginWithToken as apiLoginWithToken } from "../api/auth";
+import { UserDataManager } from "./userDataManager";
 
 export const login = async (email, password) => {
+    console.log("LOGGING IN");
     try {
         let response = await apiLogin(email, password);
 
@@ -19,41 +17,31 @@ export const login = async (email, password) => {
     }
 };
 
-class UserDataManager {
-    static async storeUserData(data) {
-        if (data.token) {
-            await secureStoreData("token", data.token);
-            delete data.token;
+export const loginWithToken = async (token) => {
+    try {
+        let response = await apiLoginWithToken(token);
+
+        if (response.user.token === token) {
+            UserDataManager.storeUserData(response.user);
+            return response.user;
+        } else {
+            throw new Error('Login with token failed');
         }
-
-        await storeData("user", data);
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
+};
 
-    static async storeToken(token) {
-        await secureStoreData("token", token);
-    }
+export const initialize = async () => {
+    let token = await UserDataManager.getToken();
 
-    static async storeUserDetails(data) {
-        await storeData("user", data);
-    }
+    if (token) {
+        let user = await loginWithToken(token);
 
-    static async getToken() {
-        try {
-            const token = await secureGetData("token");
-            return token;
-        } catch (e) {
-            console.error('Error retrieving token', e);
-            throw e;
-        }
-    }
-
-    static async getUserDetails() {
-        try {
-            const userDetails = await getData("user");
-            return userDetails;
-        } catch (e) {
-            console.error('Error retrieving user details', e);
-            throw e;
+        // Token successfully validated
+        if (user.token === token) {
+            
         }
     }
 }

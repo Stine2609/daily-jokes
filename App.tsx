@@ -2,11 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigationStack from './screens/AppNavigationStack';
-import { login } from './services/auth';
+import { initialize, login } from './services/auth';
 
 export default function App() {
 
-    login("bjellanda@gmail.com", "Test123");
+    initialize();
+    //login("bjellanda@gmail.com", "Test123");
 
     return (
         <View style={styles.container}>
