@@ -117,3 +117,25 @@ export const changePassword = async (token, newPassord) => {
         throw error;
     }
 };
+
+export const update = async (token, data) => {
+    try {
+        const response = await fetch(`${apiUrl}/auth/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error('Update user info failed');
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};

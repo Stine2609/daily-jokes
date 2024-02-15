@@ -1,4 +1,4 @@
-import { login as apiLogin, loginWithToken as apiLoginWithToken, register as apiRegister } from "../api/auth";
+import { login as apiLogin, loginWithToken as apiLoginWithToken, register as apiRegister, update as apiUpdate } from "../api/auth";
 import { UserDataManager } from "./userDataManager";
 import { generateRandomCredentials } from "../utils/random";
 
@@ -63,14 +63,31 @@ export const register = async (email, password, name, deviceID = "") => {
     }
 };
 
+export const update = async (data) => {
+    try {
+        let token = await UserDataManager.getToken();
+
+        if (!token) throw new Error('No stored token');
+
+        let response = await apiUpdate(token, data);
+
+        if (response.ok) {
+            return true;
+        } else {
+            throw new Error('Update user info failed');
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+};
+
 export const initialize = async () => {
     let token = await UserDataManager.getToken();
 
     if (token && await validateToken(token)) {
         
     } else {
-        await UserDataManager.removeUserData();
-
         let localDeviceID = await UserDataManager.getDeviceID();
 
         if (!localDeviceID) {
@@ -86,5 +103,5 @@ const validateToken = async (token) => {
 
     let user = await loginWithToken(token);
 
-    return user?.token !== token;
+    return user?.token === token;
 }
