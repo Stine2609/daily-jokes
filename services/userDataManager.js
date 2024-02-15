@@ -5,6 +5,7 @@ import { getData } from "../utils/storage";
 
 const TOKEN_STORAGE_KEY = "token";
 const USER_STORAGE_KEY = "user";
+const DEVICEID_STORAGE_KEY = "deviceID";
 
 export class UserDataManager {
     static async storeUserData(data) {
@@ -47,5 +48,29 @@ export class UserDataManager {
     static async removeUserData() {
         await removeData(USER_STORAGE_KEY);
         await secureRemoveData(TOKEN_STORAGE_KEY);
+    }
+
+    static async storeDeviceID(deviceID) {
+        await secureStoreData(DEVICEID_STORAGE_KEY, deviceID)
+    }
+
+    static async getDeviceID() {
+        try {
+            const deviceID = await secureGetData(DEVICEID_STORAGE_KEY);
+            return deviceID;
+        } catch (e) {
+            console.error('Error retrieving deviceID', e);
+            return undefined;
+        }
+    }
+
+    // Debug function to clear all stored data
+    static async clearAllData() {
+        await removeData(USER_STORAGE_KEY);
+
+        await secureRemoveData(TOKEN_STORAGE_KEY);
+        await secureRemoveData(DEVICEID_STORAGE_KEY);
+
+        console.log('All data cleared for testing purposes.');
     }
 }

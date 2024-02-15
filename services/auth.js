@@ -1,5 +1,6 @@
 import { login as apiLogin, loginWithToken as apiLoginWithToken, register as apiRegister } from "../api/auth";
 import { UserDataManager } from "./userDataManager";
+import { generateRandomCredentials } from "../utils/random";
 
 export const login = async (email, password) => {
     try {
@@ -32,6 +33,22 @@ export const loginWithToken = async (token) => {
     }
 };
 
+export const autoRegisterDevice = async () => {
+    try {
+        const { email, password, name, deviceID } = await generateRandomCredentials();
+
+        console.log(email, password, name, deviceID);
+        return;
+        const user = await register(email, password, name, deviceID);
+
+        console.log('Auto-registered account created successfully.');
+        return user;
+    } catch (error) {
+        console.error('Failed to auto-register device:', error);
+        throw error;
+    }
+};
+
 export const register = async (email, password, name, deviceID = "") => {
     try {
         let response = await apiRegister(email, password, name, deviceID);
@@ -49,12 +66,19 @@ export const register = async (email, password, name, deviceID = "") => {
 };
 
 export const initialize = async () => {
+    //await UserDataManager.clearAllData();
     let token = await UserDataManager.getToken();
 
     if (token && await validateToken(token)) {
         
     } else {
         await UserDataManager.removeUserData();
+
+        let localDeviceID = await UserDataManager.getDeviceID();
+
+        if (!localDeviceID) {
+            autoRegisterDevice();
+        }
     }
 }
 
