@@ -37,8 +37,6 @@ export const autoRegisterDevice = async () => {
     try {
         const { email, password, name, deviceID } = await generateRandomCredentials();
 
-        console.log(email, password, name, deviceID);
-        return;
         const user = await register(email, password, name, deviceID);
 
         console.log('Auto-registered account created successfully.');
@@ -66,7 +64,6 @@ export const register = async (email, password, name, deviceID = "") => {
 };
 
 export const initialize = async () => {
-    //await UserDataManager.clearAllData();
     let token = await UserDataManager.getToken();
 
     if (token && await validateToken(token)) {
