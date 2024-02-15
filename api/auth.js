@@ -47,7 +47,7 @@ export const loginWithToken = async (token) => {
     }
 };
 
-export const register = async (email, password, name) => {
+export const register = async (email, password, name, deviceID) => {
     try {
         const response = await fetch(`${apiUrl}/auth/register`, {
             method: 'POST',
@@ -58,6 +58,7 @@ export const register = async (email, password, name) => {
                 "name": name,
                 "email": email, 
                 "password": password,
+                "deviceID": deviceID
             }),
         });
 
