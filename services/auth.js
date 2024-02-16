@@ -21,7 +21,7 @@ export const loginWithToken = async (token) => {
     try {
         let response = await apiLoginWithToken(token);
 
-        if (response.user.token === token) {
+        if (response.user?.token === token) {
             UserDataManager.storeUserData(response.user);
             return response.user;
         } else {
@@ -86,15 +86,16 @@ export const initialize = async () => {
     let token = await UserDataManager.getToken();
 
     if (token && await validateToken(token)) {
-        
-    } else {
-        let localDeviceID = await UserDataManager.getDeviceID();
-
-        if (!localDeviceID) {
-            autoRegisterDevice();
-        }
+        return;
     }
-}
+
+    let localDeviceID = await UserDataManager.getDeviceID();
+
+    if (!localDeviceID) {
+        autoRegisterDevice();
+    }
+};
+
 
 const validateToken = async (token) => {
     if (!token) {
