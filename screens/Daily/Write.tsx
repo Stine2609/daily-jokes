@@ -4,6 +4,7 @@ import InputField from "../../components/InputField";
 import Button from "../../components/buttons/Button";
 import MascotTip from "../../components/MascotTip";
 import { create as uploadJoke } from "../../services/joke";
+import JokesLeftIndicator from "../../components/JokesLeftIndicator";
 
 export default function Write() {
 
@@ -23,6 +24,7 @@ export default function Write() {
                     <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
+            <JokesLeftIndicator used={1} />
             {/* <MascotTip /> */}
         </View>
     )

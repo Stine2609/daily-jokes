@@ -16,7 +16,7 @@ const borderWidth = 3;
 const shadowWidth = width + borderWidth * 2;
 
 const innerButtonHeight = 60;
-const backgroundHeight = innerButtonHeight + 14;
+const backgroundHeight = innerButtonHeight + 12;
 
 const borderRadius = 15;
 

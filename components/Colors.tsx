@@ -63,7 +63,7 @@ const colors = {
     text: {
         default: "white",
         contentBox: "#9F51FE",
-        placeholder: "#9D86B9"
+        placeholder: "rgba(159, 81, 254, 0.5)"
     },
 
     contentTab: {
