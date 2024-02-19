@@ -23,7 +23,7 @@ export default function Write() {
                     <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
-            <MascotTip />
+            {/* <MascotTip /> */}
         </View>
     )
 }

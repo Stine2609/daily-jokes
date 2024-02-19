@@ -57,13 +57,19 @@ const colors = {
         background: "white",
         highlight: "#4CDAFE",
         backgroundHighlight: "#D1D8FF",
-        text: "#3B0E72",
+        text: "#9F51FE",
     },
 
     text: {
         default: "white",
-        contentBox: "#3B0E72",
+        contentBox: "#9F51FE",
         placeholder: "#9D86B9"
+    },
+
+    contentTab: {
+        border: "white",
+        background: "#9F51FE",
+        focused: "#7054FE",
     },
 
     tabBar: {
