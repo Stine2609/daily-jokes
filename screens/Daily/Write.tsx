@@ -3,16 +3,16 @@ import ContentBox from "../../components/ContentBox";
 import InputField from "../../components/InputField";
 import Button from "../../components/buttons/Button";
 import MascotTip from "../../components/MascotTip";
-import { create } from "../../api/joke";
+import { create as uploadJoke } from "../../services/joke";
 
 export default function Write() {
 
     let submitJoke = async () => {
-        return;
-        await create({
-            userId: 9999,
-            textBody: "textbodyhere"
-        })
+        let result = await uploadJoke("textbodyhere");
+
+        if (result) {
+            console.log(result);
+        }
     }
 
     return(

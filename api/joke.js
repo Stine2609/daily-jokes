@@ -5,12 +5,13 @@ const apiUrl = getApiUrl();
 /**
  * TODO: add filter options to get
  */
-export const get = async () => {
+export const get = async (token) => {
     try {
         const response = await fetch(`${apiUrl}/joke`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
         });
 
@@ -25,18 +26,19 @@ export const get = async () => {
     }
 };
 
-export const create = async (jokeData) => {
+export const create = async (token, jokeData) => {
     try {
         const response = await fetch(`${apiUrl}/joke`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
             body: JSON.stringify(jokeData),
         });
 
         if (response.ok) {
-            return response.json();
+            return response;
         } else {
             throw new Error('Failed to create joke');
         }
@@ -46,12 +48,13 @@ export const create = async (jokeData) => {
     }
 };
 
-export const getById = async (id) => {
+export const getById = async (token, id) => {
     try {
         const response = await fetch(`${apiUrl}/joke/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
         });
 
@@ -66,12 +69,13 @@ export const getById = async (id) => {
     }
 };
 
-export const update = async (id, jokeData) => {
+export const update = async (token, id, jokeData) => {
     try {
         const response = await fetch(`${apiUrl}/joke/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
             body: JSON.stringify(jokeData),
         });
@@ -87,12 +91,13 @@ export const update = async (id, jokeData) => {
     }
 };
 
-export const deleteJoke = async (id) => {
+export const deleteJoke = async (token, id) => {
     try {
         const response = await fetch(`${apiUrl}/joke/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
         });
 

@@ -109,7 +109,7 @@ export default function SwipePicker() {
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
-                <ContentBox title={`Punny Jokes #${currentIndex + 1}`}>
+                <ContentBox>
                     <View style={{maxHeight: 150, overflow: "hidden"}}>
                         <Text color={colors.text.contentBox}>{joke}</Text>
                     </View>
@@ -128,7 +128,7 @@ export default function SwipePicker() {
                         position: 'absolute',
                         width: '100%',
                     }}>
-                    <ContentBox style={{overflow: "hidden"}} title={`Punny Jokes #${currentIndex}`}>
+                    <ContentBox style={{overflow: "hidden"}}>
                     <Animated.View style={[styles.overlay, styles.leftOverlay, {opacity: leftOverlayOpacity}]}>
                         <LinearGradient
                             start={{ x: 0, y: 1 }}
@@ -165,7 +165,7 @@ export default function SwipePicker() {
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}>
                 <View style={styles.modalView}>
-                    <ContentBox title={`Punny Jokes #${currentIndex}`}>
+                    <ContentBox>
                         <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
                             <Text color={colors.text.contentBox}>{joke}</Text>
                         </ScrollView>
