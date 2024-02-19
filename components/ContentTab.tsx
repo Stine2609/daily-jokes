@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import colors from "./Colors";
 import Text from "./Text";
+import Shadow from "./Shadow";
 
 interface ContentTabProps {
     tabs: Array<{
@@ -32,12 +33,13 @@ export default function ContentTab(props: ContentTabProps) {
     const animatedStyle = {
         left: position.interpolate({
             inputRange: [0, 50, 100],
-            outputRange: ["0%", "34%", "68%"], // Map input range to left percentage values
+            outputRange: ["-0.5%", "34%", "68%"], // Map input range to left percentage values
         }),
     };
 
     return (
         <View style={styles.container}>
+            <Shadow style={{alignSelf: "center"}} height={buttonContainerHeight} shadowHeight={5} width={"80%"} borderRadius={50} />
             <View style={styles.buttonContainer}>
                 <Animated.View style={[styles.focusedContainer, animatedStyle]} />
                 {tabs.map((tab, index) =>
@@ -59,6 +61,7 @@ export default function ContentTab(props: ContentTabProps) {
 }
 
 const buttonHeight = 46;
+const buttonContainerHeight = buttonHeight + 4
 
 const styles = StyleSheet.create({
     container: {
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.contentTab.focused,
         borderRadius: 50,
         width: "33%", // Each tab button takes up one third of the container width
-        height: buttonHeight + 4,
+        height: buttonContainerHeight,
     },
 
     tabButton: {
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: 30,
-        height: buttonHeight + 4,
+        height: buttonContainerHeight,
         backgroundColor: colors.contentTab.background,
         borderRadius: 50,
         borderWidth: 2,

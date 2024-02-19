@@ -1,27 +1,34 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import Text from "./Text";
 import PulseAnimation from "./PulseAnimation";
 
 interface StylizedTitleProps {
     size?: number;
+    dailyJokes?: boolean;
 }
 
-export default function StylizedTitle({size = 35}: StylizedTitleProps) {
+export default function StylizedTitle({size = 40, dailyJokes}: StylizedTitleProps) {
     return(
         <PulseAnimation>
-            <View style={styles.topContainer}>
-                <View style={styles.word1}>
-                    <Text size={size} defaultLineHeight>The</Text>
-                </View>
-                <View style={styles.word2}>
-                    <Text size={size} defaultLineHeight>Daily</Text>
-                </View>
-            </View>
-            <View style={styles.bottomContainer}>
-                <View style={styles.word3}>
-                    <Text size={size} defaultLineHeight>Contest</Text>
-                </View>
-            </View>
+            {dailyJokes ? (
+                <>
+                    <View style={styles.topContainer}>
+                        <View style={styles.word1}>
+                            <Text size={size} defaultLineHeight>The</Text>
+                        </View>
+                        <View style={styles.word2}>
+                            <Text size={size} defaultLineHeight>Daily</Text>
+                        </View>
+                    </View>
+                    <View style={styles.bottomContainer}>
+                        <View style={styles.word3}>
+                            <Text size={size} defaultLineHeight>Contest</Text>
+                        </View>
+                    </View>
+                </>
+            ) : (
+                <Image style={{height: size * 2 + 10, width: size * 4}} source={require("../assets/daily-jokes.png")} />
+            )}
         </PulseAnimation>
     )
 }

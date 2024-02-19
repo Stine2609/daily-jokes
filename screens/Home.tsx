@@ -21,7 +21,7 @@ export default function Home({ navigation }: HomeProps) {
             <ContentBox
                 title="Daily contest"
                 text={`"The theme for today is ${topic}!"`}
-                // isLoading={topic == ""}
+                isLoading={topic == ""}
             >
                 <PlayersDisplay users={[
                     {"id": 1, "avatarId": 5},
