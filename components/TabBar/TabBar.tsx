@@ -15,21 +15,25 @@ export default function TabBar(props:TabBarProps) {
             <TabButton
                 onPress={() => navigation.navigate("Home")}
                 label="Home"
+                icon="home"
                 background={colors.tabBar.home.background}
                 highlight={colors.tabBar.home.highlight}
             />
             <TabButton
                 label="Daily"
+                icon="daily"
                 background={colors.tabBar.daily.background}
                 highlight={colors.tabBar.daily.highlight}
             />
             <TabButton
-                label="Browse jokes"
+                label="Browse"
+                icon="browse"
                 background={colors.tabBar.browse.background}
                 highlight={colors.tabBar.browse.highlight}
             />
             <TabButton
                 label="Profile"
+                icon="profile"
                 background={colors.tabBar.profile.background}
                 highlight={colors.tabBar.profile.highlight}
             />
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         gap: 20,
-        backgroundColor: colors.tabBar.background,
+        // backgroundColor: colors.tabBar.background,
         // padding: 10,
         justifyContent: "center",
         alignItems: "center",

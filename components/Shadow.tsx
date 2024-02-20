@@ -3,7 +3,7 @@
  * Inserted before the contents of the component in which it is used
  */
 
-import { View, StyleSheet, DimensionValue } from "react-native";
+import { View, StyleSheet, DimensionValue, StyleProp, ViewStyle } from "react-native";
 
 interface ShadowProps{
     /** 
@@ -21,10 +21,11 @@ interface ShadowProps{
     width: DimensionValue;
     backgroundColor?: string;
     borderRadius: number;
+    style?: StyleProp<ViewStyle>;
 }
 
 export default function Shadow(props:ShadowProps) {
-    const { height, shadowHeight = 4, width, borderRadius, backgroundColor = "rgba(0,0,0, 0.15)"} = props;
+    const { height, shadowHeight = 4, width, borderRadius, backgroundColor = "rgba(0,0,0, 0.15)", style} = props;
     return(
         <View style={[
             styles.container,
@@ -33,7 +34,8 @@ export default function Shadow(props:ShadowProps) {
                 width: width,
                 borderRadius: borderRadius,
                 backgroundColor: backgroundColor,
-            }
+            },
+            style ? style : null
         ]} />
     )
 }

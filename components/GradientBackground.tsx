@@ -5,7 +5,7 @@ import colors from "./Colors";
 export default function GradientBackground() {
     return(
         <View style={styles.container}>
-            <Svg height="100%" width="100%">
+            <Svg height="110%" width="100%">
                 <Defs>
                     <RadialGradient id="grad" cx="50%" cy="50%" r="50%">
                         <Stop offset="0%" stopColor={colors.mainBg.start} stopOpacity="1" />
