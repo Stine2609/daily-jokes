@@ -24,7 +24,7 @@ export const useContest = (date?: Date) => {
                         await storeData('contest', contest_info[0]);
                     }
                 } catch (error) {
-                    console.error("Failed to fetch topic:", error);
+                    console.error("Failed to fetch contest:", error);
                 }
             }
         };

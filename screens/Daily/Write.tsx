@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, StyleSheet } from "react-native";
 import ContentBox from "../../components/ContentBox";
 import InputField from "../../components/InputField";
@@ -9,9 +9,12 @@ import JokesLeftIndicator from "../../components/JokesLeftIndicator";
 
 export default function Write() {
     const [inputValue, setInputValue] = useState('');
+    const jokesLeftIndicatorRef = useRef();
 
     let submitJoke = async () => {
         let result = await uploadJoke(inputValue);
+
+        jokesLeftIndicatorRef.current.refreshIndicator();
     }
 
     return(
@@ -25,7 +28,7 @@ export default function Write() {
                     <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
-            <JokesLeftIndicator used={1} />
+            <JokesLeftIndicator ref={jokesLeftIndicatorRef}/>
             {/* <MascotTip /> */}
         </View>
     )

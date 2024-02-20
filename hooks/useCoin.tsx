@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { get as getCoin } from "../api/coin";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
+import { UserDataManager } from '../services/userDataManager';
 
 export const useCoin = () => {
     const [coin, setCoin] = useState({ coins: 0 });
@@ -18,13 +19,13 @@ export const useCoin = () => {
 
             if (isFocused && isMounted) {
                 try {
-                    const coin_result = await getCoin();
+                    const coin_result = await getCoin(await UserDataManager.getToken());
                     if (isMounted) {
-                        setCoin(coin_result[0]);
-                        await storeData('coin', coin_result[0]);
+                        setCoin(coin_result);
+                        await storeData('coin', coin_result);
                     }
                 } catch (error) {
-                    console.error("Failed to fetch topic:", error);
+                    console.error("Failed to fetch coin:", error);
                 }
             }
         };

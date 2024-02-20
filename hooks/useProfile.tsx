@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { loginWithToken as getProfileData } from "../api/auth";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
+import { UserDataManager } from '../services/userDataManager';
 
 export const useProfile = () => {
     const [profile, setProfile] = useState({ });
@@ -18,13 +19,13 @@ export const useProfile = () => {
 
             if (isFocused && isMounted) {
                 try {
-                    const profile_result = await getProfileData();
+                    const profile_result = await getProfileData(await UserDataManager.getToken());
                     if (isMounted) {
-                        setProfile(profile_result[0]);
-                        await storeData('profile', profile_result[0]);
+                        setProfile(profile_result);
+                        await storeData('profile', profile_result);
                     }
                 } catch (error) {
-                    console.error("Failed to fetch topic:", error);
+                    console.error("Failed to fetch profile:", error);
                 }
             }
         };
