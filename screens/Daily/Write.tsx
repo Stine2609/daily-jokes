@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { View, StyleSheet } from "react-native";
 import ContentBox from "../../components/ContentBox";
 import InputField from "../../components/InputField";
@@ -7,19 +8,19 @@ import { create as uploadJoke } from "../../services/joke";
 import JokesLeftIndicator from "../../components/JokesLeftIndicator";
 
 export default function Write() {
+    const [inputValue, setInputValue] = useState('');
 
     let submitJoke = async () => {
-        let result = await uploadJoke("textbodyhere");
-
-        if (result) {
-            console.log(result);
-        }
+        let result = await uploadJoke(inputValue);
     }
 
     return(
         <View style={styles.container}>
             <ContentBox>
-                <InputField placeholder="Write your joke here..." />
+                <InputField 
+                    placeholder="Write your joke here..." 
+                    onChangeText={setInputValue}
+                />
                 <View style={{alignItems: "center"}}>
                     <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
                 </View>
