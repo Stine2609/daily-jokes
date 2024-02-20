@@ -4,7 +4,10 @@ import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 
 export const useContest = (date?: Date) => {
-    const [contest, setContest] = useState({ topic: "" });
+    const [contest, setContest] = useState({ 
+        topic: "",
+        date: new Date().toDateString(),
+    });
     const isFocused = useIsFocused();
 
     useEffect(() => {
