@@ -4,7 +4,7 @@
  */
 import { ReactNode, useState } from "react";
 import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
-import colors from "./Colors";
+import { componentColors } from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
 import { useContest } from "../hooks/useContest";
@@ -15,12 +15,25 @@ interface ContentBoxProps {
     text?: string;
     textColor?: string;
     style?: StyleProp<ViewStyle>;
+    headerColor?: string;
     isLoading?: boolean;
+    /** 
+    * @property Date used to determine the title for a contest title
+    */
     date?: Date;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
-    const {children, title, text, textColor = colors.contentBox.text, style, isLoading = false, date} = props;
+    const {
+        children,
+        title,
+        text,
+        textColor = componentColors.contentBox.text,
+        style,
+        headerColor = componentColors.contentBox.highlight,
+        isLoading = false,
+        date
+    } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
 
@@ -31,7 +44,7 @@ export default function ContentBox(props:ContentBoxProps) {
         setContainerHeight(height);
     };
 
-    const contest = useContest(date); 
+    const contest = useContest(date);
 
     return(
         <View style={styles.container}>
@@ -46,7 +59,7 @@ export default function ContentBox(props:ContentBoxProps) {
                         null // TODO: add loading indicator
                     ) : (
                         <>
-                            <View style={styles.titleContainer}>
+                            <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
                                 <Text>{title ? title : contest.topic }</Text>
                             </View>
                             {text && (
@@ -63,6 +76,18 @@ export default function ContentBox(props:ContentBoxProps) {
     )
 }
 
+interface ContentBoxBottomProps {
+    children?: ReactNode;
+}
+
+export function ContentBoxBottom({children}:ContentBoxBottomProps) {
+    return(
+        <View style={styles.bottomContainer}>
+            {children}
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     container: {
         width: "100%",
@@ -74,20 +99,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 14,
         borderRadius: 20,
-        backgroundColor: colors.contentBox.background,
+        backgroundColor: componentColors.contentBox.background,
         minHeight: 200,
         gap: 10
     },
 
     background: {
         position: "absolute",
-        backgroundColor: colors.contentBox.backgroundHighlight,
+        backgroundColor: componentColors.contentBox.backgroundHighlight,
         width: "80%",
         borderRadius: 20,
     },
 
     titleContainer: {
-        backgroundColor: colors.contentBox.highlight,
         borderRadius: 20,
         height: 26,
         justifyContent: "center",
@@ -99,5 +123,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         minHeight: 100,
+    },
+
+    bottomContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     }
 })

@@ -1,5 +1,5 @@
 import CircularButton from "./CircularButton";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 
 interface YesButtonProps {
     onPress?: () => void;
@@ -11,8 +11,8 @@ export default function YesButton({ onPress, size }: YesButtonProps) {
         <CircularButton
             onPress={onPress}
             iconName="yes"
-            backgroundColor={colors.yesButton.background}
-            highlightColor={colors.yesButton.highlight}
+            backgroundColor={componentColors.yesButton.background}
+            highlightColor={componentColors.yesButton.highlight}
         />
     );
 }

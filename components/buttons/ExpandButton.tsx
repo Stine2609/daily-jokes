@@ -1,5 +1,5 @@
 import CircularButton from "./CircularButton";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 interface ExpandButtonProps {
@@ -12,8 +12,8 @@ export default function ExpandButton({ onPress, size = 40 }: ExpandButtonProps) 
         <CircularButton
             onPress={onPress}
             iconComponent={<FontAwesome5 name="expand-arrows-alt" size={size / 1.8} color="white" />}
-            backgroundColor={colors.expandButton.background}
-            highlightColor={colors.expandButton.highlight}
+            backgroundColor={componentColors.expandButton.background}
+            highlightColor={componentColors.expandButton.highlight}
         />
     );
 }

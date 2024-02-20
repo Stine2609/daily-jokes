@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Avatar from "./Avatar";
 import Text from "../Text";
-import colors from "../Colors";
+import { componentColors, colors } from "../Colors";
 
 interface User {
     id: number;
@@ -23,7 +23,7 @@ export default function PlayersDisplay(props: PlayersDisplayProps) {
 
     return (
         <View style={styles.container}>
-            <Text color={colors.contentBox.highlight}>Players</Text>
+            <Text color={colors.purple.dark}>Players</Text>
             <View style={styles.avatarContainer}>
             {displayedUsers.map((user) => (
                 <Avatar key={user.id} id={user.avatarId} />

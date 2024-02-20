@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, View, StyleSheet, Image } from 'react-native';
+import { Animated, View, StyleSheet } from 'react-native';
 import Text from "./Text";
-import colors from "./Colors";
+import { colors } from "./Colors";
 
 interface MascotTipProps {
     containerHeight?: number;
@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 85,
-        backgroundColor: colors.toggleButton.bgLeft,
+        backgroundColor: colors.purple.light,
         maxWidth: 200,
         minWidth: 150,
         minHeight: 75,
         borderRadius: 20,
         borderWidth: 2.5,
-        borderColor: colors.button.border,
+        borderColor: colors.border,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 14,

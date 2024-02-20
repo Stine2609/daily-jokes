@@ -1,7 +1,7 @@
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import Svg, { Polygon } from "react-native-svg";
 import Text from "../Text";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 import Shadow from "../Shadow";
 import {percentageOf as p} from "../../utils/utils";
 
@@ -99,7 +99,7 @@ export default function BaseButton(props:BaseButtonProps) {
 
 const styles = StyleSheet.create({
     container: {
-        borderColor: colors.button.border,
+        borderColor: componentColors.button.border,
         overflow: "hidden",
     },
 
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 
     buttonText: {
         position: "absolute",
-        color: colors.button.text,
+        color: componentColors.button.text,
         fontSize: 24,
     },
 });

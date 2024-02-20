@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
-import colors from "./Colors";
+import { componentColors } from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
 
@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
 
     focusedContainer: {
         position: "absolute",
-        borderColor: colors.contentTab.border,
+        borderColor: componentColors.contentTab.border,
         borderWidth: 2,
-        backgroundColor: colors.contentTab.focused,
+        backgroundColor: componentColors.contentTab.focused,
         borderRadius: 50,
         width: "33%", // Each tab button takes up one third of the container width
         height: buttonContainerHeight,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     tabButton: {
         backgroundColor: "transparent",
         borderRadius: 50,
-        borderColor: colors.contentTab.border,
+        borderColor: componentColors.contentTab.border,
         height: buttonHeight,
         width: "33%",
         justifyContent: "center",
@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginBottom: 30,
         height: buttonContainerHeight,
-        backgroundColor: colors.contentTab.background,
+        backgroundColor: componentColors.contentTab.background,
         borderRadius: 50,
         borderWidth: 2,
-        borderColor: colors.contentTab.border,
+        borderColor: componentColors.contentTab.border,
         overflow: "hidden",
     },
 });

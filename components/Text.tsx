@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Text as RNText, StyleProp, TextStyle, StyleSheet, LayoutChangeEvent } from "react-native";
-import colors from "./Colors";
+import { componentColors } from "./Colors";
 import { useFonts } from "expo-font";
 
 interface TextProps {
@@ -44,7 +44,7 @@ const textStyles = StyleSheet.create({
     text: {
         fontFamily: "Digitalt",
         letterSpacing: 1,
-        color: colors.text.default,
+        color: componentColors.text.default,
         fontSize: 18,
     },
 
