@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import ScreenView from "../components/ScreenView";
 import Button from "../components/buttons/Button";
-import ContentBox from "../components/ContentBox";
+import ContentBox, { ContentBoxBottom } from "../components/ContentBox";
 import PlayersDisplay from "../components/avatar/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
+import { colors } from "../components/Colors";
+import Text from "../components/Text";
 
 interface HomeProps {
     navigation: {
@@ -20,6 +22,7 @@ export default function Home({ navigation }: HomeProps) {
         <ScreenView style={styles.container}>
             <ContentBox
                 title="Daily contest"
+                headerColor={colors.purple.dark}
                 text={`"The theme for today is ${topic}!"`}
                 isLoading={topic == ""}
             >
@@ -32,7 +35,10 @@ export default function Home({ navigation }: HomeProps) {
                     {"id": 6, "avatarId": 11},
                     {"id": 7, "avatarId": 1}
                 ]} />
-                <Button variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
+                <ContentBoxBottom>
+                    <Button variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
+                    <Text color={colors.purple.dark}>2:35 Hours left</Text>
+                </ContentBoxBottom>
             </ContentBox>
         </ScreenView>
     )

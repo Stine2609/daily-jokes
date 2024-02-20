@@ -15,12 +15,25 @@ interface ContentBoxProps {
     text?: string;
     textColor?: string;
     style?: StyleProp<ViewStyle>;
+    headerColor?: string;
     isLoading?: boolean;
+    /** 
+    * @property Date used to determine the title for a contest title
+    */
     date?: Date;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
-    const {children, title, text, textColor = componentColors.contentBox.text, style, isLoading = false, date} = props;
+    const {
+        children,
+        title,
+        text,
+        textColor = componentColors.contentBox.text,
+        style,
+        headerColor = componentColors.contentBox.highlight,
+        isLoading = false,
+        date
+    } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
 
@@ -31,7 +44,7 @@ export default function ContentBox(props:ContentBoxProps) {
         setContainerHeight(height);
     };
 
-    const contest = useContest(date); 
+    const contest = useContest(date);
 
     return(
         <View style={styles.container}>
@@ -46,7 +59,7 @@ export default function ContentBox(props:ContentBoxProps) {
                         null // TODO: add loading indicator
                     ) : (
                         <>
-                            <View style={styles.titleContainer}>
+                            <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
                                 <Text>{title ? title : contest.topic }</Text>
                             </View>
                             {text && (
@@ -59,6 +72,18 @@ export default function ContentBox(props:ContentBoxProps) {
                     )}
                 </>
             </View>
+        </View>
+    )
+}
+
+interface ContentBoxBottomProps {
+    children?: ReactNode;
+}
+
+export function ContentBoxBottom({children}:ContentBoxBottomProps) {
+    return(
+        <View style={styles.bottomContainer}>
+            {children}
         </View>
     )
 }
@@ -87,7 +112,6 @@ const styles = StyleSheet.create({
     },
 
     titleContainer: {
-        backgroundColor: componentColors.contentBox.highlight,
         borderRadius: 20,
         height: 26,
         justifyContent: "center",
@@ -99,5 +123,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         minHeight: 100,
+    },
+
+    bottomContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     }
 })
