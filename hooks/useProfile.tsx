@@ -3,7 +3,7 @@ import { loginWithToken as getProfileData } from "../api/auth";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 
-export const useProfile = (date?: Date) => {
+export const useProfile = () => {
     const [profile, setProfile] = useState({ });
     const isFocused = useIsFocused();
 

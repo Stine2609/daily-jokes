@@ -2,7 +2,7 @@ import { getApiUrl } from '../config.js';
 
 const apiUrl = getApiUrl();
 
-export const getContest = async () => {
+export const getContest = async (date) => {
     try {
         const response = await fetch(`${apiUrl}/contest`, {
             method: 'GET',

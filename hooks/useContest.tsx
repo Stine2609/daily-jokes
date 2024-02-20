@@ -18,7 +18,7 @@ export const useContest = (date?: Date) => {
 
             if (isFocused && isMounted) {
                 try {
-                    const contest_info = await getContest();
+                    const contest_info = await getContest(date);
                     if (isMounted) {
                         setContest(contest_info[0]);
                         await storeData('contest', contest_info[0]);

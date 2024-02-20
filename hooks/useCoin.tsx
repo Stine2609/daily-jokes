@@ -3,7 +3,7 @@ import { get as getCoin } from "../api/coin";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 
-export const useCoin = (date?: Date) => {
+export const useCoin = () => {
     const [coin, setCoin] = useState({ coins: 0 });
     const isFocused = useIsFocused();
 
