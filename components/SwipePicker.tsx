@@ -7,7 +7,7 @@ import Text from "./Text";
 import NoButton from "./buttons/NoButton";
 import YesButton from "./buttons/YesButton";
 import ExpandButton from './buttons/ExpandButton';
-import colors from './Colors';
+import { componentColors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from './ScreenView';
 
 export default function SwipePicker() {
@@ -111,7 +111,7 @@ export default function SwipePicker() {
             <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
                 <ContentBox>
                     <View style={{maxHeight: 150, overflow: "hidden"}}>
-                        <Text color={colors.text.contentBox}>{joke}</Text>
+                        <Text color={componentColors.text.contentBox}>{joke}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
                         <NoButton onPress={() => animateCardAway(-200)} />
@@ -133,7 +133,7 @@ export default function SwipePicker() {
                         <LinearGradient
                             start={{ x: 0, y: 1 }}
                             end={{ x: 1, y: 1 }}
-                            colors={[colors.noButton.highlight, 'transparent']}
+                            colors={[componentColors.noButton.highlight, 'transparent']}
                             style={{flex: 1}}
                         />
                     </Animated.View>
@@ -141,12 +141,12 @@ export default function SwipePicker() {
                         <LinearGradient
                             start={{ x: 1, y: 1 }}
                             end={{ x: 0, y: 1 }}
-                            colors={[colors.yesButton.highlight, 'transparent']}
+                            colors={[componentColors.yesButton.highlight, 'transparent']}
                             style={{flex: 1}}
                         />
                     </Animated.View>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
-                            <Text color={colors.text.contentBox}>
+                            <Text color={componentColors.text.contentBox}>
                                 {joke}
                             </Text>
                         </View>
@@ -167,7 +167,7 @@ export default function SwipePicker() {
                 <View style={styles.modalView}>
                     <ContentBox>
                         <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
-                            <Text color={colors.text.contentBox}>{joke}</Text>
+                            <Text color={componentColors.text.contentBox}>{joke}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
                             <NoButton onPress={() => animateCardAway(-200)} />

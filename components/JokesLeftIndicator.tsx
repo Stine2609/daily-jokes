@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import colors from "./Colors";
+import { componentColors } from "./Colors";
 
 interface JokesLeftIndicatorProps {
     used: 0 | 1 | 2 | 3;
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
         borderColor: "white",
         height: 24,
         width: 24,
-        backgroundColor: colors.contentTab.background,
+        backgroundColor: componentColors.contentTab.background,
     },
 
     used: {
-        backgroundColor: colors.contentBox.highlight,
+        backgroundColor: componentColors.contentBox.highlight,
     }
 })

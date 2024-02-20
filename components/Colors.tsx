@@ -1,5 +1,47 @@
+export const colors = {
+        // Base colors
+        purple: {
+            light: "#C286FF",
+            medium: "#A75CF4",
+            dark: "#9F51FE",
+            highlight: "#7054FE",
+        },
+    
+        blue: {
+            light: "#4CDAFE",
+            medium: "#09B9FF",
+        },
+    
+        pink: {
+            light: "#FC8AFF",
+            medium: "#DA57F0",
+        },
+    
+        yellow: {
+            light: "#FFDD17",
+            medium: "#FFC715",
+            dark: "#FFB213",
+            highlight: "#FF8413",
+        },
+
+        green: {
+            light: "#92F200",
+            medium: "#86EE04",
+            dark: "#67EB00",
+            highlight: "#4EC307",
+        },
+
+        red: {
+            medium: "#FF4672",
+            dark: "#E90038",
+        },
+
+        border: "white",
+}
+
 // Colors named "highlight" for buttons denote the bottom section of an element, used to create a 3d effect
-const colors = {
+export const componentColors = {
+
     // For app backgorund gradient, starts with center color
     mainBg: {
         start: "#A559FE",
@@ -7,93 +49,93 @@ const colors = {
     },
 
     button: { // The default color for all buttons if their color has not been specifically specified
-        border: "white",
+        border: colors.border,
         text: "white",
     },
 
     submitButton: {
-        bgLeft: "#FFC715",
-        bgRight: "#FFB213",
-        highlight: "#FF8413",
+        bgLeft: colors.yellow.medium,
+        bgRight: colors.yellow.dark,
+        highlight: colors.yellow.highlight,
     },
 
     playButton: {
-        bgLeft: "#86EE04",
-        bgRight: "#67EB00",
-        highlight: "#4EC307",
+        bgLeft: colors.green.medium,
+        bgRight: colors.green.dark,
+        highlight: colors.green.highlight,
     },
 
     backButton: {
-        background: "#FFF635",
-        highlight: "#FFC90C",
+        background: colors.purple.medium,
+        highlight: colors.purple.dark,
     },
 
     noButton: {
-        background: "#FF4672",
-        highlight: "#E90038",
+        background: colors.red.medium,
+        highlight: colors.red.dark,
     },
 
     yesButton: {
-        background: "#92F200",
-        highlight: "#39BD01",
+        background: colors.green.light,
+        highlight: colors.green.medium,
     },
 
     expandButton: {
-        background: "#C286FF",
-        highlight: "#A75CF4",
+        background: colors.purple.light,
+        highlight: colors.purple.medium,
+    },
+
+    superlikeButton: {
+        background: colors.blue.light,
+        highlight: colors.blue.medium,
     },
 
     toggleButton: {
-        bgLeft: "#CC9AFF",
-        bgRight: "#C286FF",
-        highlight: "#A75CF4",
+        bgLeft: colors.purple.light,
+        bgRight: colors.purple.medium,
+        highlight: colors.purple.dark,
     },
 
-    input: {
-        text: "#9D86B9",
-    },
+    // input: {
+    //     text: "#9D86B9",
+    // },
 
     contentBox: {
         background: "white",
-        highlight: "#4CDAFE",
+        highlight: colors.blue.light,
         backgroundHighlight: "#D1D8FF",
-        text: "#9F51FE",
+        text: colors.purple.dark,
     },
 
     text: {
         default: "white",
-        contentBox: "#9F51FE",
+        contentBox: colors.purple.dark,
         placeholder: "rgba(159, 81, 254, 0.5)"
     },
 
     contentTab: {
-        border: "white",
-        background: "#9F51FE",
-        focused: "#7054FE",
+        border: colors.border,
+        background: colors.purple.dark,
+        focused: colors.purple.highlight,
     },
 
     tabBar: {
-        border: "white",
-        // background: "rgba(255,255,255,0.5)",
-        background: "white",
+        border: colors.border,
         home: {
-            background: "#4CDAFE",
-            highlight: "#09B9FF",
+            background: colors.blue.light,
+            highlight: colors.blue.medium,
         },
         daily: {
-            background: "#FC8AFF",
-            highlight: "#DA57F0",
+            background: colors.pink.light,
+            highlight: colors.pink.medium,
         },
         browse: {
-            background: "#C286FF",
-            highlight: "#A75CF4",
+            background: colors.purple.light,
+            highlight: colors.purple.medium,
         },
         profile: {
-            background: "#FFDD17",
-            highlight: "#FFB213",
+            background: colors.yellow.light,
+            highlight: colors.yellow.dark,
         },
     }
-
 }
-
-export default colors

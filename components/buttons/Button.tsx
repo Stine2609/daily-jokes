@@ -1,5 +1,5 @@
 import BaseButton from "./BaseButton";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 
 interface ButtonProps {
     label?: string;
@@ -11,21 +11,21 @@ interface ButtonProps {
 
 const variants = {
     "play": {
-        leftColor: colors.playButton.bgLeft,
-        rightColor: colors.playButton.bgRight,
-        highlightColor: colors.playButton.highlight,
+        leftColor: componentColors.playButton.bgLeft,
+        rightColor: componentColors.playButton.bgRight,
+        highlightColor: componentColors.playButton.highlight,
         borderRadius: 22,
     },
     "toggle": {
-        leftColor: colors.toggleButton.bgLeft,
-        rightColor: colors.toggleButton.bgRight,
-        highlightColor: colors.toggleButton.highlight,
+        leftColor: componentColors.toggleButton.bgLeft,
+        rightColor: componentColors.toggleButton.bgRight,
+        highlightColor: componentColors.toggleButton.highlight,
         borderRadius: 22,
     },
     "submit": {
-        leftColor: colors.submitButton.bgLeft,
-        rightColor: colors.submitButton.bgRight,
-        highlightColor: colors.submitButton.highlight,
+        leftColor: componentColors.submitButton.bgLeft,
+        rightColor: componentColors.submitButton.bgRight,
+        highlightColor: componentColors.submitButton.highlight,
         borderRadius: 10,
     },
 }

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native"
 import TabButton from "./TabButton"
-import colors from "../Colors"
+import { componentColors } from "../Colors"
 import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native"
 
 interface TabBarProps {
@@ -16,26 +16,26 @@ export default function TabBar(props:TabBarProps) {
                 onPress={() => navigation.navigate("Home")}
                 label="Home"
                 icon="home"
-                background={colors.tabBar.home.background}
-                highlight={colors.tabBar.home.highlight}
+                background={componentColors.tabBar.home.background}
+                highlight={componentColors.tabBar.home.highlight}
             />
             <TabButton
                 label="Daily"
                 icon="daily"
-                background={colors.tabBar.daily.background}
-                highlight={colors.tabBar.daily.highlight}
+                background={componentColors.tabBar.daily.background}
+                highlight={componentColors.tabBar.daily.highlight}
             />
             <TabButton
                 label="Browse"
                 icon="browse"
-                background={colors.tabBar.browse.background}
-                highlight={colors.tabBar.browse.highlight}
+                background={componentColors.tabBar.browse.background}
+                highlight={componentColors.tabBar.browse.highlight}
             />
             <TabButton
                 label="Profile"
                 icon="profile"
-                background={colors.tabBar.profile.background}
-                highlight={colors.tabBar.profile.highlight}
+                background={componentColors.tabBar.profile.background}
+                highlight={componentColors.tabBar.profile.highlight}
             />
         </View>
     )
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         gap: 20,
-        // backgroundColor: colors.tabBar.background,
+        // backgroundColor: componentColors.tabBar.background,
         // padding: 10,
         justifyContent: "center",
         alignItems: "center",

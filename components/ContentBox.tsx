@@ -4,7 +4,7 @@
  */
 import { ReactNode, useState } from "react";
 import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
-import colors from "./Colors";
+import { componentColors } from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
 import { useContest } from "../hooks/useContest";
@@ -20,7 +20,7 @@ interface ContentBoxProps {
 }
 
 export default function ContentBox(props:ContentBoxProps) {
-    const {children, title, text, textColor = colors.contentBox.text, style, isLoading = false, date} = props;
+    const {children, title, text, textColor = componentColors.contentBox.text, style, isLoading = false, date} = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
 
@@ -74,20 +74,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 14,
         borderRadius: 20,
-        backgroundColor: colors.contentBox.background,
+        backgroundColor: componentColors.contentBox.background,
         minHeight: 200,
         gap: 10
     },
 
     background: {
         position: "absolute",
-        backgroundColor: colors.contentBox.backgroundHighlight,
+        backgroundColor: componentColors.contentBox.backgroundHighlight,
         width: "80%",
         borderRadius: 20,
     },
 
     titleContainer: {
-        backgroundColor: colors.contentBox.highlight,
+        backgroundColor: componentColors.contentBox.highlight,
         borderRadius: 20,
         height: 26,
         justifyContent: "center",

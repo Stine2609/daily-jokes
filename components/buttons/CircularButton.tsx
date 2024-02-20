@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 import {percentageOf as p} from "../../utils/utils";
  
 interface CircularButtonProps {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
 
     innerButtonContainer: {
-        borderColor: colors.button.border,
+        borderColor: componentColors.button.border,
         borderRadius: 100,
         justifyContent: "center",
         alignItems: "center"

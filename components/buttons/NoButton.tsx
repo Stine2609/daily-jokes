@@ -1,5 +1,5 @@
 import CircularButton from "./CircularButton";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 
 interface NoButtonProps {
     onPress?: () => void;
@@ -11,8 +11,8 @@ export default function NoButton({ onPress, size }: NoButtonProps) {
         <CircularButton
             onPress={onPress}
             iconName="no"
-            backgroundColor={colors.noButton.background}
-            highlightColor={colors.noButton.highlight}
+            backgroundColor={componentColors.noButton.background}
+            highlightColor={componentColors.noButton.highlight}
         />
     );
 }

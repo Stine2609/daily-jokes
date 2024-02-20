@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import Text from "../Text";
 import Shadow from "../Shadow";
-import colors from "../Colors";
+import { componentColors } from "../Colors";
 
 interface TabButtonProps {
     label: string;
@@ -48,7 +48,7 @@ export default function TabButton(props:TabButtonProps) {
 const styles = StyleSheet.create({
     container: {
         borderWidth: borderWidth,
-        borderColor: colors.tabBar.border,
+        borderColor: componentColors.tabBar.border,
         overflow: "hidden",
         height: backgroundHeight,
         borderRadius: borderRadius
