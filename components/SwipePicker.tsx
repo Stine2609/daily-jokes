@@ -4,8 +4,7 @@ import { PanGestureHandler, State, GestureHandlerStateChangeEvent } from 'react-
 import ContentBox from "./ContentBox";
 import { LinearGradient } from 'expo-linear-gradient';
 import Text from "./Text";
-import NoButton from "./buttons/NoButton";
-import YesButton from "./buttons/YesButton";
+import CircularButton from './buttons/CircularButton';
 import ExpandButton from './buttons/ExpandButton';
 import { componentColors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from './ScreenView';
@@ -114,8 +113,8 @@ export default function SwipePicker() {
                         <Text color={componentColors.text.contentBox}>{joke}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <NoButton onPress={() => animateCardAway(-200)} />
-                        <YesButton onPress={() => animateCardAway(200)} />
+                        <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                        <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
                         <ExpandButton onPress={() => setModalVisible(modalVisible)} />
                     </View>
                 </ContentBox>
@@ -151,8 +150,8 @@ export default function SwipePicker() {
                             </Text>
                         </View>
                         <View style={styles.buttonsContainer}>
-                            <NoButton onPress={() => animateCardAway(-200)} />
-                            <YesButton onPress={() => animateCardAway(200)} />
+                            <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                            <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
                             <ExpandButton onPress={() => setModalVisible(true)} />
                         </View>
                     </ContentBox>
@@ -170,8 +169,8 @@ export default function SwipePicker() {
                             <Text color={componentColors.text.contentBox}>{joke}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
-                            <NoButton onPress={() => animateCardAway(-200)} />
-                            <YesButton onPress={() => animateCardAway(200)} />
+                            <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                            <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
                             <ExpandButton onPress={() => setModalVisible(!modalVisible)} />
                         </View>
                     </ContentBox>

@@ -5,21 +5,41 @@ import {percentageOf as p} from "../../utils/utils";
  
 interface CircularButtonProps {
     onPress?: () => void;
-    iconName?: "yes" | "no" | "back";
+    variant?: "yes" | "no" | "back";
     iconComponent?: ReactNode;
     backgroundColor?: string;
     highlightColor?: string;
     size?: number;
 }
 
-const icons = {
-    yes: require("../../assets/icons/yes.png"),
-    no: require("../../assets/icons/no.png"),
-    back: require("../../assets/icons/back.png"),
-};
+const variants = {
+    yes: {
+        icon: require("../../assets/icons/yes.png"),
+        backgroundColor: componentColors.yesButton.background,
+        highlightColor: componentColors.yesButton.highlight,
+    },
+
+    no: {
+        icon: require("../../assets/icons/no.png"),
+        backgroundColor: componentColors.noButton.background,
+        highlightColor: componentColors.noButton.highlight,
+    },
+
+    back: {
+        icon: require("../../assets/icons/back.png"),
+        backgroundColor: componentColors.backButton.background,
+        highlightColor: componentColors.backButton.highlight,
+    },
+
+    superlike: {
+        icon: require("../../assets/icons/superlike.png"),
+        backgroundColor: componentColors.superlikeButton.background,
+        highlightColor: componentColors.superlikeButton.highlight,
+    },
+}
 
 export default function CircularButton(props: CircularButtonProps) {
-    const { onPress, iconName, iconComponent, backgroundColor, highlightColor, size = 40 } = props;
+    const { onPress, variant, iconComponent, backgroundColor, highlightColor, size = 40 } = props;
 
     const borderWidth = p(7.5, size);
     const backgroundOffset = p(7, size);
@@ -33,7 +53,7 @@ export default function CircularButton(props: CircularButtonProps) {
                 <View style={[
                     styles.background,
                     {
-                        backgroundColor: highlightColor,
+                        backgroundColor: variant ? variants[variant].highlightColor : highlightColor,
                         width: size,
                         height: size,
                         top: backgroundOffset,
@@ -42,19 +62,19 @@ export default function CircularButton(props: CircularButtonProps) {
                 <View style={[
                     styles.innerButtonContainer,
                     {
-                        backgroundColor: backgroundColor,
+                        backgroundColor: variant ? variants[variant].backgroundColor : backgroundColor,
                         width: size,
                         height: size,
                         borderWidth: borderWidth,
                     }
                 ]}>
-                    {iconName && (
+                    {variant && (
                         <Image
                             style={{
                                 height: size / 1.8,
                                 width: size / 1.8
                             }}
-                            source={icons[iconName]}
+                            source={variants[variant].icon}
                         />
                     )}
                     {iconComponent && (
