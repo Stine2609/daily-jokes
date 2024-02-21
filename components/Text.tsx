@@ -11,10 +11,11 @@ interface TextProps {
     color?: string;
     defaultLineHeight?: boolean;
     onLayout?: (event: LayoutChangeEvent) => void;
+    numberOfLines?: number;
 }
 
 export default function Text(props: TextProps) {
-    const { children, style, shadow = false, size = 18, color = "white", defaultLineHeight = false, onLayout } = props;
+    const { children, style, shadow = false, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
 
     const [fontsLoaded] = useFonts({
         "Digitalt": require("../assets/fonts/Digitalt.otf"),
@@ -28,13 +29,15 @@ export default function Text(props: TextProps) {
         <RNText
             onLayout={onLayout}
             style={[
-                style,
                 textStyles.text,
                 shadow ? textStyles.shadow : null,
                 { fontSize: size },
                 { color: color },
                 defaultLineHeight ? null : { lineHeight: 22 },
-            ]}>
+                style,
+            ]}
+            {...rest}
+        >
             {children}
         </RNText>
     );

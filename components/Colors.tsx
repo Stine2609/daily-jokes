@@ -110,7 +110,9 @@ export const componentColors = {
     text: {
         default: "white",
         contentBox: colors.purple.dark,
-        placeholder: "rgba(159, 81, 254, 0.5)"
+        placeholder: "rgba(159, 81, 254, 0.5)",
+        black: "black",
+        dark: "#49454F",
     },
 
     contentTab: {
