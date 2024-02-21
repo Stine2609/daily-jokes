@@ -8,7 +8,7 @@ const HeaderOptions = ({  }) => ({
       shadowOpacity: 0, // for iOS
     },
     headerTitle: () => (
-        <HeaderCenter />
+        <HeaderCenter label={"Daily"}/>
     ),
     headerTitleAlign: "center" as const, // Explicitly typing as "center"
     headerLeft: () => (
