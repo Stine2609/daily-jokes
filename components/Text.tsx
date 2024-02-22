@@ -15,7 +15,7 @@ interface TextProps {
 }
 
 export default function Text(props: TextProps) {
-    const { children, style, shadow = false, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
+    const { children, style, shadow = true, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
 
     const [fontsLoaded] = useFonts({
         "Digitalt": require("../assets/fonts/Digitalt.otf"),
@@ -52,7 +52,7 @@ const textStyles = StyleSheet.create({
     },
 
     shadow: {
-        textShadowColor: "rgba(0, 0, 0, 0.5)",
+        textShadowColor: "rgba(0, 0, 0, 0.2)",
         textShadowOffset: {width: 0, height: 2.5},
         textShadowRadius: 4
     }

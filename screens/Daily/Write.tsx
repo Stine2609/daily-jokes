@@ -25,7 +25,7 @@ export default function Write() {
                     onChangeText={setInputValue}
                 />
                 <View style={{alignItems: "center"}}>
-                    <Button variant="submit" onPress={submitJoke}  label="Sumbit" />
+                    <Button variant="submit" shadowHeight={8} fontSize={16} width={100} height={28} onPress={submitJoke}  label="Sumbit" />
                 </View>
             </ContentBox>
             <JokesLeftIndicator ref={jokesLeftIndicatorRef}/>

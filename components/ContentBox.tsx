@@ -60,11 +60,11 @@ export default function ContentBox(props:ContentBoxProps) {
                     ) : (
                         <>
                             <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-                                <Text>{title ? title : contest.topic }</Text>
+                                <Text shadow={false}>{title ? title : contest.topic }</Text>
                             </View>
                             {text && (
                                 <View style={styles.textContainer}>
-                                    <Text color={textColor}>{text}</Text>
+                                    <Text shadow={false} color={textColor}>{text}</Text>
                                 </View>
                             )}
                             {children}

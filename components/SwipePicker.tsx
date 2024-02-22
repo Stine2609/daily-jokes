@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Animated, Modal, ScrollView } from 'react-native';
+import { View, StyleSheet, Animated, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import { PanGestureHandler, State, GestureHandlerStateChangeEvent } from 'react-native-gesture-handler';
 import ContentBox from "./ContentBox";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -8,9 +8,11 @@ import CircularButton from './buttons/CircularButton';
 import ExpandButton from './buttons/ExpandButton';
 import { componentColors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from './ScreenView';
+import Button from './buttons/Button';
 
 export default function SwipePicker() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTextTruncated, setIsTextTruncated] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const translateX = new Animated.Value(0);
 
@@ -86,6 +88,10 @@ export default function SwipePicker() {
         }).start(() => {
             translateX.setValue(0);
             setCurrentIndex(currentIndex + 1);
+            setModalVisible(false);
+            // TODO: measure the length of the actual next joke
+            // If joke is longer than 150 characters, assume it is truncated (and hope you're right)
+            setIsTextTruncated(joke.length >= 150);
         });
     };
 
@@ -103,14 +109,19 @@ export default function SwipePicker() {
         extrapolate: 'clamp',
     });
 
-    const joke = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    const joke = "I DONT GIVE A FUCK ABOUT THE FUCKING CODE! i just want to download this stupid fucking application and use it. WHY IS THERE CODE??? MAKE A FUCKING .EXE FILE AND GIVE IT TO ME. these dumbfucks think that everyone is a developer and understands code. well i am not and i don't understand it. I only know to download and install applications. SO WHY THE FUCK IS THERE CODE? make an EXE file and give it to me. STUPID FUCKING SMELLY NERD"
+
+    // Determine if show full joke button should be shown on mount
+    useEffect(() => {
+        setIsTextTruncated(joke.length >= 150);
+    }, []);
 
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
                 <ContentBox>
                     <View style={{maxHeight: 150, overflow: "hidden"}}>
-                        <Text color={componentColors.text.contentBox}>{joke}</Text>
+                        <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
                         <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
@@ -145,10 +156,13 @@ export default function SwipePicker() {
                         />
                     </Animated.View>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
-                            <Text color={componentColors.text.contentBox}>
+                            <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>
                                 {joke}
                             </Text>
                         </View>
+                        {isTextTruncated && (
+                            <Button onPress={() => setModalVisible(true)}style={{alignSelf: "center"}} shadowHeight={8} height={28} width={160} borderRadius={10} variant="play" label="Read full joke" />
+                        )}
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
                             <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
@@ -166,7 +180,7 @@ export default function SwipePicker() {
                 <View style={styles.modalView}>
                     <ContentBox>
                         <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
-                            <Text color={componentColors.text.contentBox}>{joke}</Text>
+                            <Text shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />

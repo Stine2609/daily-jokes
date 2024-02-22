@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import Text from "../Text";
 
 interface RightComponentProps {
@@ -11,7 +11,7 @@ function RightComponent(props: RightComponentProps) {
     return(
         <View style={rightStyles.container}>
             <Image style={rightStyles.icon} source={require("../../assets/icons/arrow-right.png")} />
-            <Text color={"black"}>{text}</Text>
+            <Text shadow={false} color={"black"}>{text}</Text>
         </View>
     )
 }
@@ -42,7 +42,7 @@ interface ListItemProps {
 export default function ListItem(props: ListItemProps) {
     const { left, center, right, useDefaultRight, rightText = "#?"} = props;
     return(
-        <View style={listItemStyles.container}>
+        <TouchableOpacity style={listItemStyles.container}>
             <View style={listItemStyles.left}>
                 {left}
             </View>
@@ -58,7 +58,7 @@ export default function ListItem(props: ListItemProps) {
                     </>
                 )}
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

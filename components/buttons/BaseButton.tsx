@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { TouchableOpacity, View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import Svg, { Polygon } from "react-native-svg";
 import Text from "../Text";
 import { componentColors } from "../Colors";
@@ -16,6 +16,9 @@ interface BaseButtonProps {
     heightPercentage?: number;
     borderWidth?: number;
     buttonWidth?: number;
+    fontSize?: number;
+    shadowHeight?: number;
+    style?: StyleProp<ViewStyle>;
 }
 
 export default function BaseButton(props:BaseButtonProps) {
@@ -29,6 +32,9 @@ export default function BaseButton(props:BaseButtonProps) {
         widthPercentage = 100,
         heightPercentage = 40,
         borderWidth = 2.5,
+        fontSize = 18,
+        shadowHeight = 10,
+        style = null,
     } = props;
 
     const buttonWidth = p(widthPercentage, 100);
@@ -50,8 +56,8 @@ export default function BaseButton(props:BaseButtonProps) {
         ${p(widthPercentage, 100)},${p(heightPercentage, 100)}`;
 
     return (
-        <TouchableOpacity onPress={onPress}>
-            <Shadow height={buttonHeight + 10} width={buttonContainerWidth} borderRadius={borderRadius} />
+        <TouchableOpacity style={style} onPress={onPress}>
+            <Shadow height={buttonHeight + shadowHeight} width={buttonContainerWidth} borderRadius={borderRadius} />
             <View style={[
                 styles.container,
                 {
@@ -90,7 +96,7 @@ export default function BaseButton(props:BaseButtonProps) {
                             fill={rightColor}
                         />
                     </Svg>
-                    <Text style={styles.buttonText}>{label}</Text>
+                    <Text shadow style={[styles.buttonText, {fontSize: fontSize}]}>{label}</Text>
                 </View>
             </View>
         </TouchableOpacity>

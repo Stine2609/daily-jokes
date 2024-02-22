@@ -20,8 +20,8 @@ export default function JokeListItem(props: JokeListItemProps) {
             left={<Avatar id={joke.avatarId} />}
             center={
                 <View style={styles.centerContainer}>
-                    <Text color={componentColors.text.black}>{joke.username}</Text>
-                    <Text numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={componentColors.text.dark}>{joke.text}</Text>
+                    <Text shadow={false} color={componentColors.text.black}>{joke.username}</Text>
+                    <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={componentColors.text.dark}>{joke.text}</Text>
                 </View>
             }
             useDefaultRight

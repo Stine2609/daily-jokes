@@ -1,3 +1,4 @@
+import { StyleProp, ViewStyle } from "react-native";
 import BaseButton from "./BaseButton";
 import { componentColors } from "../Colors";
 
@@ -6,6 +7,10 @@ interface ButtonProps {
     onPress?: () => void;
     height?: number;
     width?: number;
+    fontSize?: number;
+    shadowHeight?: number;
+    style?: StyleProp<ViewStyle>;
+    borderRadius?: number;
     variant?: "play" | "toggle" | "submit"
 }
 
@@ -30,7 +35,7 @@ const variants = {
     },
 }
 
-export default function Button({ label, onPress, height, width, variant = "play" }: ButtonProps) {
+export default function Button({ label, onPress, height, width, fontSize, shadowHeight, style, borderRadius, variant = "play" }: ButtonProps) {
     return (
         <BaseButton
             onPress={onPress}
@@ -38,9 +43,12 @@ export default function Button({ label, onPress, height, width, variant = "play"
             leftColor={variants[variant].leftColor}
             rightColor={variants[variant].rightColor}
             highlightColor={variants[variant].highlightColor}
-            borderRadius={variants[variant].borderRadius}
+            borderRadius={borderRadius ? borderRadius : variants[variant].borderRadius}
             heightPercentage={height}
             widthPercentage={width}
+            fontSize={fontSize}
+            shadowHeight={shadowHeight}
+            style={style}
         />
     );
 }

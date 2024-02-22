@@ -20,6 +20,7 @@ export default function TabBar(props:TabBarProps) {
                 highlight={componentColors.tabBar.home.highlight}
             />
             <TabButton
+                onPress={() => navigation.navigate("Daily")}
                 label="Daily"
                 icon="daily"
                 background={componentColors.tabBar.daily.background}
