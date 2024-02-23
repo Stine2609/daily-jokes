@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Text from "./Text";
 import CircularButton from './buttons/CircularButton';
 import ExpandButton from './buttons/ExpandButton';
-import { componentColors } from './Colors';
+import { componentColors, colors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from './ScreenView';
 import Button from './buttons/Button';
 
@@ -119,14 +119,14 @@ export default function SwipePicker() {
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
-                <ContentBox>
+                <ContentBox headerColor={colors.green.dark}>
                     <View style={{maxHeight: 150, overflow: "hidden"}}>
                         <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
                         <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                        <CircularButton variant="superlike" onPress={() => {}} />
                         <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
-                        <ExpandButton onPress={() => setModalVisible(modalVisible)} />
                     </View>
                 </ContentBox>
             </Animated.View>
@@ -138,23 +138,23 @@ export default function SwipePicker() {
                         position: 'absolute',
                         width: '100%',
                     }}>
-                    <ContentBox style={{overflow: "hidden"}}>
-                    <Animated.View style={[styles.overlay, styles.leftOverlay, {opacity: leftOverlayOpacity}]}>
-                        <LinearGradient
-                            start={{ x: 0, y: 1 }}
-                            end={{ x: 1, y: 1 }}
-                            colors={[componentColors.noButton.highlight, 'transparent']}
-                            style={{flex: 1}}
-                        />
-                    </Animated.View>
-                    <Animated.View style={[styles.overlay, styles.rightOverlay, {opacity: rightOverlayOpacity}]}>
-                        <LinearGradient
-                            start={{ x: 1, y: 1 }}
-                            end={{ x: 0, y: 1 }}
-                            colors={[componentColors.yesButton.highlight, 'transparent']}
-                            style={{flex: 1}}
-                        />
-                    </Animated.View>
+                    <ContentBox headerColor={colors.green.dark} style={{overflow: "hidden"}}>
+                        <Animated.View style={[styles.overlay, styles.leftOverlay, {opacity: leftOverlayOpacity}]}>
+                            <LinearGradient
+                                start={{ x: 0, y: 1 }}
+                                end={{ x: 1, y: 1 }}
+                                colors={[componentColors.noButton.highlight, 'transparent']}
+                                style={{flex: 1}}
+                            />
+                        </Animated.View>
+                        <Animated.View style={[styles.overlay, styles.rightOverlay, {opacity: rightOverlayOpacity}]}>
+                            <LinearGradient
+                                start={{ x: 1, y: 1 }}
+                                end={{ x: 0, y: 1 }}
+                                colors={[componentColors.yesButton.highlight, 'transparent']}
+                                style={{flex: 1}}
+                            />
+                        </Animated.View>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
                             <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>
                                 {joke}
@@ -165,8 +165,8 @@ export default function SwipePicker() {
                         )}
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                            <CircularButton variant="superlike" onPress={() => {}} />
                             <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
-                            <ExpandButton onPress={() => setModalVisible(true)} />
                         </View>
                     </ContentBox>
                 </Animated.View>
@@ -178,14 +178,14 @@ export default function SwipePicker() {
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}>
                 <View style={styles.modalView}>
-                    <ContentBox>
+                    <ContentBox headerColor={colors.green.dark}>
                         <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
                             <Text shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
+                            <CircularButton variant="superlike" onPress={() => {}} />
                             <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
-                            <ExpandButton onPress={() => setModalVisible(!modalVisible)} />
                         </View>
                     </ContentBox>
                 </View>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
 
     buttonsContainer: {
         flexDirection: "row",
-        gap: 20,
+        gap: 10,
         width: "100%",
         justifyContent: "center"
     },

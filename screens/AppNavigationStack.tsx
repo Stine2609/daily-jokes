@@ -10,15 +10,15 @@ export default function AppNavigationStack() {
     return(
         <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
-				name="Home"
-				component={Home}
-				options={HeaderOptions}
-			/>
+                name="Home"
+                component={Home}
+                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+            />
             <Stack.Screen
-				name="Daily"
-				component={Daily}
-				options={HeaderOptions}
-			/>
+                name="Daily"
+                component={Daily}
+                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+            />
         </Stack.Navigator>
     )
 }

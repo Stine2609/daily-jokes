@@ -6,6 +6,7 @@ import Button from "../../components/buttons/Button";
 import MascotTip from "../../components/MascotTip";
 import { create as uploadJoke } from "../../services/joke";
 import JokesLeftIndicator from "../../components/JokesLeftIndicator";
+import { colors } from '../../components/Colors';
 
 export default function Write() {
     const [inputValue, setInputValue] = useState('');
@@ -19,7 +20,7 @@ export default function Write() {
 
     return(
         <View style={styles.container}>
-            <ContentBox>
+            <ContentBox headerColor={colors.yellow.dark}>
                 <InputField 
                     placeholder="Write your joke here..." 
                     onChangeText={setInputValue}

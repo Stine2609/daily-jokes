@@ -5,7 +5,7 @@ import {percentageOf as p} from "../../utils/utils";
  
 interface CircularButtonProps {
     onPress?: () => void;
-    variant?: "yes" | "no" | "back";
+    variant?: "yes" | "no" | "back" | "hamburger" | "superlike";
     iconComponent?: ReactNode;
     backgroundColor?: string;
     highlightColor?: string;
@@ -27,6 +27,12 @@ const variants = {
 
     back: {
         icon: require("../../assets/icons/back.png"),
+        backgroundColor: componentColors.backButton.background,
+        highlightColor: componentColors.backButton.highlight,
+    },
+
+    hamburger: {
+        icon: require("../../assets/icons/hamburger.png"),
         backgroundColor: componentColors.backButton.background,
         highlightColor: componentColors.backButton.highlight,
     },
