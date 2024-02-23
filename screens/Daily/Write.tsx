@@ -10,12 +10,13 @@ import { colors } from '../../components/Colors';
 
 export default function Write() {
     const [inputValue, setInputValue] = useState('');
-    const jokesLeftIndicatorRef = useRef();
+    const jokesLeftIndicatorRef = useRef<{ refreshIndicator: () => void }>(null);
+
 
     let submitJoke = async () => {
         let result = await uploadJoke(inputValue);
 
-        jokesLeftIndicatorRef.current.refreshIndicator();
+        jokesLeftIndicatorRef.current?.refreshIndicator();
     }
 
     return(

@@ -43,13 +43,6 @@ export default function ContentTab(props: ContentTabProps) {
             )),
         })
     };
- 
-    console.log(animatedStyle)
-
-    console.log(tabWidthPercent)
-
-    console.log(tabs.map((_, index) => (100 / (tabs.length)) * index))
-    console.log(tabs.map((_, index) => (tabWidthPercent * index + "%")))
 
     return (
         <View style={styles.container}>

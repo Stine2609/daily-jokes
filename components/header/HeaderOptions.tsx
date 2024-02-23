@@ -5,6 +5,10 @@ import CircularButton from "../buttons/CircularButton";
 import Drawer from "../../components/Drawer";
 import CoinCount from "../CoinCount";
 
+type DrawerRef = {
+    openDrawer: () => void;
+};
+
 const HeaderOptions = ({  }) => ({
     headerTransparent: true,
     headerStyle: {
@@ -19,7 +23,7 @@ const HeaderOptions = ({  }) => ({
     headerLeft: (props: any) => {
         const { onPress } = props;  // Extract default onPress
         
-        const navigationDrawerRef = useRef(null);
+        const navigationDrawerRef = useRef<DrawerRef>(null);
 
         return(
             <View style={{marginLeft: 20}}>
