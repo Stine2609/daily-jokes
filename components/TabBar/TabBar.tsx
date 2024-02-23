@@ -27,6 +27,7 @@ export default function TabBar(props:TabBarProps) {
                 highlight={componentColors.tabBar.daily.highlight}
             />
             <TabButton
+                onPress={() => navigation.navigate("Browse")}
                 label="Browse"
                 icon="browse"
                 background={componentColors.tabBar.browse.background}

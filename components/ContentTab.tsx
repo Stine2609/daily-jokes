@@ -15,14 +15,17 @@ export default function ContentTab(props: ContentTabProps) {
     const { tabs } = props;
     const [activeTab, setActiveTab] = useState(0);
 
+    // Calculate width in percentage based on the number of tabs
+    const tabWidthPercent = 100 / tabs.length;
+
     // Initialize the position with the activeTab
     // Convert activeTab index to a percentage
-    const initialPosition = activeTab * 50; // Since we have 3 tabs, each tab change represents a 50% shift
+    const initialPosition = activeTab * tabWidthPercent;
     const position = useRef(new Animated.Value(initialPosition)).current;
 
     useEffect(() => {
         // Calculate the new position based on the activeTab
-        const newPosition = activeTab * 50; // Each tab change moves the position by 50%
+        const newPosition = activeTab * tabWidthPercent;
         
         Animated.spring(position, {
             toValue: newPosition,
@@ -32,19 +35,30 @@ export default function ContentTab(props: ContentTabProps) {
 
     const animatedStyle = {
         left: position.interpolate({
-            inputRange: [0, 50, 100],
-            outputRange: ["-0.5%", "34%", "68%"], // Map input range to left percentage values
-        }),
+            inputRange: tabs.map((_, index) => (100 / (tabs.length)) * index),
+            outputRange: tabs.map((_, index) => (
+                // For last and first, push the element slightly further to the right or left
+                // In order to avoid ugly doubling of borders
+                (tabWidthPercent * index + (index == 0 ? -0.5 : 0) + (index == tabs.length - 1 ? 0.5 : 0)) + "%"
+            )),
+        })
     };
+ 
+    console.log(animatedStyle)
+
+    console.log(tabWidthPercent)
+
+    console.log(tabs.map((_, index) => (100 / (tabs.length)) * index))
+    console.log(tabs.map((_, index) => (tabWidthPercent * index + "%")))
 
     return (
         <View style={styles.container}>
             <Shadow style={{alignSelf: "center"}} height={buttonContainerHeight} shadowHeight={5} width={"80%"} borderRadius={50} />
             <View style={styles.buttonContainer}>
-                <Animated.View style={[styles.focusedContainer, animatedStyle]} />
+                <Animated.View style={[styles.focusedContainer, animatedStyle, {width: `${tabWidthPercent}%`}]} />
                 {tabs.map((tab, index) =>
                     <TouchableOpacity
-                        style={styles.tabButton}
+                        style={[styles.tabButton, { width: `${tabWidthPercent}%` }]}
                         key={"TabButton-" + index}
                         onPress={() => setActiveTab(index)}
                     >
@@ -53,9 +67,29 @@ export default function ContentTab(props: ContentTabProps) {
                 )}
             </View>
 
-            <View>
-                {tabs[activeTab].component}
-            </View>
+            {tabs.map((tab, index) => (
+                <Animated.View
+                    key={index}
+                    style={[
+                        styles.tabContent,
+                        {
+                            // Position all tab contents in the same space
+                            position: 'absolute',
+                            opacity: activeTab === index ? 1 : 0,
+                            // Use the entire parent space
+                            top: 75,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            // Ensure only the active tab is interactable
+                            zIndex: activeTab === index ? 1 : 0,
+                        },
+                    ]}
+                >
+                    {tab.component}
+                </Animated.View>
+            ))}
+
         </View>
     );
 }
@@ -66,7 +100,12 @@ const buttonContainerHeight = buttonHeight + 4
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        gap: 10,
+        position: 'relative',
+        flex: 1,
+    },
+    tabContent: {
+        width: '100%',
+        height: '100%',
     },
 
     focusedContainer: {
@@ -75,7 +114,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         backgroundColor: componentColors.contentTab.focused,
         borderRadius: 50,
-        width: "33%", // Each tab button takes up one third of the container width
         height: buttonContainerHeight,
     },
 
@@ -84,7 +122,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderColor: componentColors.contentTab.border,
         height: buttonHeight,
-        width: "33%",
         justifyContent: "center",
         alignItems: "center",
     },
