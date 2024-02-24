@@ -28,12 +28,10 @@ export default function SquareButton(props: SquareButtonProps) {
         onPress,
     } = props;
 
-    const ParentTag = onPress ? TouchableOpacity : View;
-
     const innerHeight = height - p(10, height);
 
     return(
-        <ParentTag onPress={onPress}>
+        <TouchableOpacity activeOpacity={onPress ? 0.2 : 1} onPress={onPress}>
             <Shadow width={width + borderWidth * 2} height={height} shadowHeight={p(4, height)} borderRadius={borderRadius} />
             <View style={[
                 styles.container,
@@ -71,7 +69,7 @@ export default function SquareButton(props: SquareButtonProps) {
                     </View>
                 </View>
             </View>
-        </ParentTag>
+        </TouchableOpacity>
     )
 }
 
