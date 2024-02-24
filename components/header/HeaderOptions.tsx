@@ -44,7 +44,7 @@ const HeaderOptions = ({  }) => ({
         )
     },
     headerRight: () => (
-        <View style={{marginLeft: 20}}>
+        <View style={{marginRight: 20}}>
             <CoinCount />
         </View>
     ),

@@ -59,7 +59,7 @@ const adjectives = [
 const nouns = [
     'Penguin', 'Taco', 'Unicorn', 'Ninja', 'Pirate', 'Robot', 'Zombie', 'Alien', 'Wizard', 'Knight',
     'Dragon', 'Goblin', 'Phoenix', 'Robot', 'Sphinx', 'Vampire', 'Werewolf', 'Yeti', 'Zebra', 'Koala',
-    'Llama', 'Narwhal', 'Octopus', 'Panda', 'Quokka', 'Rabbit', 'Sloth', 'Turtle', 'Unicorn', 'Vulture',
+    'Llama', 'Narwhal', 'Octopus', 'Panda', 'Quokka', 'Rabbit', 'Asgeir', 'Sloth', 'Turtle', 'Unicorn', 'Vulture',
     'Walrus', 'Xerus', 'Yak', 'Zorse', 'Apple', 'Bagel', 'Cookie', 'Doughnut', 'Eclair', 'Fajita',
     'Gelato', 'Hummus', 'IceCream', 'Jellybean', 'Kebab', 'Lemon', 'Mango', 'Noodle', 'Olive', 'Peach',
     'Quiche', 'Radish', 'Strawberry', 'Tomato', 'Udon', 'Vanilla', 'Waffle', 'Xacuti', 'Yogurt', 'Ziti',

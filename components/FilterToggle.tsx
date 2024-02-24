@@ -19,7 +19,7 @@ export default function FilterToggle(props: FilterToggleProps) {
     return(
         <View style={styles.container}>
             {options.map((option, index) => 
-                <TouchableOpacity style={[styles.button, {backgroundColor: activeFilter == index ? colors.purple.highlight : colors.purple.dark}]} onPress={() => {
+                <TouchableOpacity key={option.label + index} style={[styles.button, {backgroundColor: activeFilter == index ? colors.purple.highlight : colors.purple.dark}]} onPress={() => {
                     setActiveFilter(index);
                 }}>
                     {activeFilter == index && (
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center",
         gap: 10,
-        marginVertical: 16,
+        marginTop: 6,
+        marginBottom: 16,
     },
 
     button: {

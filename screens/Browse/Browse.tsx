@@ -7,7 +7,8 @@ export default function Browse() {
 
     return (
         <ScreenView style={{justifyContent: "flex-start"}}>
-            <ContentTab 
+            <ContentTab
+                contentSpacing={10}
                 tabs={[
                     {
                         name: "Jokes",

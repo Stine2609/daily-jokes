@@ -8,11 +8,12 @@ interface ContentTabProps {
     tabs: Array<{
         name: string;
         component: React.ReactNode;
-    }>
+    }>;
+    contentSpacing?: number;
 }
 
 export default function ContentTab(props: ContentTabProps) {
-    const { tabs } = props;
+    const { tabs, contentSpacing = 25 } = props;
     const [activeTab, setActiveTab] = useState(0);
 
     // Calculate width in percentage based on the number of tabs
@@ -66,14 +67,8 @@ export default function ContentTab(props: ContentTabProps) {
                     style={[
                         styles.tabContent,
                         {
-                            // Position all tab contents in the same space
-                            position: 'absolute',
                             opacity: activeTab === index ? 1 : 0,
-                            // Use the entire parent space
-                            top: 75,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
+                            top: 50 + contentSpacing,
                             // Ensure only the active tab is interactable
                             zIndex: activeTab === index ? 1 : 0,
                         },
@@ -97,6 +92,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tabContent: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
         width: '100%',
         height: '100%',
     },
@@ -125,7 +124,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "space-between",
-        marginBottom: 30,
         height: buttonContainerHeight,
         backgroundColor: componentColors.contentTab.background,
         borderRadius: 50,

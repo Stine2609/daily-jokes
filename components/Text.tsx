@@ -7,6 +7,7 @@ interface TextProps {
     children?: ReactNode;
     style?: StyleProp<TextStyle>;
     shadow?: boolean;
+    shadowColor?: string;
     size?: number;
     color?: string;
     defaultLineHeight?: boolean;
@@ -15,7 +16,7 @@ interface TextProps {
 }
 
 export default function Text(props: TextProps) {
-    const { children, style, shadow = true, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
+    const { children, style, shadow = true, shadowColor, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
 
     const [fontsLoaded] = useFonts({
         "Digitalt": require("../assets/fonts/Digitalt.otf"),
@@ -31,6 +32,7 @@ export default function Text(props: TextProps) {
             style={[
                 textStyles.text,
                 shadow ? textStyles.shadow : null,
+                shadowColor ? {textShadowColor: shadowColor} : null,
                 { fontSize: size },
                 { color: color },
                 defaultLineHeight ? null : { lineHeight: 22 },

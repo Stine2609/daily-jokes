@@ -4,6 +4,7 @@ import HeaderOptions from "../components/header/HeaderOptions";
 import Home from "./Home";
 import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
+import Profile from "./Profile";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,11 @@ export default function AppNavigationStack() {
             <Stack.Screen
                 name="Browse"
                 component={Browse}
+                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
                 options={({ navigation, route }) => HeaderOptions({ navigation, route })}
             />
         </Stack.Navigator>

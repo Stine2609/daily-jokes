@@ -1,10 +1,11 @@
-import { View, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, TextInput, TouchableOpacity, Image, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { textStyles } from "./Text";
 import { colors } from "./Colors";
 import Shadow from "./Shadow";
 
 interface SearchBarProps {
     placeholder?: string;
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 50,
         alignItems: "center",
+        marginBottom: 10,
     },
 
     innerContainer: {
