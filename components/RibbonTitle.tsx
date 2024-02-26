@@ -17,7 +17,7 @@ export default function RibbonTitle(props: RibbonTitleProps) {
     return(
         <View style={styles.container}>
             <Image style={styles.image} source={require("../assets/ribbon.png")} />
-            <Text shadow={false} size={13} style={[styles.text, styles.title]}>{topText}</Text>
+            <Text shadow={false} size={14} style={[styles.text, styles.title]}>{topText}</Text>
             <Text shadowColor={colors.pink.dark} size={20} style={[styles.text, styles.message]}>{bottomText}</Text>
         </View>
     )
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     image: {
         position: "absolute",
         alignSelf: "center",
-        height: p(85, originalHeight),
-        width: p(85, originalWidth),
+        height: p(100, originalHeight),
+        width: p(100, originalWidth),
     },
 
     text: {
@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
 
     title: {
         color: colors.pink.dark,
+        top: 4,
     },
 
     message: {
-        top: 16,
+        top: 20,
     }
 })
