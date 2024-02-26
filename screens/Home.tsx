@@ -7,6 +7,7 @@ import PlayersDisplay from "../components/avatar/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
 import { colors } from "../components/Colors";
 import Text from "../components/Text";
+import { useTimeLeft } from "../hooks/useTimeLeft";
 
 interface HomeProps {
     navigation: {
@@ -14,37 +15,10 @@ interface HomeProps {
     };
 }
 
-function getTimeLeft(contestDate: string): string {
-    const contestEndDate = new Date(contestDate);
-    contestEndDate.setUTCDate(contestEndDate.getUTCDate() + 1);
-
-    const now = new Date();
-    const timeLeft = contestEndDate.getTime() - now.getTime(); 
-
-    if (timeLeft < 0) {
-        return "Contest has ended";
-    }
-
-    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}:${minutes} hours left`;
-}
-
 export default function Home({ navigation }: HomeProps) {
 
     const contest = useContest();
-    const [timeLeft, setTimeLeft] = useState('Calculating time left...');
-
-    useEffect(() => {
-        const updateTimeLeft = () => {
-            setTimeLeft(getTimeLeft(contest.date));
-        };
-
-        updateTimeLeft(); // Initial update
-        const intervalId = setInterval(updateTimeLeft, 60000); // Update every minute
-
-        return () => clearInterval(intervalId); // Cleanup on unmount
-    }, [contest.date]);
+    const timeLeft = useTimeLeft(contest.date);
 
     return(
         <ScreenView style={styles.container}>
