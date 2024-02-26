@@ -1,10 +1,13 @@
-import { login as apiLogin, loginWithToken as apiLoginWithToken, register as apiRegister, update as apiUpdate } from "../api/auth";
+import { api } from "../api/api";
 import { UserDataManager } from "./userDataManager";
 import { generateRandomCredentials } from "../utils/random";
 
 export const login = async (email, password) => {
     try {
-        let response = await apiLogin(email, password);
+        let response = await api("POST", "/auth/login", {
+            "email": email,
+            "password": password,
+        });
 
         if (response.user.email === email) {
             UserDataManager.storeUserData(response.user);
@@ -19,7 +22,7 @@ export const login = async (email, password) => {
 
 export const loginWithToken = async (token) => {
     try {
-        let response = await apiLoginWithToken(token);
+        let response = await api("POST", "/auth/loginWithToken", undefined, token);
 
         if (response.user?.token === token) {
             UserDataManager.storeUserData(response.user);
@@ -49,7 +52,12 @@ export const autoRegisterDevice = async () => {
 
 export const register = async (email, password, name, deviceID = "") => {
     try {
-        let response = await apiRegister(email, password, name, deviceID);
+        let response = await api("POST", "/auth/register", {
+            "name": name,
+            "email": email,
+            "password": password,
+            "deviceID": deviceID
+        });
 
         if (response.user.email === email) {
             UserDataManager.storeUserData(response.user);
@@ -69,7 +77,7 @@ export const update = async (data) => {
 
         if (!token) throw new Error('No stored token');
 
-        let response = await apiUpdate(token, data);
+        let response = await api("POST", "/auth/update", data, token);
 
         if (response.ok) {
             return true;
