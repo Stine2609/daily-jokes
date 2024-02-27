@@ -1,4 +1,4 @@
-export const environment = "production";
+export const environment = "development";
 
 const config = {
     production: {
