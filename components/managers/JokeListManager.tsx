@@ -20,7 +20,7 @@ export default function JokeListManager({ criteria }) {
                 jokes.map((joke, index) => (
                     <JokeListItem key={index} joke={{
                         avatarId: joke.user?.profile ? joke.user.profile : 0, 
-                        username: joke.userId, 
+                        username: joke.user?.name ? joke.user.name : "", 
                         text: joke.textBody, 
                         position: 1 
                     }} />
