@@ -21,6 +21,6 @@ export default function InputField(props: InputFieldProps) {
 const styles = StyleSheet.create({
     input: {
         textAlignVertical: "top",
-        minHeight: 80
+        minHeight: 60,
     },
 })

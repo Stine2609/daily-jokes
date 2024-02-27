@@ -13,7 +13,7 @@ import RibbonTitle from "./RibbonTitle";
 interface ContentBoxProps {
     children?: ReactNode;
     title?: string;
-    text?: string;
+    text?: string | ReactNode;
     textColor?: string;
     style?: StyleProp<ViewStyle>;
     headerColor?: string;
@@ -68,28 +68,28 @@ export default function ContentBox(props:ContentBoxProps) {
                 <>
                 {ribbonTitle && (
                     <View style={styles.ribbonTitleConatiner}>
-                        <RibbonTitle  topText={flavorText} bottomText={title} />
+                        <RibbonTitle topText={flavorText} bottomText={title} />
                     </View>
                 )}
-                    {isLoading ? (
-                        null // TODO: add loading indicator
-                    ) : (
-                        <>
-                            {!ribbonTitle && (
-                                <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-                                    <Text shadow={false}>{title ? title : contest.topic }</Text>
-                                </View>
-                            )}
-                            {text && (
-                                <View style={styles.textContainer}>
-                                    <Text shadow={false} color={textColor}>{text}</Text>
-                                </View>
-                            )}
-                            <View style={ribbonTitle ? {marginTop: 40} : null}>
-                                {children}
+                {isLoading ? (
+                    null // TODO: add loading indicator
+                ) : (
+                    <>
+                        {!ribbonTitle && (
+                            <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
+                                <Text shadow={false}>{title ? title : contest.topic }</Text>
                             </View>
-                        </>
-                    )}
+                        )}
+                        {text && (
+                            <View style={styles.textContainer}>
+                                <Text shadow={false} color={textColor} style={{textAlign: "center"}}>{text}</Text>
+                            </View>
+                        )}
+                        <View style={[ribbonTitle ? {marginTop: 40} : null, {gap: 10}]}>
+                            {children}
+                        </View>
+                    </>
+                )}
                 </>
             </View>
         </View>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         borderRadius: 20,
         backgroundColor: componentColors.contentBox.background,
-        minHeight: 200,
+        minHeight: 100,
         gap: 10
     },
 
@@ -141,14 +141,15 @@ const styles = StyleSheet.create({
 
     textContainer: {
         justifyContent: "center",
-        alignItems: "center",
-        minHeight: 100,
+        // alignItems: "center",
+        minHeight: 60,
     },
 
     bottomContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        marginTop: 10,
     },
 
     ribbonTitleConatiner: {

@@ -23,7 +23,7 @@ export default function PlayersDisplay(props: PlayersDisplayProps) {
 
     return (
         <View style={styles.container}>
-            <Text color={colors.purple.dark}>Players</Text>
+            <Text shadow={false} color={colors.purple.dark}>Players</Text>
             <View style={styles.avatarContainer}>
             {displayedUsers.map((user) => (
                 <Avatar key={user.id} id={user.avatarId} />

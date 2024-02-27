@@ -15,10 +15,10 @@ interface ScreenViewProps {
     scrollView?: boolean;
 }
 
-const HEADER_HEIGHT = 64 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
+export const HEADER_HEIGHT = 64 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0);
 export const TAB_BAR_HEIGHT = 100;
 
-export const SCREEN_HEIGHT = Dimensions.get("screen").height - (HEADER_HEIGHT + TAB_BAR_HEIGHT)
+export const SCREEN_HEIGHT = Dimensions.get("screen").height - (HEADER_HEIGHT + TAB_BAR_HEIGHT + 20)
 
 export default function ScreenView(props: ScreenViewProps) {
     const {children, style, scrollView = true} = props;
@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
+        maxHeight: SCREEN_HEIGHT,
         marginTop: HEADER_HEIGHT,
         // marginBottom: TAB_BAR_HEIGHT,
-        minHeight: SCREEN_HEIGHT - 24,
+        minHeight: SCREEN_HEIGHT,
     },
 })

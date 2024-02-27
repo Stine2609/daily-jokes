@@ -5,9 +5,10 @@ import Button from "../components/buttons/Button";
 import ContentBox, { ContentBoxBottom } from "../components/ContentBox";
 import PlayersDisplay from "../components/profile/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
-import { colors } from "../components/Colors";
 import Text from "../components/Text";
 import { useTimeLeft } from "../hooks/useTimeLeft";
+import { colors } from "../components/Colors";
+import PulseAnimation from "../components/PulseAnimation";
 
 interface HomeProps {
     navigation: {
@@ -25,7 +26,14 @@ export default function Home({ navigation }: HomeProps) {
             <ContentBox
                 title="Daily contest"
                 headerColor={colors.purple.dark}
-                text={`"The theme for today is ${contest.topic}!"`}
+                text={
+                    <Text shadow={false}>
+                        <Text shadow={false} color={colors.purple.medium}>{"The theme for today is \n"}</Text>
+                        <PulseAnimation>
+                            <Text shadow={false} color={colors.purple.dark}>{contest.topic}</Text>
+                        </PulseAnimation>
+                    </Text>
+                }
                 isLoading={contest.topic == ""}
             >
                 <PlayersDisplay users={[
@@ -38,8 +46,8 @@ export default function Home({ navigation }: HomeProps) {
                     {"id": 7, "avatarId": 1}
                 ]} />
                 <ContentBoxBottom>
-                    <Button variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
-                    <Text color={colors.purple.dark}>{timeLeft}</Text>
+                    <Button height={36} variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
+                    <Text shadow={false} color={colors.purple.dark}>{timeLeft}</Text>
                 </ContentBoxBottom>
             </ContentBox>
         </ScreenView>
