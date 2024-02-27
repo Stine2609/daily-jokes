@@ -35,21 +35,61 @@ const rightStyles = StyleSheet.create({
 interface CenterComponentProps {
     title?: string;
     text?: string;
+    stats?: {
+        likes?: number;
+        participants?: number;
+    }
 }
 
 function CenterComponent(props: CenterComponentProps) {
-    const { title, text } = props;
+    const { title, text, stats } = props;
     return(
         <View style={centerStyles.centerContainer}>
-            <Text shadow={false} color={componentColors.text.black}>{title}</Text>
-            <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={componentColors.text.dark}>{text}</Text>
+            <Text shadow={false} numberOfLines={1} color={componentColors.text.black}>{title}</Text>
+            {text && (
+                <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={componentColors.text.dark}>{text}</Text>
+            )}
+            {stats && (
+                <View style={centerStyles.statsContainer}>
+                    {stats.likes && (
+                        <View style={centerStyles.stat}>
+                            <Image style={centerStyles.icon} source={require("../../assets/icons/likes.png")} />
+                            <Text shadow={false} color="#49454F" size={16}>{stats.likes}</Text>
+                        </View>
+                    )}
+                    {stats.participants && (
+                        <View style={centerStyles.stat}>
+                            <Image style={centerStyles.icon} source={require("../../assets/icons/participants.png")} />
+                            <Text shadow={false} color="#49454F" size={16}>{stats.participants}</Text>
+                        </View>
+                    )}
+                </View>
+            )}
         </View>
     )
 }
 
 const centerStyles = StyleSheet.create({
     centerContainer: {
+        gap: 2,
+        justifyContent: "space-evenly",
+        flex: 1
+    },
 
+    statsContainer: {
+        flexDirection: "row",
+        gap: 10,
+    },
+
+    stat: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4,
+    },
+
+    icon: {
+        height: 14,
+        width: 14,
     }
 })
 
@@ -59,14 +99,18 @@ interface ListItemProps {
     center?: ReactNode;
     useDefaultCenter?: boolean;
     centerTitle?: string;
-    centerText?: string;
+    centerText?: string | null;
+    stats?: {
+        likes?: number;
+        participants?: number;
+    }
     right?: ReactNode;
     useDefaultRight?: boolean;
     rightText?: string | null;
 }
 
 export default function ListItem(props: ListItemProps) {
-    const { left, center, useDefaultCenter, centerTitle, centerText, right, useDefaultRight, rightText = ""} = props;
+    const { left, center, useDefaultCenter, centerTitle, centerText, stats, right, useDefaultRight, rightText = ""} = props;
     return(
         <TouchableOpacity style={listItemStyles.container}>
             <View style={listItemStyles.left}>
@@ -74,7 +118,7 @@ export default function ListItem(props: ListItemProps) {
             </View>
             <View style={listItemStyles.center}>
                 {useDefaultCenter ? (
-                    <CenterComponent title={centerTitle} text={centerText} />
+                    <CenterComponent title={centerTitle} text={centerText ? centerText : ""} stats={stats} />
                 ) : (
                     <>
                         {center}
@@ -98,11 +142,11 @@ const listItemStyles = StyleSheet.create({
     container: {
         flexDirection: "row",
         gap: 10,
-        marginVertical: 4,
+        marginVertical: 8,
     },
 
     left: {
-        flexBasis: 50,
+        flexBasis: 56,
     },
 
     center: {

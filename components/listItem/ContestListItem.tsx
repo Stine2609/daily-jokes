@@ -8,7 +8,12 @@ interface ContestListItemProps {
     contest: {
         date: string;
         name: string;
-        winner: string;
+        winner?: string;
+        position?: number;
+        stats?: {
+            likes?: number;
+            participants?: number;
+        }
     }
 }
 
@@ -17,14 +22,16 @@ export default function ContestListItem(props: ContestListItemProps) {
     return(
         <ListItem 
             left={
-                <SquareButton width={50} height={50} borderRadius={10} borderWidth={0} highlightColor={colors.purple.highlight} backgroundColor={colors.purple.dark}>
+                <SquareButton width={56} height={56} borderRadius={10} borderWidth={0} highlightColor={colors.purple.highlight} backgroundColor={colors.purple.dark}>
                     <Text shadow={false} size={21} style={{textAlign: "center", lineHeight: 18}}>{contest.date}</Text>
                 </SquareButton>
             }
             useDefaultCenter
             centerTitle={contest.name}
-            centerText={`#1 ${contest.winner}`}
+            centerText={contest.winner ? `#1 ${contest.winner}` : null}
+            stats={contest.stats}
             useDefaultRight
+            rightText={contest.position ? "#" + contest.position : null}
         />
     )
 }

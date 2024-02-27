@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import ScreenView from "../components/ScreenView";
 import Button from "../components/buttons/Button";
 import ContentBox, { ContentBoxBottom } from "../components/ContentBox";
-import PlayersDisplay from "../components/avatar/PlayersDisplay";
+import PlayersDisplay from "../components/profile/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
 import { colors } from "../components/Colors";
 import Text from "../components/Text";

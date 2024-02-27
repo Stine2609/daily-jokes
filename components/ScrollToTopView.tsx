@@ -8,7 +8,7 @@ interface ScrollToTopViewProps {
 }
 
 export default function ScrollToTopView(props: ScrollToTopViewProps) {
-    const { children, scrollToTopThreshold = 100 } = props;
+    const { children, scrollToTopThreshold = 200 } = props;
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [scrollingBack, setScrollingBack] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);

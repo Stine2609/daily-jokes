@@ -85,7 +85,9 @@ export default function ContentBox(props:ContentBoxProps) {
                                     <Text shadow={false} color={textColor}>{text}</Text>
                                 </View>
                             )}
-                            {children}
+                            <View style={ribbonTitle ? {marginTop: 40} : null}>
+                                {children}
+                            </View>
                         </>
                     )}
                 </>
@@ -152,6 +154,6 @@ const styles = StyleSheet.create({
     ribbonTitleConatiner: {
         position: "absolute",
         alignSelf: "center",
-        top: -30
+        top: -30,
     }
 })

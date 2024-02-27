@@ -8,6 +8,7 @@ import { colors } from '../Colors';
 interface joke {
     user?: {
         profile?: number;
+        name?: string;
     };
     userId: string;
     textBody: string;
@@ -37,7 +38,10 @@ export default function JokeListManager({ criteria }: JokeListManagerProps) {
                         avatarId: joke.user?.profile ? joke.user.profile : 0, 
                         username: joke.user?.name ? joke.user.name : "", 
                         text: joke.textBody, 
-                        position: 1 
+                        position: 1,
+                        stats: {
+                            likes: 20,
+                        }
                     }} />
                 ))
             ) : (
