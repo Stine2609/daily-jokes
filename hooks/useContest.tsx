@@ -7,6 +7,7 @@ export const useContest = (date?: Date) => {
     const [contest, setContest] = useState({ 
         topic: "",
         date: new Date().toDateString(),
+        id: -1,
     });
     const isFocused = useIsFocused();
 

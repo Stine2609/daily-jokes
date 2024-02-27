@@ -5,7 +5,7 @@ import { storeData, getData } from '../utils/storage';
 import { UserDataManager } from '../services/userDataManager';
 
 export const useProfile = () => {
-    const [profile, setProfile] = useState({ });
+    const [profile, setProfile] = useState({ userId: -1 });
     const isFocused = useIsFocused();
 
     useEffect(() => {
