@@ -8,9 +8,9 @@ import ContentTab from "../../components/ContentTab";
 export default function Daily() {
 
     return (
-        <ScreenView style={{justifyContent: "flex-start"}}>
+        <ScreenView style={{ justifyContent: "flex-start" }}>
             <StylizedTitle />
-            <ContentTab 
+            <ContentTab
                 tabs={[
                     {
                         name: "Write",

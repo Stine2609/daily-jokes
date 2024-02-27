@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import { componentColors } from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
+import ActiveTabContext from '../context/ActiveTabContext';
 
 interface ContentTabProps {
     tabs: Array<{
@@ -46,39 +47,41 @@ export default function ContentTab(props: ContentTabProps) {
     };
 
     return (
-        <View style={styles.container}>
-            <Shadow style={{alignSelf: "center"}} height={buttonContainerHeight} shadowHeight={5} width={"80%"} borderRadius={50} />
-            <View style={styles.buttonContainer}>
-                <Animated.View style={[styles.focusedContainer, animatedStyle, {width: `${tabWidthPercent}%`}]} />
-                {tabs.map((tab, index) =>
-                    <TouchableOpacity
-                        style={[styles.tabButton, { width: `${tabWidthPercent}%` }]}
-                        key={"TabButton-" + index}
-                        onPress={() => setActiveTab(index)}
+        <ActiveTabContext.Provider value={{ activeTab, setActiveTab }}>
+            <View style={styles.container}>
+                <Shadow style={{ alignSelf: "center" }} height={buttonContainerHeight} shadowHeight={5} width={"80%"} borderRadius={50} />
+                <View style={styles.buttonContainer}>
+                    <Animated.View style={[styles.focusedContainer, animatedStyle, { width: `${tabWidthPercent}%` }]} />
+                    {tabs.map((tab, index) =>
+                        <TouchableOpacity
+                            style={[styles.tabButton, { width: `${tabWidthPercent}%` }]}
+                            key={"TabButton-" + index}
+                            onPress={() => setActiveTab(index)}
+                        >
+                            <Text>{tab.name}</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+
+                {tabs.map((tab, index) => (
+                    <Animated.View
+                        key={index}
+                        style={[
+                            styles.tabContent,
+                            {
+                                opacity: activeTab === index ? 1 : 0,
+                                top: 50 + contentSpacing,
+                                // Ensure only the active tab is interactable
+                                zIndex: activeTab === index ? 1 : 0,
+                            },
+                        ]}
                     >
-                        <Text>{tab.name}</Text>
-                    </TouchableOpacity>
-                )}
+                        {tab.component}
+                    </Animated.View>
+                ))}
+
             </View>
-
-            {tabs.map((tab, index) => (
-                <Animated.View
-                    key={index}
-                    style={[
-                        styles.tabContent,
-                        {
-                            opacity: activeTab === index ? 1 : 0,
-                            top: 50 + contentSpacing,
-                            // Ensure only the active tab is interactable
-                            zIndex: activeTab === index ? 1 : 0,
-                        },
-                    ]}
-                >
-                    {tab.component}
-                </Animated.View>
-            ))}
-
-        </View>
+        </ActiveTabContext.Provider>
     );
 }
 

@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View } from "react-native";
 import ContentBox from "../../components/ContentBox";
 import { colors } from "../../components/Colors";
 import { UserDataManager } from '../../services/userDataManager';
 import { useContest } from '../../hooks/useContest';
 import JokeListManager from '../../components/managers/JokeListManager';
+import ActiveTabContext from '../../context/ActiveTabContext';
 
 export default function MyJokes() {
-    const [criteria, setCriteria] = useState({}); 
+    const { activeTab } = useContext(ActiveTabContext);
+    const [criteria, setCriteria] = useState({ userId: -1, contestId: -1 }); 
     
     const contest = useContest();
 
     useEffect(() => {
-        const fetchUserId = async () => {
-            const userDetails = await UserDataManager.getUserDetails();
-            setCriteria({ userId: userDetails.id, contestId: contest.id }); 
-        };
+        if(activeTab === 2) {
+            const fetchUserId = async () => {
+                const userDetails = await UserDataManager.getUserDetails();
+                setCriteria({ userId: userDetails.id, contestId: contest.id }); 
+            };
 
-        fetchUserId();
-    }, [contest]);
+            fetchUserId();
+        }
+    }, [activeTab, contest]);
 
     return (
         <View>
