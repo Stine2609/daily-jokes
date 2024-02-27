@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet } from "react-native";
-import ContentBox from "../../components/ContentBox";
-import InputField from "../../components/InputField";
+import ContentBox from "../../components/layout/ContentBox";
+import InputField from "../../components/generalUI/InputField";
 import Button from "../../components/buttons/Button";
-import MascotTip from "../../components/MascotTip";
+import MascotTip from "../../components/misc/MascotTip";
 import { create as uploadJoke } from "../../services/joke";
-import JokesLeftIndicator from "../../components/JokesLeftIndicator";
-import { colors } from '../../components/Colors';
+import JokesLeftIndicator from "../../components/misc/JokesLeftIndicator";
+import { colors } from '../../components/misc/Colors';
 
 export default function Write() {
     const [inputValue, setInputValue] = useState('');

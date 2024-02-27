@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import Text from "./Text";
-import { colors } from "./Colors";
+import { colors } from "../misc/Colors";
 
 interface FilterToggleProps {
     options: Array<{
@@ -23,7 +23,7 @@ export default function FilterToggle(props: FilterToggleProps) {
                     setActiveFilter(index);
                 }}>
                     {activeFilter == index && (
-                        <Image style={[styles.icon]} source={require("../assets/icons/check.png")} />
+                        <Image style={[styles.icon]} source={require("../../assets/icons/check.png")} />
                     )}
                     <Text shadow={false}>{option.label}</Text>
                 </TouchableOpacity>

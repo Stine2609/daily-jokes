@@ -1,8 +1,8 @@
 import { View } from 'react-native';
-import SearchBar from "../../components/SearchBar";
-import FilterToggle from "../../components/FilterToggle";
-import ContentBox from "../../components/ContentBox";
-import ScrollToTopView from '../../components/ScrollToTopView';
+import SearchBar from "../../components/generalUI/SearchBar";
+import FilterToggle from "../../components/generalUI/FilterToggle";
+import ContentBox from "../../components/layout/ContentBox";
+import ScrollToTopView from "../../components/layout/ScrollToTopView";
 import JokeListManager from '../../components/managers/JokeListManager';
 
 export default function Jokes() {

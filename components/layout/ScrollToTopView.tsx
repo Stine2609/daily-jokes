@@ -1,6 +1,6 @@
 import React, { useState, useRef, ReactNode } from "react";
 import { ScrollView, Pressable, Image, StyleSheet} from "react-native";
-import { colors } from "./Colors";
+import { colors } from "../misc/Colors";
 
 interface ScrollToTopViewProps {
     children?: ReactNode;
@@ -43,7 +43,7 @@ export default function ScrollToTopView(props: ScrollToTopViewProps) {
                     style={styles.scrollToTopButton}
                     onPress={scrollToTop}
                 >
-                    <Image style={styles.scrollToTopIcon} source={require("../assets/icons/back.png")} />
+                    <Image style={styles.scrollToTopIcon} source={require("../../assets/icons/back.png")} />
                 </Pressable>
             )}
         </>

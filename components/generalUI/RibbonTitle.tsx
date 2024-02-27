@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import Text from './Text';
-import { percentageOf as p } from '../utils/utils';
-import { colors } from './Colors';
+import { percentageOf as p } from '../../utils/utils';
+import { colors } from '../misc/Colors';
 
 const originalHeight = 68;
 const originalWidth = 276;
@@ -16,7 +16,7 @@ export default function RibbonTitle(props: RibbonTitleProps) {
     const { topText, bottomText } = props;
     return(
         <View style={styles.container}>
-            <Image style={styles.image} source={require("../assets/ribbon.png")} />
+            <Image style={styles.image} source={require("../../assets/ribbon.png")} />
             <Text shadow={false} size={14} style={[styles.text, styles.title]}>{topText}</Text>
             <Text shadowColor={colors.pink.dark} size={20} style={[styles.text, styles.message]}>{bottomText}</Text>
         </View>

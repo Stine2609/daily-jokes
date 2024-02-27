@@ -1,7 +1,7 @@
 import { View } from "react-native";
-import ScrollToTopView from "../../components/ScrollToTopView";
-import SearchBar from "../../components/SearchBar";
-import ContentBox from "../../components/ContentBox";
+import ScrollToTopView from "../../components/layout/ScrollToTopView";
+import SearchBar from "../../components/generalUI/SearchBar";
+import ContentBox from "../../components/layout/ContentBox";
 import ContestListItem from "../../components/listItem/ContestListItem";
 
 export default function Contests() {

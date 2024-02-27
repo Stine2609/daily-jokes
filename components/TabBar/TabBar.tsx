@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native"
 import TabButton from "./TabButton"
-import { componentColors } from "../Colors"
+import { componentColors } from "../misc/Colors"
 import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native"
 
 interface TabBarProps {

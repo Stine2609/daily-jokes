@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import ListItem from "./ListItem";
-import Text from "../Text";
-import { colors } from "../Colors";
+import Text from "../generalUI/Text";
+import { colors } from "../misc/Colors";
 import SquareButton from "../buttons/SquareButton";
 
 interface ContestListItemProps {

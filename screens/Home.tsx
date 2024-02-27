@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import ScreenView from "../components/ScreenView";
+import ScreenView from "../components/layout/ScreenView";
 import Button from "../components/buttons/Button";
-import ContentBox, { ContentBoxBottom } from "../components/ContentBox";
+import ContentBox, { ContentBoxBottom } from "../components/layout/ContentBox";
 import PlayersDisplay from "../components/profile/PlayersDisplay";
 import { useContest } from "../hooks/useContest";
-import Text from "../components/Text";
+import Text from "../components/generalUI/Text";
 import { useTimeLeft } from "../hooks/useTimeLeft";
-import { colors } from "../components/Colors";
-import PulseAnimation from "../components/PulseAnimation";
+import { colors } from "../components/misc/Colors";
+import PulseAnimation from "../components/animations/PulseAnimation";
 
 interface HomeProps {
     navigation: {

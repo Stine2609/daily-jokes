@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, forwardRef } from 'react';
 import { View, StyleSheet } from "react-native";
 import { componentColors } from "./Colors";
-import { useJokeSubmission } from "../hooks/useJokeSubmission";
+import { useJokeSubmission } from "../../hooks/useJokeSubmission";
 
 const JokesLeftIndicator = forwardRef((props, ref) => {
     const { jokeSubmission, refresh } = useJokeSubmission();

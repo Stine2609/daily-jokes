@@ -1,5 +1,5 @@
 import CircularButton from "./CircularButton";
-import { componentColors } from "../Colors";
+import { componentColors } from "../misc/Colors";
 
 interface BackButtonProps {
     onPress?: () => void;

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import Shadow from "../Shadow";
+import Shadow from "../misc/Shadow";
 import { percentageOf as p } from "../../utils/utils";
 
 interface SquareButtonProps {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import Text from "../Text";
-import Shadow from "../Shadow";
-import { colors } from "../Colors";
+import Text from "../generalUI/Text";
+import Shadow from "../misc/Shadow";
+import { colors } from "../misc/Colors";
 
 interface HeaderCenterProps {
     label: string;

@@ -4,11 +4,11 @@
  */
 import { ReactNode, useState } from "react";
 import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
-import { componentColors } from "./Colors";
-import Text from "./Text";
-import Shadow from "./Shadow";
-import { useContest } from "../hooks/useContest";
-import RibbonTitle from "./RibbonTitle";
+import { componentColors } from "../misc/Colors";
+import Text from "../generalUI/Text";
+import Shadow from "../misc/Shadow";
+import { useContest } from "../../hooks/useContest";
+import RibbonTitle from "../generalUI/RibbonTitle";
 
 interface ContentBoxProps {
     children?: ReactNode;

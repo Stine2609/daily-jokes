@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Text as RNText, StyleProp, TextStyle, StyleSheet, LayoutChangeEvent } from "react-native";
-import { componentColors } from "./Colors";
+import { componentColors } from "../misc/Colors";
 import { useFonts } from "expo-font";
 
 interface TextProps {
@@ -19,7 +19,7 @@ export default function Text(props: TextProps) {
     const { children, style, shadow = true, shadowColor, size = 18, color = "white", defaultLineHeight = false, onLayout, ...rest } = props;
 
     const [fontsLoaded] = useFonts({
-        "Digitalt": require("../assets/fonts/Digitalt.otf"),
+        "Digitalt": require("../../assets/fonts/Digitalt.otf"),
     });
 
     if (!fontsLoaded) {

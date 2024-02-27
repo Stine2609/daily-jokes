@@ -1,8 +1,8 @@
 import { TouchableOpacity, View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import Svg, { Polygon } from "react-native-svg";
-import Text from "../Text";
-import { componentColors } from "../Colors";
-import Shadow from "../Shadow";
+import Text from "../generalUI/Text";
+import { componentColors } from "../misc/Colors";
+import Shadow from "../misc/Shadow";
 import {percentageOf as p} from "../../utils/utils";
 
 interface BaseButtonProps {

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
-import { componentColors } from "../Colors";
+import { componentColors } from "../misc/Colors";
 import {percentageOf as p} from "../../utils/utils";
  
 interface CircularButtonProps {

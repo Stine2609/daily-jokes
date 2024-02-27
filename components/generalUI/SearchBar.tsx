@@ -1,7 +1,7 @@
 import { View, TextInput, TouchableOpacity, Image, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { textStyles } from "./Text";
-import { colors } from "./Colors";
-import Shadow from "./Shadow";
+import { colors } from "../misc/Colors";
+import Shadow from "../misc/Shadow";
 
 interface SearchBarProps {
     placeholder?: string;
@@ -23,7 +23,7 @@ export default function SearchBar(props: SearchBarProps) {
                     multiline={false}
                 />
                 <TouchableOpacity hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }} style={styles.iconContainer}>
-                    <Image style={styles.icon} source={require("../assets/icons/search.png")} />
+                    <Image style={styles.icon} source={require("../../assets/icons/search.png")} />
                 </TouchableOpacity>
             </View>
         </View>

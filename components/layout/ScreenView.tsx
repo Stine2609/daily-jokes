@@ -6,8 +6,8 @@
 
 import { ReactNode } from "react";
 import { View, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, StyleProp, TextStyle, StatusBar } from "react-native";
-import GradientBackground from "../components/GradientBackground";
-import TabBar from "./TabBar/TabBar";
+import GradientBackground from "./GradientBackground";
+import TabBar from "../TabBar/TabBar";
 
 interface ScreenViewProps {
     children?: ReactNode;

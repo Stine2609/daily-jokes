@@ -1,7 +1,7 @@
-import ScreenView from "../../components/ScreenView";
+import ScreenView from "../../components/layout/ScreenView";
 import Jokes from "./Jokes";
 import Contests from "./Contests";
-import ContentTab from "../../components/ContentTab";
+import ContentTab from "../../components/layout/ContentTab";
 
 export default function Browse() {
 

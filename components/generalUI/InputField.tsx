@@ -1,6 +1,6 @@
 import { TextInput, TextInputProps, StyleSheet } from "react-native";
 import { textStyles } from "./Text";
-import { componentColors } from "./Colors";
+import { componentColors } from "../misc/Colors";
 
 interface InputFieldProps extends TextInputProps {
     placeholderTextColor?: string;

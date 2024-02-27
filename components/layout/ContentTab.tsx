@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
-import { componentColors } from "./Colors";
-import Text from "./Text";
-import Shadow from "./Shadow";
-import ActiveTabContext from '../context/ActiveTabContext';
+import { componentColors } from "../misc/Colors";
+import Text from "../generalUI/Text";
+import Shadow from "../misc/Shadow";
+import ActiveTabContext from '../../context/ActiveTabContext';
 
 interface ContentTabProps {
     tabs: Array<{

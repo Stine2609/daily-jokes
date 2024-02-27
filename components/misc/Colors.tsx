@@ -37,6 +37,12 @@ export const colors = {
             dark: "#E90038",
         },
 
+        metals: {
+            gold: "#AE824E",
+            silver: "#BCBABE",
+            bronze: "#824F14",
+        },
+
         border: "white",
 }
 
@@ -96,10 +102,6 @@ export const componentColors = {
         bgRight: colors.purple.medium,
         highlight: colors.purple.dark,
     },
-
-    // input: {
-    //     text: "#9D86B9",
-    // },
 
     contentBox: {
         background: "white",

@@ -1,4 +1,4 @@
-import Text from "../components/Text";
+import Text from "../components/generalUI/Text";
 import { createStackNavigator } from "@react-navigation/stack";
 import HeaderOptions from "../components/header/HeaderOptions";
 import Home from "./Home";

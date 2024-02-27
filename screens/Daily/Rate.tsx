@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import SwipePicker from "../../components/SwipePicker";
+import SwipePicker from "../../components/misc/SwipePicker";
 
 export default function Rate() {
     return(

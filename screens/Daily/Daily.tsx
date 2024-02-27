@@ -1,9 +1,9 @@
-import ScreenView from "../../components/ScreenView";
-import StylizedTitle from "../../components/StylizedTitle";
+import ScreenView from "../../components/layout/ScreenView";
+import StylizedTitle from "../../components/misc/StylizedTitle";
 import Write from "./Write";
 import Rate from "./Rate";
 import MyJokes from "./MyJokes";
-import ContentTab from "../../components/ContentTab";
+import ContentTab from "../../components/layout/ContentTab";
 
 export default function Daily() {
 

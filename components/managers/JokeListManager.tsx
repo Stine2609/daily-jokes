@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View } from "react-native";
-import Text from '../Text';
+import Text from '../generalUI/Text';
 import JokeListItem from "../../components/listItem/JokeListItem";
 import { useJokesSearch } from "../../hooks/useJokesSearch";
-import { colors } from '../Colors';
+import { colors } from '../misc/Colors';
 
 interface joke {
     user?: {

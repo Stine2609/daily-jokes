@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image } from "react-native";
-import Text from "./Text";
-import PulseAnimation from "./PulseAnimation";
+import Text from "../generalUI/Text";
+import PulseAnimation from "../animations/PulseAnimation";
 
 interface StylizedTitleProps {
     size?: number;
@@ -27,7 +27,7 @@ export default function StylizedTitle({size = 40, dailyJokes}: StylizedTitleProp
                     </View>
                 </>
             ) : (
-                <Image style={{height: size * 2 + 10, width: size * 4}} source={require("../assets/daily-jokes.png")} />
+                <Image style={{height: size * 2 + 10, width: size * 4}} source={require("../../assets/daily-jokes.png")} />
             )}
         </PulseAnimation>
     )

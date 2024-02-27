@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
-import Text from "../Text";
-import { componentColors } from "../Colors";
+import Text from "../generalUI/Text";
+import { componentColors } from "../misc/Colors";
 
 interface RightComponentProps {
     text: string;

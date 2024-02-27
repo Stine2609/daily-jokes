@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
-import Text from "../Text";
-import Shadow from "../Shadow";
-import { componentColors } from "../Colors";
+import Text from "../generalUI/Text";
+import Shadow from "../misc/Shadow";
+import { componentColors } from "../misc/Colors";
 
 interface TabButtonProps {
     label: string;

@@ -1,6 +1,6 @@
 import { StyleProp, ViewStyle } from "react-native";
 import BaseButton from "./BaseButton";
-import { componentColors } from "../Colors";
+import { componentColors } from "../misc/Colors";
 
 interface ButtonProps {
     label?: string;

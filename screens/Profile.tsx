@@ -1,11 +1,11 @@
 import { View, StyleSheet } from "react-native";
-import ScreenView, { HEADER_HEIGHT, SCREEN_HEIGHT } from "../components/ScreenView";
-import Text from "../components/Text";
+import ScreenView, { HEADER_HEIGHT, SCREEN_HEIGHT } from "../components/layout/ScreenView";
+import Text from "../components/generalUI/Text";
 import { ProfilePicture } from "../components/profile/Avatar";
-import ContentBox from "../components/ContentBox";
+import ContentBox from "../components/layout/ContentBox";
 import ContestListItem from "../components/listItem/ContestListItem";
 import ProfileBackground from "../components/profile/ProfileBackground";
-import ScrollToTopView from "../components/ScrollToTopView";
+import ScrollToTopView from "../components/layout/ScrollToTopView";
 
 export default function Profile() {
     return(

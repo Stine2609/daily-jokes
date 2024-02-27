@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Avatar from "./Avatar";
-import Text from "../Text";
-import { componentColors, colors } from "../Colors";
+import Text from "../generalUI/Text";
+import { componentColors, colors } from "../misc/Colors";
 
 interface User {
     id: number;

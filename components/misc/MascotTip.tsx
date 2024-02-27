@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import Text from "./Text";
+import Text from "../generalUI/Text";
 import { colors } from "./Colors";
 
 interface MascotTipProps {
@@ -42,7 +42,7 @@ export default function MascotTip(props: MascotTipProps) {
                         transform: [{ translateX: mascotAnim }, { rotate: '-25deg' }],
                     },
                 ]}
-                source={require('../assets/mascot.png')}
+                source={require('../../assets/mascot.png')}
             />
             <Animated.View
                 style={[

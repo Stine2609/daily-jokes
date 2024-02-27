@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View } from "react-native";
-import ContentBox from "../../components/ContentBox";
-import { colors } from "../../components/Colors";
+import ContentBox from "../../components/layout/ContentBox";
+import { colors } from "../../components/misc/Colors";
 import { UserDataManager } from '../../services/userDataManager';
 import { useContest } from '../../hooks/useContest';
 import JokeListManager from '../../components/managers/JokeListManager';

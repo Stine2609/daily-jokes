@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Animated, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import { PanGestureHandler, State, GestureHandlerStateChangeEvent } from 'react-native-gesture-handler';
-import ContentBox from "./ContentBox";
+import ContentBox from "../layout/ContentBox";
 import { LinearGradient } from 'expo-linear-gradient';
-import Text from "./Text";
-import CircularButton from './buttons/CircularButton';
-import ExpandButton from './buttons/ExpandButton';
+import Text from "../generalUI/Text";
+import CircularButton from '../buttons/CircularButton';
+import ExpandButton from '../buttons/ExpandButton';
 import { componentColors, colors } from './Colors';
-import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from './ScreenView';
-import Button from './buttons/Button';
+import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from '../layout/ScreenView';
+import Button from '../buttons/Button';
 
 export default function SwipePicker() {
     const [currentIndex, setCurrentIndex] = useState(0);

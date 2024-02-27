@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
-import { componentColors } from "./Colors";
+import { componentColors } from "../misc/Colors";
 
 export default function GradientBackground() {
     return(
