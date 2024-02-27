@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { get as getJokeSubmission } from "../api/joke_submission";
+import { api } from "../api/api";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage';
 import { UserDataManager } from '../services/userDataManager';
@@ -21,7 +21,7 @@ export const useJokeSubmission = () => {
         }
 
         try {
-            const jokeSubmissionResult = await getJokeSubmission(await UserDataManager.getToken());
+            const jokeSubmissionResult = await api("GET", "/jokeSubmission", undefined, await UserDataManager.getToken());
             if (isMounted) { // This check needs to be rethought due to useCallback usage.
                 setJokeSubmission(jokeSubmissionResult);
                 await storeData('jokeSubmission', jokeSubmissionResult);

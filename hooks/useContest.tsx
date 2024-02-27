@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getContest } from "../api/contest";
+import { api } from "../api/api";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 
@@ -21,7 +21,7 @@ export const useContest = (date?: Date) => {
 
             if (isFocused && isMounted) {
                 try {
-                    const contest_info = await getContest(date);
+                    const contest_info = await api("GET", "/contest");
                     if (isMounted) {
                         setContest(contest_info[0]);
                         await storeData('contest', contest_info[0]);

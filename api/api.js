@@ -3,6 +3,7 @@ import { getApiUrl } from '../config.js';
 const apiUrl = getApiUrl();
 
 export const api = async (method, endpoint, body, token) => {
+    console.log(method, endpoint, body, token);
     try {
         const headers = {
             'Content-Type': 'application/json',

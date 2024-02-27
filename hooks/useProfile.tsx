@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { loginWithToken as getProfileData } from "../api/auth";
+import { api } from "../api/api";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 import { UserDataManager } from '../services/userDataManager';
@@ -19,7 +19,7 @@ export const useProfile = () => {
 
             if (isFocused && isMounted) {
                 try {
-                    const profile_result = await getProfileData(await UserDataManager.getToken());
+                    const profile_result = await api("POST", "/auth/loginWithToken", undefined, await UserDataManager.getToken());
                     if (isMounted) {
                         setProfile(profile_result);
                         await storeData('profile', profile_result);

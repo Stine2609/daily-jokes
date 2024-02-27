@@ -32,7 +32,6 @@ export const loginWithToken = async (token) => {
         }
     } catch (error) {
         console.error(error);
-        throw error;
     }
 };
 
@@ -100,7 +99,11 @@ export const initialize = async () => {
     let localDeviceID = await UserDataManager.getDeviceID();
 
     if (!localDeviceID) {
-        autoRegisterDevice();
+        await autoRegisterDevice();
+        return;
+    } else {
+        await UserDataManager.clearAllData();
+        await autoRegisterDevice();
     }
 };
 

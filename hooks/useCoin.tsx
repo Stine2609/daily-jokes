@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { get as getCoin } from "../api/coin";
+import { api } from "../api/api";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 import { UserDataManager } from '../services/userDataManager';
@@ -19,7 +19,7 @@ export const useCoin = () => {
 
             if (isFocused && isMounted) {
                 try {
-                    const coin_result = await getCoin(await UserDataManager.getToken());
+                    const coin_result = await api("GET", "/joke", undefined, await UserDataManager.getToken());
                     if (isMounted) {
                         setCoin(coin_result);
                         await storeData('coin', coin_result);
