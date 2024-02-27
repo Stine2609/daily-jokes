@@ -8,6 +8,7 @@ import { componentColors } from "./Colors";
 import Text from "./Text";
 import Shadow from "./Shadow";
 import { useContest } from "../hooks/useContest";
+import RibbonTitle from "./RibbonTitle";
 
 interface ContentBoxProps {
     children?: ReactNode;
@@ -21,6 +22,14 @@ interface ContentBoxProps {
     * @property Date used to determine the title for a contest title
     */
     date?: Date;
+    /** 
+    * @property Replaces the normal title with a big fancy title
+    */
+    ribbonTitle?: boolean;
+    /** 
+    * @property Flavor text that appears above the title in a ribbon title
+    */
+    flavorText?: string;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
@@ -32,7 +41,9 @@ export default function ContentBox(props:ContentBoxProps) {
         style,
         headerColor = componentColors.contentBox.highlight,
         isLoading = false,
-        date
+        date,
+        ribbonTitle = false,
+        flavorText,
     } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
@@ -47,7 +58,7 @@ export default function ContentBox(props:ContentBoxProps) {
     const contest = useContest(date);
 
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, ribbonTitle ? {marginTop: 25} : null]}>
             <Shadow height={containerHeight} shadowHeight={8} width={"80%"} borderRadius={20} />
             <View style={[
                     styles.background,
@@ -55,13 +66,20 @@ export default function ContentBox(props:ContentBoxProps) {
                 ]} />
             <View style={[style, styles.contentBoxContainer]} onLayout={onLayout}>
                 <>
+                {ribbonTitle && (
+                    <View style={styles.ribbonTitleConatiner}>
+                        <RibbonTitle  topText={flavorText} bottomText={title} />
+                    </View>
+                )}
                     {isLoading ? (
                         null // TODO: add loading indicator
                     ) : (
                         <>
-                            <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-                                <Text shadow={false}>{title ? title : contest.topic }</Text>
-                            </View>
+                            {!ribbonTitle && (
+                                <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
+                                    <Text shadow={false}>{title ? title : contest.topic }</Text>
+                                </View>
+                            )}
                             {text && (
                                 <View style={styles.textContainer}>
                                     <Text shadow={false} color={textColor}>{text}</Text>
@@ -129,5 +147,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+    },
+
+    ribbonTitleConatiner: {
+        position: "absolute",
+        alignSelf: "center",
+        top: -30
     }
 })
