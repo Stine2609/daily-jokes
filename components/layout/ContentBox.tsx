@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
     textContainer: {
         justifyContent: "center",
-        // alignItems: "center",
+        alignItems: "center",
         minHeight: 60,
     },
 
