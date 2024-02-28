@@ -1,10 +1,13 @@
 import { View, Image, StyleSheet } from "react-native";
 import Text from "../generalUI/Text";
+import { useCoin } from "../../hooks/useCoin";
 
 export default function CoinCount() {
+    let coin = useCoin();
+
     return(
         <View style={styles.container}>
-            <Text size={16}>1251</Text>
+            <Text size={16}>{coin.coins}</Text>
             <Image style={styles.image} source={require("../../assets/icons/coin.png")} />
         </View>
     )

@@ -21,7 +21,7 @@ export default function Jokes() {
                     ]}
                 />
                 <ContentBox>
-                    <JokeListManager criteria={{}}></JokeListManager>
+                    <JokeListManager criteria={{ sortBy: "-createTimeStamp" }}></JokeListManager>
                 </ContentBox>
             </ScrollToTopView>
         </View>

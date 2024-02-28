@@ -9,7 +9,7 @@ import ActiveTabContext from '../../context/ActiveTabContext';
 
 export default function MyJokes() {
     const { activeTab } = useContext(ActiveTabContext);
-    const [criteria, setCriteria] = useState({ userId: -1, contestId: -1 }); 
+    const [criteria, setCriteria] = useState({ filters: { userId: -1, contestId: -1 } }); 
     
     const contest = useContest();
 
@@ -17,7 +17,7 @@ export default function MyJokes() {
         if(activeTab === 2) {
             const fetchUserId = async () => {
                 const userDetails = await UserDataManager.getUserDetails();
-                setCriteria({ userId: userDetails.id, contestId: contest.id }); 
+                setCriteria({ filters: { userId: userDetails.id, contestId: contest.id } }); 
             };
 
             fetchUserId();

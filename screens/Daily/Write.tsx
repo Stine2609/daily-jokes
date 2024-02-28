@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { View, StyleSheet } from "react-native";
 import ContentBox from "../../components/layout/ContentBox";
 import InputField from "../../components/generalUI/InputField";
@@ -7,11 +7,18 @@ import MascotTip from "../../components/misc/MascotTip";
 import { create as uploadJoke } from "../../services/joke";
 import JokesLeftIndicator from "../../components/misc/JokesLeftIndicator";
 import { colors } from '../../components/misc/Colors';
+import ActiveTabContext from '../../context/ActiveTabContext';
 
 export default function Write() {
+    const { activeTab } = useContext(ActiveTabContext);
     const [inputValue, setInputValue] = useState('');
     const jokesLeftIndicatorRef = useRef<{ refreshIndicator: () => void }>(null);
 
+    useEffect(() => {
+        if (activeTab === 0) {
+            jokesLeftIndicatorRef.current?.refreshIndicator();
+        }
+    }, [activeTab]);
 
     let submitJoke = async () => {
         let result = await uploadJoke(inputValue);
