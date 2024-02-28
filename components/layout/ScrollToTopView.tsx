@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
     scrollToTopIcon: {
         width: 20,
         height: 20,
-        transform: "rotate(90deg)",
+        transform: [{rotate: "90deg"}],
     }
 });

@@ -1,20 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Animated, Modal, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Animated, Modal, ScrollView } from 'react-native';
 import { PanGestureHandler, State, GestureHandlerStateChangeEvent } from 'react-native-gesture-handler';
 import ContentBox from "../layout/ContentBox";
 import { LinearGradient } from 'expo-linear-gradient';
 import Text from "../generalUI/Text";
 import CircularButton from '../buttons/CircularButton';
-import ExpandButton from '../buttons/ExpandButton';
 import { componentColors, colors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from '../layout/ScreenView';
 import Button from '../buttons/Button';
+import { useJokesSearch } from '../../hooks/useJokesSearch';
+
+interface joke {
+    user?: {
+        profile?: number;
+        name?: string;
+    };
+    userId: string;
+    textBody: string;
+    position: number;
+}
 
 export default function SwipePicker() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isTextTruncated, setIsTextTruncated] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const translateX = new Animated.Value(0);
+
+    const [page, setPage] = useState(1);
+    const [criteria, setCriteria] = useState({ pagination: { page: page, page_size: 10 }});
+
+    const fetchedJokes = useJokesSearch(criteria);
+
+    const [jokes, setJokes] = useState<joke[]>([]);
+
+    useEffect(() => {
+        if (fetchedJokes) {
+            setJokes(prev => [...prev, ...fetchedJokes]);
+        }
+    }, [fetchedJokes]);
+
+    useEffect(() => {
+        onNext()
+    }, [currentIndex]);
+
+    const onNext = () => {
+        if (currentIndex % 5 == 0) {
+            const newCriteria = {
+                ...criteria, 
+                pagination: { ...criteria.pagination, page: page } 
+            };
+            setCriteria(newCriteria);
+            const nextPage = page + 1;
+            setPage(nextPage);
+        }
+    }
 
     useEffect(() => {
         // Animation sequence for swiping hint
@@ -91,7 +130,9 @@ export default function SwipePicker() {
             setModalVisible(false);
             // TODO: measure the length of the actual next joke
             // If joke is longer than 150 characters, assume it is truncated (and hope you're right)
-            setIsTextTruncated(joke.length >= 150);
+            if(jokes[currentIndex]) {
+                setIsTextTruncated(jokes[currentIndex].textBody.length >= 150);
+            }
         });
     };
 
@@ -113,7 +154,9 @@ export default function SwipePicker() {
 
     // Determine if show full joke button should be shown on mount
     useEffect(() => {
-        setIsTextTruncated(joke.length >= 150);
+        if(jokes[currentIndex]) {
+            setIsTextTruncated(jokes[currentIndex].textBody.length >= 150);
+        }
     }, []);
 
     return (
@@ -121,7 +164,7 @@ export default function SwipePicker() {
             <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
                 <ContentBox headerColor={colors.green.dark}>
                     <View style={{maxHeight: 150, overflow: "hidden"}}>
-                        <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
+                        <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex + 1] ? jokes[currentIndex + 1].textBody : ""}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
                         <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
@@ -157,7 +200,7 @@ export default function SwipePicker() {
                         </Animated.View>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
                             <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>
-                                {joke}
+                                {jokes[currentIndex] ? jokes[currentIndex].textBody : ""}
                             </Text>
                         </View>
                         {isTextTruncated && (
@@ -180,7 +223,7 @@ export default function SwipePicker() {
                 <View style={styles.modalView}>
                     <ContentBox headerColor={colors.green.dark}>
                         <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
-                            <Text shadow={false} color={componentColors.text.contentBox}>{joke}</Text>
+                            <Text shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex] ? jokes[currentIndex].textBody : ""}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
