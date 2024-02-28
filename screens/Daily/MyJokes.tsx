@@ -27,7 +27,7 @@ export default function MyJokes() {
     return (
         <View>
             <ContentBox headerColor={colors.purple.medium}>
-                <JokeListManager criteria={criteria}></JokeListManager>
+                <JokeListManager initialCriteria={criteria}></JokeListManager>
             </ContentBox>
         </View>
     );

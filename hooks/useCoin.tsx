@@ -20,6 +20,7 @@ export const useCoin = () => {
             if (isFocused && isMounted) {
                 try {
                     const coin_result = await api("GET", "/coin", undefined, await UserDataManager.getToken());
+                    if (!coin_result.coins) coin_result.coins = 0;
                     if (isMounted) {
                         setCoin(coin_result);
                         await storeData('coin', coin_result);
