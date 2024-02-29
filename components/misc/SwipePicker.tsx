@@ -30,7 +30,7 @@ export default function SwipePicker() {
     const translateX = new Animated.Value(0);
 
     const [page, setPage] = useState(1);
-    const [criteria, setCriteria] = useState({ sortBy: "-createTimeStamp", pagination: { page: page, page_size: 10 }});
+    const [criteria, setCriteria] = useState({ sortBy: "-createTimeStamp", pagination: { page: page, page_size: 10 } });
 
     const fetchedJokes = useJokesSearchSwipe(criteria);
 
@@ -49,8 +49,8 @@ export default function SwipePicker() {
     const onNext = () => {
         if (currentIndex % 5 == 0) {
             const newCriteria = {
-                ...criteria, 
-                pagination: { ...criteria.pagination, page: page } 
+                ...criteria,
+                pagination: { ...criteria.pagination, page: page }
             };
             setCriteria(newCriteria);
             const nextPage = page + 1;
@@ -118,7 +118,7 @@ export default function SwipePicker() {
             const action = swipeDirection === 'right' ? 'like' : 'dislike';
 
             if (jokeId) {
-                rate(jokeId, action); 
+                rate(jokeId, action);
             }
 
             animateCardAway(translationX);
@@ -133,7 +133,7 @@ export default function SwipePicker() {
     const rate = async (jokeId: Number, action: string) => {
         await api("POST", `/joke/rate/${jokeId}/${action}`, undefined, await UserDataManager.getToken());
     }
-    
+
 
     // Animates the card if a button is pressed
     const animateCardAway = (direction: number) => {
@@ -148,7 +148,7 @@ export default function SwipePicker() {
             setModalVisible(false);
             // TODO: measure the length of the actual next joke
             // If joke is longer than 150 characters, assume it is truncated (and hope you're right)
-            if(jokes[currentIndex]) {
+            if (jokes[currentIndex]) {
                 setIsTextTruncated(jokes[currentIndex].textBody.length >= 150);
             }
         });
@@ -172,70 +172,19 @@ export default function SwipePicker() {
 
     // Determine if show full joke button should be shown on mount
     useEffect(() => {
-        if(jokes[currentIndex]) {
+        if (jokes[currentIndex]) {
             setIsTextTruncated(jokes[currentIndex].textBody.length >= 150);
         }
     }, []);
 
     return (
         <View style={styles.container}>
-            <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
-                <ContentBox headerColor={colors.green.dark}>
-                    <View style={{maxHeight: 150, overflow: "hidden"}}>
-                        <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex + 1] ? jokes[currentIndex + 1].textBody : ""}</Text>
-                    </View>
-                    <View style={styles.buttonsContainer}>
-                        <CircularButton variant="no" onPress={() => {
-                            const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
-                            if (jokeId) {
-                                rate(jokes[currentIndex].id, 'dislike'); // Rate as dislike before animating away
-                            }
-                            animateCardAway(-200); // Animate card to the left for a "no" action
-                        }} />
-                        <CircularButton variant="superlike" onPress={() => { }} />
-                        <CircularButton variant="yes" onPress={() => {
-                            const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
-                            if (jokeId) {
-                                rate(jokes[currentIndex].id, 'like'); // Rate as like before animating away
-                            }
-                            animateCardAway(200); // Animate card to the right for a "yes" action
-                        }} />
-                    </View>
-                </ContentBox>
-            </Animated.View>
-            <PanGestureHandler
-                onGestureEvent={onGestureEvent}
-                onHandlerStateChange={onHandlerStateChange}>
-                <Animated.View style={{
-                        transform: [{ translateX: translateX }, { rotateZ: rotateZ }],
-                        position: 'absolute',
-                        width: '100%',
-                    }}>
-                    <ContentBox headerColor={colors.green.dark} style={{overflow: "hidden"}}>
-                        <Animated.View style={[styles.overlay, styles.leftOverlay, {opacity: leftOverlayOpacity}]}>
-                            <LinearGradient
-                                start={{ x: 0, y: 1 }}
-                                end={{ x: 1, y: 1 }}
-                                colors={[componentColors.noButton.highlight, 'transparent']}
-                                style={{flex: 1}}
-                            />
-                        </Animated.View>
-                        <Animated.View style={[styles.overlay, styles.rightOverlay, {opacity: rightOverlayOpacity}]}>
-                            <LinearGradient
-                                start={{ x: 1, y: 1 }}
-                                end={{ x: 0, y: 1 }}
-                                colors={[componentColors.yesButton.highlight, 'transparent']}
-                                style={{flex: 1}}
-                            />
-                        </Animated.View>
+            {jokes[currentIndex + 1] && (
+                <Animated.View style={[styles.nextCard, { opacity: nextCardOpacity }]}>
+                    <ContentBox headerColor={colors.green.dark}>
                         <View style={{ maxHeight: 150, overflow: "hidden" }}>
-                            <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>
-                                {jokes[currentIndex] ? jokes[currentIndex].textBody : ""}
-                            </Text>
+                            <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex + 1] ? jokes[currentIndex + 1].textBody : ""}</Text>
                         </View>
-                        {isTextTruncated && (
-                            <Button onPress={() => setModalVisible(true)} style={{ alignSelf: "center" }} shadowHeight={8} height={28} width={160} borderRadius={10} variant="play" label="Read full joke" />
-                        )}
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => {
                                 const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
@@ -255,7 +204,62 @@ export default function SwipePicker() {
                         </View>
                     </ContentBox>
                 </Animated.View>
-            </PanGestureHandler>
+            )}
+            {jokes[currentIndex] && (
+                <PanGestureHandler
+                    onGestureEvent={onGestureEvent}
+                    onHandlerStateChange={onHandlerStateChange}>
+                    <Animated.View style={{
+                        transform: [{ translateX: translateX }, { rotateZ: rotateZ }],
+                        position: 'absolute',
+                        width: '100%',
+                    }}>
+                        <ContentBox headerColor={colors.green.dark} style={{ overflow: "hidden" }}>
+                            <Animated.View style={[styles.overlay, styles.leftOverlay, { opacity: leftOverlayOpacity }]}>
+                                <LinearGradient
+                                    start={{ x: 0, y: 1 }}
+                                    end={{ x: 1, y: 1 }}
+                                    colors={[componentColors.noButton.highlight, 'transparent']}
+                                    style={{ flex: 1 }}
+                                />
+                            </Animated.View>
+                            <Animated.View style={[styles.overlay, styles.rightOverlay, { opacity: rightOverlayOpacity }]}>
+                                <LinearGradient
+                                    start={{ x: 1, y: 1 }}
+                                    end={{ x: 0, y: 1 }}
+                                    colors={[componentColors.yesButton.highlight, 'transparent']}
+                                    style={{ flex: 1 }}
+                                />
+                            </Animated.View>
+                            <View style={{ maxHeight: 150, overflow: "hidden" }}>
+                                <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>
+                                    {jokes[currentIndex] ? jokes[currentIndex].textBody : ""}
+                                </Text>
+                            </View>
+                            {isTextTruncated && (
+                                <Button onPress={() => setModalVisible(true)} style={{ alignSelf: "center" }} shadowHeight={8} height={28} width={160} borderRadius={10} variant="play" label="Read full joke" />
+                            )}
+                            <View style={styles.buttonsContainer}>
+                                <CircularButton variant="no" onPress={() => {
+                                    const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                                    if (jokeId) {
+                                        rate(jokes[currentIndex].id, 'dislike'); // Rate as dislike before animating away
+                                    }
+                                    animateCardAway(-200); // Animate card to the left for a "no" action
+                                }} />
+                                <CircularButton variant="superlike" onPress={() => { }} />
+                                <CircularButton variant="yes" onPress={() => {
+                                    const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                                    if (jokeId) {
+                                        rate(jokes[currentIndex].id, 'like'); // Rate as like before animating away
+                                    }
+                                    animateCardAway(200); // Animate card to the right for a "yes" action
+                                }} />
+                            </View>
+                        </ContentBox>
+                    </Animated.View>
+                </PanGestureHandler>
+            )}
 
             <Modal
                 animationType="fade"
@@ -264,12 +268,12 @@ export default function SwipePicker() {
                 onRequestClose={() => setModalVisible(!modalVisible)}>
                 <View style={styles.modalView}>
                     <ContentBox headerColor={colors.green.dark}>
-                        <ScrollView style={{maxHeight: SCREEN_HEIGHT - 100}}>
+                        <ScrollView style={{ maxHeight: SCREEN_HEIGHT - 100 }}>
                             <Text shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex] ? jokes[currentIndex].textBody : ""}</Text>
                         </ScrollView>
                         <View style={styles.buttonsContainer}>
                             <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
-                            <CircularButton variant="superlike" onPress={() => {}} />
+                            <CircularButton variant="superlike" onPress={() => { }} />
                             <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
                         </View>
                     </ContentBox>
@@ -298,7 +302,7 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "center"
     },
-    
+
     modalView: {
         flex: 1,
         justifyContent: "center",
