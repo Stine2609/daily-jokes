@@ -8,9 +8,12 @@ import CircularButton from '../buttons/CircularButton';
 import { componentColors, colors } from './Colors';
 import { SCREEN_HEIGHT, TAB_BAR_HEIGHT } from '../layout/ScreenView';
 import Button from '../buttons/Button';
-import { useJokesSearch } from '../../hooks/useJokesSearch';
+import { useJokesSearchSwipe } from '../../hooks/useJokesSearchSwipe';
+import { api } from '../../api/api';
+import { UserDataManager } from '../../services/userDataManager';
 
 interface joke {
+    id: Number;
     user?: {
         profile?: number;
         name?: string;
@@ -27,9 +30,9 @@ export default function SwipePicker() {
     const translateX = new Animated.Value(0);
 
     const [page, setPage] = useState(1);
-    const [criteria, setCriteria] = useState({ pagination: { page: page, page_size: 10 }});
+    const [criteria, setCriteria] = useState({ sortBy: "-createTimeStamp", pagination: { page: page, page_size: 10 }});
 
-    const fetchedJokes = useJokesSearch(criteria);
+    const fetchedJokes = useJokesSearchSwipe(criteria);
 
     const [jokes, setJokes] = useState<joke[]>([]);
 
@@ -107,7 +110,17 @@ export default function SwipePicker() {
     };
 
     const handleSwipe = (translationX: number) => {
+        let swipeDirection = translationX > 0 ? 'right' : 'left';
+
         if (Math.abs(translationX) > 140) {
+            const jokeId = jokes[currentIndex] ? jokes[currentIndex].id : null;
+            console.log(jokes[currentIndex]);
+            const action = swipeDirection === 'right' ? 'like' : 'dislike';
+
+            if (jokeId) {
+                rate(jokeId, action); 
+            }
+
             animateCardAway(translationX);
         } else {
             Animated.spring(translateX, {
@@ -116,6 +129,11 @@ export default function SwipePicker() {
             }).start();
         }
     };
+
+    const rate = async (jokeId: Number, action: string) => {
+        await api("POST", `/joke/rate/${jokeId}/${action}`, undefined, await UserDataManager.getToken());
+    }
+    
 
     // Animates the card if a button is pressed
     const animateCardAway = (direction: number) => {
@@ -167,9 +185,21 @@ export default function SwipePicker() {
                         <Text numberOfLines={7} shadow={false} color={componentColors.text.contentBox}>{jokes[currentIndex + 1] ? jokes[currentIndex + 1].textBody : ""}</Text>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
-                        <CircularButton variant="superlike" onPress={() => {}} />
-                        <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
+                        <CircularButton variant="no" onPress={() => {
+                            const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                            if (jokeId) {
+                                rate(jokes[currentIndex].id, 'dislike'); // Rate as dislike before animating away
+                            }
+                            animateCardAway(-200); // Animate card to the left for a "no" action
+                        }} />
+                        <CircularButton variant="superlike" onPress={() => { }} />
+                        <CircularButton variant="yes" onPress={() => {
+                            const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                            if (jokeId) {
+                                rate(jokes[currentIndex].id, 'like'); // Rate as like before animating away
+                            }
+                            animateCardAway(200); // Animate card to the right for a "yes" action
+                        }} />
                     </View>
                 </ContentBox>
             </Animated.View>
@@ -204,12 +234,24 @@ export default function SwipePicker() {
                             </Text>
                         </View>
                         {isTextTruncated && (
-                            <Button onPress={() => setModalVisible(true)}style={{alignSelf: "center"}} shadowHeight={8} height={28} width={160} borderRadius={10} variant="play" label="Read full joke" />
+                            <Button onPress={() => setModalVisible(true)} style={{ alignSelf: "center" }} shadowHeight={8} height={28} width={160} borderRadius={10} variant="play" label="Read full joke" />
                         )}
                         <View style={styles.buttonsContainer}>
-                            <CircularButton variant="no" onPress={() => animateCardAway(-200)} />
-                            <CircularButton variant="superlike" onPress={() => {}} />
-                            <CircularButton variant="yes" onPress={() => animateCardAway(200)} />
+                            <CircularButton variant="no" onPress={() => {
+                                const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                                if (jokeId) {
+                                    rate(jokes[currentIndex].id, 'dislike'); // Rate as dislike before animating away
+                                }
+                                animateCardAway(-200); // Animate card to the left for a "no" action
+                            }} />
+                            <CircularButton variant="superlike" onPress={() => { }} />
+                            <CircularButton variant="yes" onPress={() => {
+                                const jokeId = jokes[currentIndex] ? jokes[currentIndex].userId : null; // Make sure this is the correct identifier
+                                if (jokeId) {
+                                    rate(jokes[currentIndex].id, 'like'); // Rate as like before animating away
+                                }
+                                animateCardAway(200); // Animate card to the right for a "yes" action
+                            }} />
                         </View>
                     </ContentBox>
                 </Animated.View>
