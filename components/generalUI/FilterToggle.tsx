@@ -7,29 +7,29 @@ interface FilterToggleProps {
     options: Array<{
         label: string;
         onPress?: () => null;
-    }>
+    }>;
+    activeFilter: number;
+    setActiveFilter: (index: number) => void;
 }
 
-export default function FilterToggle(props: FilterToggleProps) {
-    const { options } = props;
-
-    // First option passed is set as active
-    const [activeFilter, setActiveFilter] = useState(0);
-    
-    return(
+export default function FilterToggle({ options, activeFilter, setActiveFilter }: FilterToggleProps) {
+    return (
         <View style={styles.container}>
-            {options.map((option, index) => 
-                <TouchableOpacity key={option.label + index} style={[styles.button, {backgroundColor: activeFilter == index ? colors.purple.highlight : colors.purple.dark}]} onPress={() => {
-                    setActiveFilter(index);
-                }}>
-                    {activeFilter == index && (
-                        <Image style={[styles.icon]} source={require("../../assets/icons/check.png")} />
-                    )}
+            {options.map((option, index) => (
+                <TouchableOpacity
+                    key={option.label + index}
+                    style={[
+                        styles.button,
+                        { backgroundColor: activeFilter == index ? colors.purple.highlight : colors.purple.dark },
+                    ]}
+                    onPress={() => setActiveFilter(index)}
+                >
+                    {activeFilter == index && <Image style={styles.icon} source={require("../../assets/icons/check.png")} />}
                     <Text shadow={false}>{option.label}</Text>
                 </TouchableOpacity>
-            )}
+            ))}
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
