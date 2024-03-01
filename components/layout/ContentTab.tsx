@@ -76,7 +76,9 @@ export default function ContentTab(props: ContentTabProps) {
                             },
                         ]}
                     >
-                        {tab.component}
+                        <View style={styles.child}>
+                            {tab.component}
+                        </View>
                     </Animated.View>
                 ))}
 
@@ -134,4 +136,11 @@ const styles = StyleSheet.create({
         borderColor: componentColors.contentTab.border,
         overflow: "hidden",
     },
+
+    child: {
+        justifyContent: "center",
+        // alignItems: "center",
+        flex: 1,
+        marginBottom: 50,
+    }
 });

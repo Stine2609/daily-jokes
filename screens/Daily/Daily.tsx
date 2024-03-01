@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import ScreenView from "../../components/layout/ScreenView";
 import StylizedTitle from "../../components/misc/StylizedTitle";
 import Write from "./Write";
@@ -8,9 +9,9 @@ import ContentTab from "../../components/layout/ContentTab";
 export default function Daily() {
 
     return (
-        <ScreenView style={{ justifyContent: "flex-start" }}>
-            <StylizedTitle />
-            <ContentTab
+        <ScreenView style={[styles.container, { justifyContent: "flex-start" }]}>
+            {/* <StylizedTitle /> */}
+            <ContentTab contentSpacing={0}
                 tabs={[
                     {
                         name: "Write",
@@ -29,3 +30,11 @@ export default function Daily() {
         </ScreenView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        // gap: 20,
+        // paddingTop: 20,
+        justifyContent: "flex-start",
+    }
+})

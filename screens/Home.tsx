@@ -9,6 +9,7 @@ import Text from "../components/generalUI/Text";
 import { useTimeLeft } from "../hooks/useTimeLeft";
 import { colors } from "../components/misc/Colors";
 import PulseAnimation from "../components/animations/PulseAnimation";
+import StylizedTitle from "../components/misc/StylizedTitle";
 
 interface HomeProps {
     navigation: {
@@ -23,6 +24,7 @@ export default function Home({ navigation }: HomeProps) {
 
     return(
         <ScreenView style={styles.container}>
+            <StylizedTitle />
             <ContentBox
                 title="Daily contest"
                 headerColor={colors.purple.dark}
@@ -56,6 +58,8 @@ export default function Home({ navigation }: HomeProps) {
 
 const styles = StyleSheet.create({
     container: {
-        gap: 100,
+        gap: 20,
+        paddingTop: 20,
+        justifyContent: "flex-start",
     }
 })
