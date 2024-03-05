@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Animated, StyleProp, ViewStyle } from "react-native";
 import { componentColors } from "../misc/Colors";
 import Text from "../generalUI/Text";
 import Shadow from "../misc/Shadow";
@@ -11,10 +11,11 @@ interface ContentTabProps {
         component: React.ReactNode;
     }>;
     contentSpacing?: number;
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 export default function ContentTab(props: ContentTabProps) {
-    const { tabs, contentSpacing = 25 } = props;
+    const { tabs, contentSpacing = 25, containerStyle } = props;
     const [activeTab, setActiveTab] = useState(0);
 
     // Calculate width in percentage based on the number of tabs
@@ -76,7 +77,7 @@ export default function ContentTab(props: ContentTabProps) {
                             },
                         ]}
                     >
-                        <View style={styles.child}>
+                        <View style={[styles.child, containerStyle]}>
                             {tab.component}
                         </View>
                     </Animated.View>

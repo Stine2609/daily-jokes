@@ -1,16 +1,17 @@
-import { TextInput, TextInputProps, StyleSheet } from "react-native";
+import { TextInput, TextInputProps, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { textStyles } from "./Text";
 import { componentColors } from "../misc/Colors";
 
 interface InputFieldProps extends TextInputProps {
     placeholderTextColor?: string;
+    style?: StyleProp<ViewStyle>;
 }
 
 export default function InputField(props: InputFieldProps) {
-    const { placeholderTextColor = componentColors.text.placeholder, ...rest } = props;
+    const { placeholderTextColor = componentColors.text.placeholder, style, ...rest } = props;
     return(
         <TextInput
-            style={[textStyles.text, textStyles.shadow, {color: componentColors.text.contentBox}, styles.input]}
+            style={[textStyles.text, textStyles.shadow, {color: componentColors.text.contentBox}, styles.input, style]}
             placeholderTextColor={placeholderTextColor}
             multiline
             {...rest}
