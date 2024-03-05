@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 function getTimeLeft(contestDate: string) {
     const contestEndDate = new Date(contestDate);
     contestEndDate.setUTCDate(contestEndDate.getUTCDate() + 1);
+    contestEndDate.setUTCHours(0, 0, 0, 0); 
 
     const now = new Date();
-    const timeLeft = contestEndDate.getTime() - now.getTime(); 
+    const timeLeft = contestEndDate.getTime() - now.getTime();
 
     if (timeLeft < 0) {
         return "Contest has ended";
@@ -13,7 +14,9 @@ function getTimeLeft(contestDate: string) {
 
     const hours = Math.floor(timeLeft / (1000 * 60 * 60));
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}:${minutes} hours left`;
+    const paddedMinutes = minutes.toString().padStart(2, '0'); 
+
+    return `${hours}:${paddedMinutes} hours left`;
 }
 
 export function useTimeLeft(contestDate: string) {
@@ -24,10 +27,10 @@ export function useTimeLeft(contestDate: string) {
             setTimeLeft(getTimeLeft(contestDate));
         };
 
-        updateTimeLeft(); // Initial update
-        const intervalId = setInterval(updateTimeLeft, 60000); // Update every minute
+        updateTimeLeft(); 
+        const intervalId = setInterval(updateTimeLeft, 60000); 
 
-        return () => clearInterval(intervalId); // Cleanup on unmount
+        return () => clearInterval(intervalId);
     }, [contestDate]);
 
     return timeLeft;
