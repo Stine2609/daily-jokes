@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { View } from "react-native";
 import HeaderCenter from "./HeaderCenter";
 import CircularButton from "../buttons/CircularButton";
-import Drawer from "../generalUI/Drawer";
+import Drawer from "../drawer/Drawer";
 import CoinCount from "../misc/CoinCount";
 
 type DrawerRef = {

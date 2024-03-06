@@ -1,21 +1,39 @@
-import { View, StyleSheet } from "react-native";
-import ScreenView, { HEADER_HEIGHT, SCREEN_HEIGHT } from "../components/layout/ScreenView";
-import Text from "../components/generalUI/Text";
-import { ProfilePicture } from "../components/profile/Avatar";
-import ContentBox from "../components/layout/ContentBox";
-import ContestListItem from "../components/listItem/ContestListItem";
-import ProfileBackground from "../components/profile/ProfileBackground";
-import ScrollToTopView from "../components/layout/ScrollToTopView";
+import React, { useRef } from 'react';
+import { View, StyleSheet } from 'react-native';
+import ScreenView, { HEADER_HEIGHT, SCREEN_HEIGHT } from '../components/layout/ScreenView';
+import Text from '../components/generalUI/Text';
+import { ProfilePicture } from '../components/profile/Avatar';
+import ContentBox from '../components/layout/ContentBox';
+import ContestListItem from '../components/listItem/ContestListItem';
+import ProfileBackground from '../components/profile/ProfileBackground';
+import ScrollToTopView from '../components/layout/ScrollToTopView';
+import Button from '../components/buttons/Button';
+import Drawer from '../components/drawer/Drawer';
+
+type DrawerRef = {
+    openDrawer: () => void;
+};
 
 export default function Profile() {
+    // Create a ref for the drawer
+    const customizeDrawer = useRef<DrawerRef>(null);
+
     return(
         <ScreenView style={{
             marginTop: 0,
-            // For this screen, the content is allowed to go behind the top bar
-            maxHeight: HEADER_HEIGHT + SCREEN_HEIGHT
+            maxHeight: HEADER_HEIGHT + SCREEN_HEIGHT,
         }}>
             <ScrollToTopView scrollToTopThreshold={500}>
-                <ProfileBackground imageId={0} />
+                <ProfileBackground imageId={0}>
+                    {/* Modify the button to open the drawer */}
+                    <Button
+                        label="Customize your profile"
+                        width={250}
+                        variant="blue"
+                        height={32}
+                        onPress={() => customizeDrawer.current?.openDrawer()}
+                    />
+                </ProfileBackground>
                 <View style={styles.profilePictureContainer}>
                     <View style={styles.profilePictureInner}>
                         <ProfilePicture id={6} />
@@ -34,6 +52,10 @@ export default function Profile() {
                     }}/>
                 </ContentBox>
             </ScrollToTopView>
+            {/* Attach the ref to the Drawer */}
+            <Drawer width="100%" ref={customizeDrawer}>
+                <Button label="Close Drawer" onPress={() => customizeDrawer.current?.closeDrawer()} />
+            </Drawer>
         </ScreenView>
     )
 }
@@ -44,7 +66,6 @@ const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center"
     },
-
     profilePictureInner: {
         bottom: "50%",
         position: "absolute",

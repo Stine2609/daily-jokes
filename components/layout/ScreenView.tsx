@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ReactNode } from 'react';
-import { View, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, StyleProp, TextStyle, StatusBar, Keyboard } from 'react-native';
+import { View, Dimensions, KeyboardAvoidingView, ScrollView, StyleSheet, StyleProp, TextStyle, StatusBar } from 'react-native';
 import GradientBackground from './GradientBackground';
 import TabBar from '../TabBar/TabBar';
 
@@ -18,21 +18,6 @@ export const SCREEN_HEIGHT = Dimensions.get("screen").height - (HEADER_HEIGHT + 
 
 export default function ScreenView(props: ScreenViewProps) {
     const { children, style, scrollView = true, hideTabBar = false } = props;
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
-
-    useEffect(() => {
-        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-            setKeyboardVisible(true);
-        });
-        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardVisible(false);
-        });
-
-        return () => {
-            showSubscription.remove();
-            hideSubscription.remove();
-        };
-    }, []);
 
     return (
         <View style={styles.container}>
@@ -48,7 +33,7 @@ export default function ScreenView(props: ScreenViewProps) {
                     </View>
                 )}
             </KeyboardAvoidingView>
-            {!hideTabBar && !keyboardVisible && (
+            {!hideTabBar && (
                 <TabBar />
             )}
         </View>

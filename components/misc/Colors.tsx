@@ -8,14 +8,16 @@ export const colors = {
         },
     
         blue: {
-            light: "#4CDAFE",
-            medium: "#09B9FF",
+            light: "#94E7FC",
+            medium: "#4CDAFE",
+            dark: "#09B9FF",
         },
     
         pink: {
-            light: "#FC8AFF",
-            medium: "#DA57F0",
-            dark: "#B20D78",
+            light: "#FDC0FF",
+            medium: "#FC8AFF",
+            dark: "#DA57F0",
+            highlight: "#B20D78"
         },
     
         yellow: {
@@ -93,8 +95,8 @@ export const componentColors = {
     },
 
     superlikeButton: {
-        background: colors.blue.light,
-        highlight: colors.blue.medium,
+        background: colors.blue.medium,
+        highlight: colors.blue.dark,
     },
 
     toggleButton: {
@@ -105,7 +107,7 @@ export const componentColors = {
 
     contentBox: {
         background: "white",
-        highlight: colors.blue.light,
+        highlight: colors.blue.medium,
         backgroundHighlight: "#D1D8FF",
         text: colors.purple.dark,
     },
@@ -127,12 +129,12 @@ export const componentColors = {
     tabBar: {
         border: colors.border,
         home: {
-            background: colors.blue.light,
-            highlight: colors.blue.medium,
+            background: colors.blue.medium,
+            highlight: colors.blue.dark,
         },
         daily: {
-            background: colors.pink.light,
-            highlight: colors.pink.medium,
+            background: colors.pink.medium,
+            highlight: colors.pink.dark,
         },
         browse: {
             background: colors.purple.light,

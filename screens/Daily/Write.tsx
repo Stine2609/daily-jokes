@@ -55,7 +55,6 @@ export default function Write() {
                     // maxHeight: SCREEN_HEIGHT - keyboardHeight,
                     justifyContent: keyboardVisible ? "flex-start" : "center",
                     paddingTop: 20,
-                    backgroundColor: "red",
                 }
             ]}>
                 <ContentBox style={{maxHeight: SCREEN_HEIGHT - 100}} headerColor={colors.yellow.dark}>

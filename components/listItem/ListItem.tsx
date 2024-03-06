@@ -5,13 +5,16 @@ import { componentColors } from "../misc/Colors";
 
 interface RightComponentProps {
     text: string;
+    displayArrow: boolean;
 }
 
 function RightComponent(props: RightComponentProps) {
-    const { text } = props;
+    const { text, displayArrow } = props;
     return(
         <View style={rightStyles.container}>
-            <Image style={rightStyles.icon} source={require("../../assets/icons/arrow-right.png")} />
+            {displayArrow && (
+                <Image style={rightStyles.icon} source={require("../../assets/icons/arrow-right.png")} />
+            )}
             <Text shadow={false} color={"black"}>{text}</Text>
         </View>
     )
@@ -35,6 +38,8 @@ const rightStyles = StyleSheet.create({
 interface CenterComponentProps {
     title?: string;
     text?: string;
+    titleColor?: string;
+    textColor?: string;
     stats?: {
         likes?: number;
         participants?: number;
@@ -42,12 +47,12 @@ interface CenterComponentProps {
 }
 
 function CenterComponent(props: CenterComponentProps) {
-    const { title, text, stats } = props;
+    const { title, text, titleColor = componentColors.text.black, textColor = componentColors.text.dark, stats } = props;
     return(
         <View style={centerStyles.centerContainer}>
-            <Text shadow={false} numberOfLines={1} color={componentColors.text.black}>{title}</Text>
+            <Text shadow={false} numberOfLines={1} color={titleColor}>{title}</Text>
             {text && (
-                <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={componentColors.text.dark}>{text}</Text>
+                <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={textColor}>{text}</Text>
             )}
             {stats && (
                 <View style={centerStyles.statsContainer}>
@@ -100,6 +105,8 @@ interface ListItemProps {
     useDefaultCenter?: boolean;
     centerTitle?: string;
     centerText?: string | null;
+    centerTitleColor?: string;
+    centerTextColor?: string;
     stats?: {
         likes?: number;
         participants?: number;
@@ -107,18 +114,20 @@ interface ListItemProps {
     right?: ReactNode;
     useDefaultRight?: boolean;
     rightText?: string | null;
+    rightArrow?: boolean;
+    onPress?: () => void;
 }
 
 export default function ListItem(props: ListItemProps) {
-    const { left, center, useDefaultCenter, centerTitle, centerText, stats, right, useDefaultRight, rightText = ""} = props;
+    const { left, center, useDefaultCenter, centerTitle, centerText, centerTitleColor, centerTextColor, stats, right, useDefaultRight, rightText = "", rightArrow = true, onPress} = props;
     return(
-        <TouchableOpacity style={listItemStyles.container}>
+        <TouchableOpacity onPress={onPress} style={listItemStyles.container}>
             <View style={listItemStyles.left}>
                 {left}
             </View>
             <View style={listItemStyles.center}>
                 {useDefaultCenter ? (
-                    <CenterComponent title={centerTitle} text={centerText ? centerText : ""} stats={stats} />
+                    <CenterComponent title={centerTitle} text={centerText ? centerText : ""} textColor={centerTextColor} titleColor={centerTitleColor} stats={stats} />
                 ) : (
                     <>
                         {center}
@@ -127,7 +136,7 @@ export default function ListItem(props: ListItemProps) {
             </View>
             <View style={listItemStyles.right}>
                 {useDefaultRight ? (
-                    <RightComponent text={rightText ? rightText : ""} />
+                    <RightComponent displayArrow={rightArrow} text={rightText ? rightText : ""} />
                 ) : (
                     <>
                         {right}

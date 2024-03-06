@@ -1,4 +1,5 @@
-import { Image, View, StyleSheet, Dimensions } from "react-native";
+import { ReactNode } from "react";
+import { ImageBackground, View, StyleSheet, Dimensions } from "react-native";
 import { getPercentage, percentageOf } from "../../utils/utils";
 
 const backgrounds: Record<number, ReturnType<typeof require>> = {
@@ -7,6 +8,7 @@ const backgrounds: Record<number, ReturnType<typeof require>> = {
 
 interface ProfileBackgroundProps {
     imageId: number;
+    children?: ReactNode;
 }
 
 const screenWidth = Dimensions.get("window").width;
@@ -19,11 +21,13 @@ const imageWidth = screenWidth;
 const imageHeight = percentageOf(getPercentage(screenWidth, originalImageWidth), originalImageHeight);
 
 export default function ProfileBackground(props: ProfileBackgroundProps) {
-    const { imageId } = props;
+    const { imageId, children } = props;
 
     return(
         <View>
-            <Image style={{height: imageHeight, width: imageWidth}} source={backgrounds[imageId]} />
+            <ImageBackground style={{height: imageHeight, width: imageWidth, justifyContent: "center", alignItems: "center"}} source={backgrounds[imageId]}>
+                {children}
+            </ImageBackground>
         </View>
     )
 }

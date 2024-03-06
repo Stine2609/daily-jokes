@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import SearchBar from "../../components/generalUI/SearchBar";
 import FilterToggle from "../../components/generalUI/FilterToggle";
-import ContentBox from "../../components/layout/ContentBox";
 import ScrollToTopView from "../../components/layout/ScrollToTopView";
 import JokeListManager from '../../components/managers/JokeListManager';
 import { useContest } from '../../hooks/useContest';
@@ -27,9 +26,9 @@ export default function Jokes() {
                     activeFilter={activeFilter}
                     setActiveFilter={setActiveFilter}
                 />
-                <ContentBox>
+                <View style={{width: "80%", alignSelf: "center"}}>
                     <JokeListManager initialCriteria={{ exclude: { contestId: { not: contest.id } }, sortBy: activeFilter == 0 ? "-createTimeStamp" : "score" }}></JokeListManager>
-                </ContentBox>
+                </View>
             </ScrollToTopView>
         </View>
     )

@@ -1,6 +1,12 @@
-import { StyleSheet } from "react-native";
+import { useState } from "react";
+import { ScrollView } from "react-native";
 import ListItem from "./ListItem";
 import Avatar from "../profile/Avatar";
+import Modal from "../generalUI/Modal";
+import ContentBox from "../layout/ContentBox";
+import { SCREEN_HEIGHT } from "../layout/ScreenView";
+import Text from "../generalUI/Text";
+import { componentColors } from "../misc/Colors";
 
 interface JokeListItemProps {
     joke: {
@@ -11,20 +17,45 @@ interface JokeListItemProps {
         stats?: {
             likes?: number;
         }
-    }
+    };
+    titleColor?: string;
+    textColor?: string;
 }
 
 export default function JokeListItem(props: JokeListItemProps) {
-    const { joke } = props;
+    const { joke, titleColor, textColor } = props;
+
+    const [modalVisible, setModalVisible] = useState(false);
+
     return(
-        <ListItem 
-            left={<Avatar id={joke.avatarId} />}
-            useDefaultCenter
-            centerTitle={joke.username}
-            centerText={joke.text}
-            stats={joke.stats}
-            useDefaultRight
-            rightText={"#" + joke.position}
-        />
+        <>
+            <ListItem 
+                left={<Avatar id={joke.avatarId} />}
+                useDefaultCenter
+                centerTitle={joke.username}
+                centerText={joke.text}
+                centerTitleColor={titleColor}
+                centerTextColor={textColor}
+                stats={joke.stats}
+                useDefaultRight
+                rightText={"#" + joke.position}
+                onPress={() => setModalVisible(true)}
+            />
+            <Modal modalVisible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+                <ContentBox width={"100%"}>
+                    <ScrollView style={{ maxHeight: SCREEN_HEIGHT - 100 }}>
+                        <Text shadow={false} color={componentColors.contentBox.text}>{joke.text}</Text>
+                    </ScrollView>
+                    <ListItem
+                            left={<Avatar id={joke.avatarId} />}
+                            useDefaultCenter
+                            centerTitle={joke.username}
+                            rightArrow={false}
+                            useDefaultRight
+                            rightText={"#" + joke.position}
+                        />
+                </ContentBox>
+            </Modal>
+        </>
     )
 }

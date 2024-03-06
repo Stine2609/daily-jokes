@@ -3,7 +3,7 @@
  * 
  */
 import { ReactNode, useState } from "react";
-import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { View, StyleSheet, StyleProp, ViewStyle, DimensionValue } from "react-native";
 import { componentColors } from "../misc/Colors";
 import Text from "../generalUI/Text";
 import Shadow from "../misc/Shadow";
@@ -30,6 +30,7 @@ interface ContentBoxProps {
     * @property Flavor text that appears above the title in a ribbon title
     */
     flavorText?: string;
+    width?: DimensionValue;
 }
 
 export default function ContentBox(props:ContentBoxProps) {
@@ -44,6 +45,7 @@ export default function ContentBox(props:ContentBoxProps) {
         date,
         ribbonTitle = false,
         flavorText,
+        width = "80%",
     } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
@@ -59,12 +61,13 @@ export default function ContentBox(props:ContentBoxProps) {
 
     return(
         <View style={[styles.container, ribbonTitle ? {marginTop: 25} : null]}>
-            <Shadow height={containerHeight} shadowHeight={8} width={"80%"} borderRadius={20} />
+            <Shadow height={containerHeight} shadowHeight={8} width={width} borderRadius={20} />
             <View style={[
                     styles.background,
-                    {height: containerHeight + 4}
+                    {height: containerHeight + 4},
+                    {width: width}
                 ]} />
-            <View style={[style, styles.contentBoxContainer]} onLayout={onLayout}>
+            <View style={[style, styles.contentBoxContainer, , {width: width}]} onLayout={onLayout}>
                 <>
                 {ribbonTitle && (
                     <View style={styles.ribbonTitleConatiner}>
@@ -115,7 +118,6 @@ const styles = StyleSheet.create({
     },
 
     contentBoxContainer: {
-        width: "80%",
         paddingHorizontal: 20,
         paddingVertical: 14,
         borderRadius: 20,
@@ -127,7 +129,6 @@ const styles = StyleSheet.create({
     background: {
         position: "absolute",
         backgroundColor: componentColors.contentBox.backgroundHighlight,
-        width: "80%",
         borderRadius: 20,
     },
 

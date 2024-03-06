@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useState, useImperativeHandle, ReactNode } from "react";
 import { Animated, Easing, Dimensions, Modal, View, Pressable, SafeAreaView, StyleProp, ViewStyle, StyleSheet } from "react-native";
 import { PanGestureHandler, State, GestureHandlerRootView } from "react-native-gesture-handler";
+import GradientBackground from "../layout/GradientBackground";
 
 interface DrawerProps {
     children?: ReactNode;
@@ -199,12 +200,17 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
                             onGestureEvent={gestureEvent}
                         >
                             <Animated.View
-                                style={[{
-                                    backgroundColor: backgroundColor,
-                                    width: drawerWidth,
-                                    transform: [{ translateX: slideAnim }]
-                                }, containerStyle]}
+                                style={[
+                                    {
+                                        backgroundColor: backgroundColor,
+                                        width: drawerWidth,
+                                        transform: [{ translateX: slideAnim }]
+                                    },
+                                    containerStyle,
+                                    drawerStyles.drawer,
+                                ]}
                             >
+                                <GradientBackground />
                                 <SafeAreaView style={{flex: 1}}>
                                     {children}
                                 </SafeAreaView>
@@ -220,7 +226,9 @@ const Drawer = forwardRef((props: DrawerProps, ref) => {
 export default Drawer;
 
 const drawerStyles = StyleSheet.create({
-
+    drawer: {
+        
+    }
 })
 
 export { drawerStyles };

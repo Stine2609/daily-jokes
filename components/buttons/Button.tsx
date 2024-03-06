@@ -1,6 +1,6 @@
 import { StyleProp, ViewStyle } from "react-native";
 import BaseButton from "./BaseButton";
-import { componentColors } from "../misc/Colors";
+import { componentColors, colors } from "../misc/Colors";
 
 interface ButtonProps {
     label?: string;
@@ -11,7 +11,7 @@ interface ButtonProps {
     shadowHeight?: number;
     style?: StyleProp<ViewStyle>;
     borderRadius?: number;
-    variant?: "play" | "toggle" | "submit"
+    variant?: "play" | "toggle" | "submit" | "blue" | "pink"
 }
 
 const variants = {
@@ -33,6 +33,18 @@ const variants = {
         highlightColor: componentColors.submitButton.highlight,
         borderRadius: 10,
     },
+    "blue": {
+        leftColor: colors.blue.light,
+        rightColor: colors.blue.medium,
+        highlightColor: colors.blue.dark,
+        borderRadius: 10,
+    },
+    "pink": {
+        leftColor: colors.pink.light,
+        rightColor: colors.pink.medium,
+        highlightColor: colors.pink.dark,
+        borderRadius: 10,
+    }
 }
 
 export default function Button({ label, onPress, height, width, fontSize, shadowHeight, style, borderRadius, variant = "play" }: ButtonProps) {
