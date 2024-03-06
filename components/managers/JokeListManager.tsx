@@ -4,6 +4,7 @@ import Text from '../generalUI/Text';
 import JokeListItem from "../../components/listItem/JokeListItem";
 import { useJokesSearch } from "../../hooks/useJokesSearch";
 import { colors } from '../misc/Colors';
+import LoadingIndicator from '../generalUI/LoadingIndicator';
 
 interface joke {
     user?: {
@@ -27,22 +28,25 @@ interface JokeListManagerProps {
 }
 
 export default function JokeListManager({ initialCriteria = { sortBy: "-createTimeStamp", pagination: { page: 1 } } }: JokeListManagerProps) {
-    const [jokes, setJokes] = useState<joke[]>([]);
+    const [localJokes, setLocalJokes] = useState<joke[]>([]);
     const [page, setPage] = useState(1);
     const [criteria, setCriteria] = useState(initialCriteria);
+    const [initialFetchCompleted, setInitialFetchCompleted] = useState(false);
 
-    const fetchedJokes = useJokesSearch(criteria);
+    const { jokes, isLoading } = useJokesSearch(criteria);
 
     useEffect(() => {
-        if (fetchedJokes) {
-            setJokes(prev => [...prev, ...fetchedJokes]);
+        if (jokes) {
+            setLocalJokes(prev => [...prev, ...jokes]);
+            if (!initialFetchCompleted) setInitialFetchCompleted(true);
         }
-    }, [fetchedJokes]);
+    }, [jokes]);
 
     useEffect(() => {
         setPage(1);
         setCriteria(initialCriteria);
-        setJokes([]);
+        setLocalJokes([]);
+        setInitialFetchCompleted(false);
     }, [initialCriteria]);
 
     useEffect(() => {
@@ -66,21 +70,32 @@ export default function JokeListManager({ initialCriteria = { sortBy: "-createTi
 
     return (
         <View>
-            {jokes.length > 0 ? (
-                jokes.map((joke, index) => (
-                    <JokeListItem key={index} joke={{
-                        avatarId: joke.user?.profile ? joke.user.profile : 0, 
-                        username: joke.user?.name ? joke.user.name : "", 
-                        text: joke.textBody, 
-                        position: 1, 
-                        stats: {
-                            likes: 20,
-                        }
-                    }} />
-                ))
+            {localJokes.length > 0 ? (
+                <>
+                    {localJokes.map((joke, index) => (
+                        <JokeListItem
+                            key={index}
+                            joke={{
+                                avatarId: joke.user?.profile ? joke.user.profile : 0,
+                                username: joke.user?.name ? joke.user.name : "",
+                                text: joke.textBody,
+                                position: 1,
+                                stats: {
+                                    likes: 20,
+                                }
+                            }}
+                        />
+                    ))}
+                    {isLoading && <View style={{ height: 50 }}><LoadingIndicator isLoading={isLoading} /></View>}
+                </>
             ) : (
-                <Text shadow={false} style={{textAlign: "center"}} color={colors.purple.dark}>You have not written any jokes yet.</Text>
+                !isLoading && initialFetchCompleted ? (
+                    <Text shadow={false} style={{ textAlign: "center" }} color={colors.purple.dark}>No jokes found.</Text>
+                ) : (
+                    <View style={{ height: 50 }}><LoadingIndicator isLoading={isLoading} /></View>
+                )
             )}
+
             <Button title="Load More" onPress={loadMoreJokes} />
         </View>
     );
