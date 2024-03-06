@@ -1,6 +1,7 @@
 import { api } from "../api/api";
 import { UserDataManager } from "./userDataManager";
 import { generateRandomCredentials } from "../utils/random";
+import { registerForPushNotificationsAsync } from "./notification";
 
 export const login = async (email, password) => {
     try {
@@ -55,7 +56,8 @@ export const register = async (email, password, name, deviceID = "") => {
             "name": name,
             "email": email,
             "password": password,
-            "deviceID": deviceID
+            "deviceID": deviceID,
+            "expoPushToken": await registerForPushNotificationsAsync(),
         });
 
         if (response.user.email === email) {
