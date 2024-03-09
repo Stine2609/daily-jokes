@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Text from "../components/generalUI/Text";
 import { createStackNavigator } from "@react-navigation/stack";
-import HeaderOptions from "../components/header/HeaderOptions";
+import HeaderOptions, { HomeHeaderOptions } from "../components/header/HeaderOptions";
 import Home from "./Home";
 import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
 import Profile from "./Profile";
+import Notifications from "./Notifications";
 import Results from "../components/misc/Results";
 
 const Stack = createStackNavigator();
 
 export default function AppNavigationStack() {
-
-    const [resultsVisible, setResultsVisible] = useState(false);
 
     return(
         <>
@@ -20,7 +19,7 @@ export default function AppNavigationStack() {
             <Stack.Screen
                 name="Home"
                 component={Home}
-                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+                options={({ navigation, route }) => HomeHeaderOptions({ navigation, route })}
             />
             <Stack.Screen
                 name="Daily"
@@ -37,18 +36,23 @@ export default function AppNavigationStack() {
                 component={Profile}
                 options={({ navigation, route }) => HeaderOptions({ navigation, route })}
             />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+            />
         </Stack.Navigator>
         {/* TODO: Implement functionality for results modal */}
-        <Results
-            visible={resultsVisible}
-            onRequestClose={() => setResultsVisible(false)}
-            results={{
-                date: "Date",
-                theme: "Theme",
-                rank: "#Rank",
-                reward: 0,
+        {/* <Results
+            visible={contestResult ? true : false}
+            onRequestClose={() => { console.log("test"); }}
+            results={{ 
+                date: contestResult?.date,
+                rank: "#" + contestResult?.rank,
+                theme: "contestResult?.topic",
+                reward: contestResult?.coins,
             }}
-        />
+        /> */}
         </>
     )
 }

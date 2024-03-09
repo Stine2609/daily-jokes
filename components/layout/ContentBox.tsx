@@ -28,7 +28,7 @@ interface ContentBoxProps {
     ribbonTitle?: {
         topText: string;
         bottomText: string;
-        stars: boolean;
+        stars?: boolean;
     }
     width?: DimensionValue;
 }
@@ -70,7 +70,7 @@ export default function ContentBox(props:ContentBoxProps) {
                 <>
                 {ribbonTitle&& (
                     <View style={styles.ribbonTitleConatiner}>
-                        <RibbonTitle topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ?  ribbonTitle.bottomText : title} />
+                        <RibbonTitle stars={false} topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ?  ribbonTitle.bottomText : title} />
                     </View>
                 )}
                 {isLoading ? (

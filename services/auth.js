@@ -104,8 +104,8 @@ export const initialize = async () => {
         await autoRegisterDevice();
         return;
     } else {
-        await UserDataManager.clearAllData();
-        await autoRegisterDevice();
+        //await UserDataManager.clearAllData();
+        //await autoRegisterDevice();
     }
 };
 

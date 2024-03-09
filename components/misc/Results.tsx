@@ -9,10 +9,10 @@ interface ResultsProps {
     visible: boolean;
     onRequestClose: () => void;
     results: {
-        date: string;
-        theme: string;
-        rank: string;
-        reward: number | string;
+        date?: string;
+        theme?: string;
+        rank?: string;
+        reward?: number | string;
     }
 }
 
@@ -21,7 +21,7 @@ export default function Results(props: ResultsProps) {
     return(
         <Modal modalVisible={visible} onRequestClose={onRequestClose} >
             <ContentBox ribbonTitle={{
-                topText: results.date,
+                topText: results.date ? results.date : "",
                 bottomText: "Results",
                 stars: true,
             }}>

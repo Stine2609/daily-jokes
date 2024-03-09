@@ -16,10 +16,11 @@ const originalShineWidth = 989;
 interface RibbonTitleProps {
     topText?: string;
     bottomText?: string;
+    stars?: boolean;
 }
 
 export default function RibbonTitle(props: RibbonTitleProps) {
-    const { topText, bottomText } = props;
+    const { topText, bottomText, stars } = props;
 
     // Ref for the animation value
     const rotateScaleAnimation = useRef(new Animated.Value(0)).current;
@@ -63,7 +64,9 @@ export default function RibbonTitle(props: RibbonTitleProps) {
                 ]} 
                 source={require("../../assets/ribbon-shine.png")} 
             />
-            <Image style={[styles.image, styles.stars]} source={require("../../assets/ribbon-stars.png")} />
+            {stars && (
+                <Image style={[styles.image, styles.stars]} source={require("../../assets/ribbon-stars.png")} />
+            )}
             <Image style={[styles.image, styles.ribbon]} source={require("../../assets/ribbon.png")} />
             <Text shadow={false} size={14} style={[styles.text, styles.title]}>{topText}</Text>
             <Text shadowColor={colors.pink.highlight} size={20} style={[styles.text, styles.message]}>{bottomText}</Text>
