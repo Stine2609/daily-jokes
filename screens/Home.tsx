@@ -38,15 +38,12 @@ export default function Home({ navigation }: HomeProps) {
                 }
                 isLoading={contest.topic == ""}
             >
-                <PlayersDisplay users={[
-                    {"id": 1, "avatarId": 5},
-                    {"id": 2, "avatarId": 3},
-                    {"id": 3, "avatarId": 0},
-                    {"id": 4, "avatarId": 2},
-                    {"id": 5, "avatarId": 12},
-                    {"id": 6, "avatarId": 11},
-                    {"id": 7, "avatarId": 1}
-                ]} />
+                {contest.participants && (
+                    <PlayersDisplay totalPlayers={contest.totalParticipants} users={contest.participants.map(participant => ({
+                        id: participant.id,
+                        avatarId: participant.profile,
+                    }))} />
+                )}
                 <ContentBoxBottom>
                     <Button height={36} variant="play" onPress={() => navigation.navigate("Daily")} label="Play" />
                     <Text shadow={false} color={colors.purple.dark}>{timeLeft}</Text>

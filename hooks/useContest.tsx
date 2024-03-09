@@ -8,6 +8,8 @@ export const useContest = (date?: Date) => {
         topic: "",
         date: new Date().toDateString(),
         id: -1,
+        participants: [{ id: 0, profile: 0 }],
+        totalParticipants: 0,
     });
     const isFocused = useIsFocused();
 
