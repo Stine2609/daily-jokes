@@ -12,10 +12,11 @@ import Drawer from '../components/drawer/Drawer';
 
 type DrawerRef = {
     openDrawer: () => void;
+    closeDrawer: () => void;
 };
 
 export default function Profile() {
-    // Create a ref for the drawer
+    
     const customizeDrawer = useRef<DrawerRef>(null);
 
     return(
@@ -40,7 +41,10 @@ export default function Profile() {
                         <Text size={20}>Crazy Askeir</Text>
                     </View>
                 </View>
-                <ContentBox ribbonTitle flavorText="Top" title="Results">
+                <ContentBox ribbonTitle={{
+                    topText: "Top",
+                    bottomText: "Results",
+                }}>
                     <ContestListItem contest={{
                         date: "Feb. 26",
                         name: "Puns!",
@@ -52,7 +56,7 @@ export default function Profile() {
                     }}/>
                 </ContentBox>
             </ScrollToTopView>
-            {/* Attach the ref to the Drawer */}
+
             <Drawer width="100%" ref={customizeDrawer}>
                 <Button label="Close Drawer" onPress={() => customizeDrawer.current?.closeDrawer()} />
             </Drawer>
@@ -66,6 +70,7 @@ const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center"
     },
+    
     profilePictureInner: {
         bottom: "50%",
         position: "absolute",

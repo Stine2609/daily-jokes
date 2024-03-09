@@ -6,10 +6,12 @@ import CircularButton from '../buttons/CircularButton';
 interface ModalProps {
     children?: ReactNode;
     modalVisible: boolean;
-    onRequestClose: () => void;
+    onRequestClose?: () => void;
 }
 
-export default function Modal({ children, modalVisible, onRequestClose }: ModalProps) {
+export default function Modal(props: ModalProps) {
+    const { children, modalVisible, onRequestClose } = props;
+
     return (
         <RNModal
             animationType="fade"
@@ -18,17 +20,19 @@ export default function Modal({ children, modalVisible, onRequestClose }: ModalP
             onRequestClose={onRequestClose}>
             {/* Overlay View to capture outside clicks */}
             <TouchableWithoutFeedback onPress={onRequestClose}>
-                <View style={styles.fullScreenView}>
-                    {/* Prevent onPress from being triggered when modal content is clicked */}
-                    <TouchableWithoutFeedback>
-                        <View style={styles.modalView}>
-                            {children}
-                            <View style={styles.closeButton}>
-                                <CircularButton variant="no" onPress={onRequestClose} />
+                <>
+                    <View style={styles.fullScreenView}>
+                        {/* Prevent onPress from being triggered when modal content is clicked */}
+                        <TouchableWithoutFeedback>
+                            <View style={styles.modalView}>
+                                {children}
                             </View>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+                    <View style={styles.closeButton}>
+                        <CircularButton size={36} variant="close" onPress={onRequestClose} />
+                    </View>
+                </>
             </TouchableWithoutFeedback>
         </RNModal>
     );
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
     },
     closeButton: {
         position: "absolute",
-        right: 14,
-        top: 4,
+        right: 10,
+        top: 10,
     },
 });

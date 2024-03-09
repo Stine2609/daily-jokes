@@ -6,7 +6,6 @@ import AppNavigationStack from './screens/AppNavigationStack';
 import { initialize } from "./services/initialize";
 
 export default function App() {
-
     initialize();
 
     return (
