@@ -6,7 +6,7 @@ export const fetchContestResult = async () => {
         const result = await api("GET", "/contestresult/unread", undefined, await UserDataManager.getToken());
         return result;
     } catch (error) {
-        console.error("Failed to fetch contestResult:", error);
+        console.log("Failed to fetch contestResult:", error);
     }
 };
 

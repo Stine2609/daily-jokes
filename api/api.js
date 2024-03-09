@@ -32,12 +32,12 @@ export const api = async (method, endpoint, body, token) => {
         } catch (error) {
             if (attempts < MAX_RETRIES) {
                 const backoff = RETRY_DELAY * Math.pow(2, attempts) + Math.random() * RETRY_DELAY;
-                console.error(`Attempt ${attempts + 1}: ${error.message}. Retrying in ${backoff}ms...`);
+                console.log(`Attempt ${attempts + 1}: ${error.message}. Retrying in ${backoff}ms...`);
                 attempts++;
                 await new Promise(resolve => setTimeout(resolve, backoff));
                 return makeRequest();
             } else {
-                console.error(error);
+                console.log(error);
                 throw error; 
             }
         }

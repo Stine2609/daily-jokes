@@ -5,13 +5,10 @@ import Home from "./Home";
 import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
 import Profile from "./Profile";
-import { useContestResult } from "../hooks/useContestResult";
 
 const Stack = createStackNavigator();
 
 export default function AppNavigationStack() {
-
-    let contestResults = useContestResult();
 
     return(
         <Stack.Navigator initialRouteName="Home">

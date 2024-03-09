@@ -18,7 +18,7 @@ export const useContestResult = () => {
                         setContestResult(contestResult_result);
                     }
                 } catch (error) {
-                    console.error("Failed to fetch contestResult:", error);
+                    console.log("Failed to fetch contestResult:", error);
                 }
             }
         };
