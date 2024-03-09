@@ -8,9 +8,10 @@ import DrawerLink from "../drawer/DrawerLink";
 
 type DrawerRef = {
     openDrawer: () => void;
+    closeDrawer: () => void;
 };
 
-const HeaderOptions = ({  }) => ({
+const HeaderOptions = ({ navigation, route }) => ({
     headerTransparent: true,
     headerStyle: {
       backgroundColor: "transparent",
@@ -26,7 +27,20 @@ const HeaderOptions = ({  }) => ({
         const navigationDrawerRef = useRef<DrawerRef>(null);
         return(
             <View style={{marginLeft: 20}}>
-                <CircularButton variant="back" onPress={onPress} />
+                {route.name == "Home" ? (
+                    <>
+                        <CircularButton variant="hamburger" onPress={() => navigationDrawerRef.current?.openDrawer()} />
+                        <Drawer
+                            ref={navigationDrawerRef}
+                            containerStyle={[]}
+                            side="left"
+                        >
+                            <DrawerLink text="Notifications" linkTo="Notifications" onPress={() => navigationDrawerRef.current?.closeDrawer()} />
+                        </Drawer>
+                    </>
+                ) : (
+                    <CircularButton variant="back" onPress={onPress} />
+                )}
             </View>
         )
     },
@@ -38,37 +52,3 @@ const HeaderOptions = ({  }) => ({
 })
 
 export default HeaderOptions
-
-
-export const HomeHeaderOptions = ({ }) => ({
-    headerTransparent: true,
-    headerStyle: {
-      backgroundColor: "transparent",
-      elevation: 0, // for Android
-      shadowOpacity: 0, // for iOS
-    },
-    headerTitle: () => (
-        <HeaderCenter label={"Daily"}/>
-    ),
-    headerTitleAlign: "center" as const, // Explicitly typing as "center"
-    headerLeft: () => {
-        const navigationDrawerRef = useRef<DrawerRef>(null);
-        return(
-            <View style={{marginLeft: 20}}>
-                <CircularButton variant="hamburger" onPress={() => navigationDrawerRef.current?.openDrawer()} />
-                <Drawer
-                    ref={navigationDrawerRef}
-                    containerStyle={[]}
-                    side="left"
-                >
-                    <DrawerLink text="Notifications" linkTo="Notifications" />
-                </Drawer>
-            </View>
-        )
-    },
-    headerRight: () => (
-        <View style={{marginRight: 20}}>
-            <CoinCount />
-        </View>
-    ),
-})
