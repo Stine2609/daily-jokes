@@ -25,11 +25,11 @@ interface ContentBoxProps {
     /** 
     * @property Replaces the normal title with a big fancy title
     */
-    ribbonTitle?: boolean;
-    /** 
-    * @property Flavor text that appears above the title in a ribbon title
-    */
-    flavorText?: string;
+    ribbonTitle?: {
+        topText: string;
+        bottomText: string;
+        stars: boolean;
+    }
     width?: DimensionValue;
 }
 
@@ -43,8 +43,7 @@ export default function ContentBox(props:ContentBoxProps) {
         headerColor = componentColors.contentBox.highlight,
         isLoading = false,
         date,
-        ribbonTitle = false,
-        flavorText,
+        ribbonTitle,
         width = "80%",
     } = props;
 
@@ -67,11 +66,11 @@ export default function ContentBox(props:ContentBoxProps) {
                     {height: containerHeight + 4},
                     {width: width}
                 ]} />
-            <View style={[style, styles.contentBoxContainer, , {width: width}]} onLayout={onLayout}>
+            <View style={[style, styles.contentBoxContainer, {width: width}]} onLayout={onLayout}>
                 <>
-                {ribbonTitle && (
+                {ribbonTitle&& (
                     <View style={styles.ribbonTitleConatiner}>
-                        <RibbonTitle topText={flavorText} bottomText={title} />
+                        <RibbonTitle topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ?  ribbonTitle.bottomText : title} />
                     </View>
                 )}
                 {isLoading ? (

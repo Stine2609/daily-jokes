@@ -1,7 +1,7 @@
 export const colors = {
         // Base colors
         purple: {
-            light: "#C286FF",
+            light: "#C16DFE",
             medium: "#A75CF4",
             dark: "#9F51FE",
             highlight: "#7054FE",
