@@ -1,8 +1,9 @@
+import React, { useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigationStack from './screens/AppNavigationStack';
-import { initialize } from './services/auth';
+import { initialize } from "./services/initialize";
 
 export default function App() {
 
