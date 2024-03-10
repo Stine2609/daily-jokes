@@ -1,5 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { AppState } from 'react-native';
+import { getData, storeData } from '../../utils/storage';
 import Results from './Results';
 import { api } from '../../api/api';
 import { UserDataManager } from '../../services/userDataManager';
@@ -17,6 +18,9 @@ type ContestResult = {
     };
 };
 
+const LAST_POLL_TIME_KEY = 'LAST_POLL_TIME';
+const POLL_INTERVAL_MS = 1000; // Adjust the polling interval as needed
+
 const fetchContestResult = async (): Promise<ContestResult[] | undefined> => {
     try {
         const result = await api("GET", "/contestresult/unread", undefined, await UserDataManager.getToken());
@@ -29,33 +33,39 @@ const fetchContestResult = async (): Promise<ContestResult[] | undefined> => {
 const ContestResultChecker: React.FC = ({ children }) => {
     const [contestResult, setContestResult] = useState<ContestResult | null>(null);
 
+    const checkForNewContestResults = useCallback(async () => {
+        const lastPollTime: number = await getData(LAST_POLL_TIME_KEY) || 0;
+        const now = Date.now();
+
+        if (now - lastPollTime >= POLL_INTERVAL_MS) {
+            const result = await fetchContestResult();
+            if (result && result.length > 0) {
+                setContestResult(result[0]);
+                await api("GET", `/contestresult/read/${result[0].id}`, undefined, await UserDataManager.getToken());
+            }
+
+            await storeData(LAST_POLL_TIME_KEY, now);
+        }
+
+        const nextPollIn = POLL_INTERVAL_MS - (Date.now() - lastPollTime);
+        setTimeout(checkForNewContestResults, nextPollIn > 0 ? nextPollIn : POLL_INTERVAL_MS);
+    }, []);
+
     useEffect(() => {
-        let isMounted = true; // Flag to check mount status
+        checkForNewContestResults();
 
-        const checkForNewContestResults = async () => {
-            if (!isMounted) return; // Prevent running if component has been unmounted
-
-            try {
-                const result = await fetchContestResult();
-                if (result && result.length > 0) {
-                    setContestResult(result[0]);
-                    await api("GET", `/contestresult/read/${result[0].id}`, undefined, await UserDataManager.getToken());
-                }
-            } catch (error) {
-                console.error("Failed to poll for contestResult:", error);
-            } finally {
-                if (isMounted) {
-                    setTimeout(checkForNewContestResults, 1000); // Schedule the next poll
-                }
+        const handleAppStateChange = (nextAppState: AppStateStatus) => {
+            if (nextAppState === 'active') {
+                checkForNewContestResults();
             }
         };
 
-        checkForNewContestResults(); // Initial call to start polling
+        AppState.addEventListener('change', handleAppStateChange);
 
         return () => {
-            isMounted = false; // Set flag to false to prevent future runs after component unmount
+            AppState.removeEventListener('change', handleAppStateChange);
         };
-    }, []);
+    }, [checkForNewContestResults]);
 
     return (
         <>
@@ -64,7 +74,7 @@ const ContestResultChecker: React.FC = ({ children }) => {
                 <Results
                     visible={true}
                     onRequestClose={() => setContestResult(null)}
-                    results={{ 
+                    results={{
                         date: formatTimestampToShortDate(contestResult.contest.date),
                         rank: "#" + contestResult.rank.toString(),
                         theme: contestResult.contest.topic,
