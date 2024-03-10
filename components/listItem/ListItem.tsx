@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import Text from "../generalUI/Text";
 import { componentColors } from "../misc/Colors";
+import ContentBox from "../layout/ContentBox";
 
 interface RightComponentProps {
     text: string;
@@ -119,31 +120,47 @@ interface ListItemProps {
 }
 
 export default function ListItem(props: ListItemProps) {
-    const { left, center, useDefaultCenter, centerTitle, centerText, centerTitleColor, centerTextColor, stats, right, useDefaultRight, rightText = "", rightArrow = true, onPress} = props;
+    const { 
+        left,
+        center,
+        useDefaultCenter,
+        centerTitle,
+        centerText,
+        centerTitleColor,
+        centerTextColor,
+        stats,
+        right,
+        useDefaultRight,
+        rightText = "",
+        rightArrow = true,
+        onPress
+    } = props;
     return(
-        <TouchableOpacity onPress={onPress} style={listItemStyles.container}>
-            <View style={listItemStyles.left}>
-                {left}
-            </View>
-            <View style={listItemStyles.center}>
-                {useDefaultCenter ? (
-                    <CenterComponent title={centerTitle} text={centerText ? centerText : ""} textColor={centerTextColor} titleColor={centerTitleColor} stats={stats} />
-                ) : (
-                    <>
-                        {center}
-                    </>
-                )}
-            </View>
-            <View style={listItemStyles.right}>
-                {useDefaultRight ? (
-                    <RightComponent displayArrow={rightArrow} text={rightText ? rightText : ""} />
-                ) : (
-                    <>
-                        {right}
-                    </>
-                )}
-            </View>
-        </TouchableOpacity>
+        <ContentBox style={{marginBottom: 18}}>
+            <TouchableOpacity onPress={onPress} style={listItemStyles.container}>
+                <View style={listItemStyles.left}>
+                    {left}
+                </View>
+                <View style={listItemStyles.center}>
+                    {useDefaultCenter ? (
+                        <CenterComponent title={centerTitle} text={centerText ? centerText : ""} textColor={centerTextColor} titleColor={centerTitleColor} stats={stats} />
+                    ) : (
+                        <>
+                            {center}
+                        </>
+                    )}
+                </View>
+                <View style={listItemStyles.right}>
+                    {useDefaultRight ? (
+                        <RightComponent displayArrow={rightArrow} text={rightText ? rightText : ""} />
+                    ) : (
+                        <>
+                            {right}
+                        </>
+                    )}
+                </View>
+            </TouchableOpacity>
+        </ContentBox>
     )
 }
 

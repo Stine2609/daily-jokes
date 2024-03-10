@@ -14,10 +14,10 @@ export default function Contests() {
         <View style={{ flex: 1 }}>
             <ScrollToTopView>
                 <SearchBar placeholder="Search..." />
-                <ContentBox>
+                {/* <ContentBox> */}
                     <ContestListManager initialCriteria={{ filters: { resultsCalculated: true }, sortBy: "-date" }}>
                     </ContestListManager>
-                </ContentBox>
+                {/* </ContentBox> */}
             </ScrollToTopView>
         </View>
     );

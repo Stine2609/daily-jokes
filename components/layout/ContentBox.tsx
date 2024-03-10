@@ -68,7 +68,7 @@ export default function ContentBox(props:ContentBoxProps) {
                 ]} />
             <View style={[style, styles.contentBoxContainer, {width: width}]} onLayout={onLayout}>
                 <>
-                {ribbonTitle&& (
+                {ribbonTitle && (
                     <View style={styles.ribbonTitleConatiner}>
                         <RibbonTitle stars={false} topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ?  ribbonTitle.bottomText : title} />
                     </View>
@@ -77,7 +77,7 @@ export default function ContentBox(props:ContentBoxProps) {
                     null // TODO: add loading indicator
                 ) : (
                     <>
-                        {!ribbonTitle && (
+                        {!ribbonTitle && title && (
                             <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
                                 <Text shadow={false}>{title ? title : contest.topic }</Text>
                             </View>

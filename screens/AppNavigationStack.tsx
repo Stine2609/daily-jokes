@@ -3,6 +3,7 @@ import HeaderOptions from "../components/header/HeaderOptions";
 import Home from "./Home";
 import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
+import Results from "./Results/Results";
 import Profile from "./Profile";
 import Notifications from "./Notifications";
 import ContestResultChecker from "../components/misc/ContestResultChecker";
@@ -11,6 +12,7 @@ export type StackParamsList = {
     Home: undefined;
     Daily: undefined;
     Browse: undefined;
+    Results: undefined;
     Profile: undefined;
     Notifications: undefined;
 }
@@ -35,6 +37,11 @@ export default function AppNavigationStack() {
                 <Stack.Screen
                     name="Browse"
                     component={Browse}
+                    options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+                />
+                <Stack.Screen
+                    name="Results"
+                    component={Results}
                     options={({ navigation, route }) => HeaderOptions({ navigation, route })}
                 />
                 <Stack.Screen

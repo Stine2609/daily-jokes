@@ -26,7 +26,7 @@ export default function Jokes() {
                     activeFilter={activeFilter}
                     setActiveFilter={setActiveFilter}
                 />
-                <View style={{width: "80%", alignSelf: "center"}}>
+                <View style={{width: "100%", alignSelf: "center"}}>
                     <JokeListManager initialCriteria={{ exclude: { contestId: { not: contest.id } }, sortBy: activeFilter == 0 ? "-createTimeStamp" : "score" }}></JokeListManager>
                 </View>
             </ScrollToTopView>

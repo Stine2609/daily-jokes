@@ -6,6 +6,7 @@ import { useJokesSearch } from "../../hooks/useJokesSearch";
 import { colors } from '../misc/Colors';
 import LoadingIndicator from '../generalUI/LoadingIndicator';
 import Button from '../buttons/Button';
+import ContentBox from '../layout/ContentBox';
 
 interface joke {
     user?: {
