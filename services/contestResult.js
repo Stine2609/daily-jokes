@@ -39,5 +39,5 @@ export const showContestResultPopup = async (result) => {
 }
 
 export const initialize = async () => {
-    await checkForNewContestResults();
+    //await checkForNewContestResults();
 }
