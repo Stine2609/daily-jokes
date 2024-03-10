@@ -20,10 +20,11 @@ interface JokeListItemProps {
     };
     titleColor?: string;
     textColor?: string;
+    noBox?: boolean;
 }
 
 export default function JokeListItem(props: JokeListItemProps) {
-    const { joke, titleColor, textColor } = props;
+    const { joke, titleColor, textColor, noBox } = props;
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -40,6 +41,7 @@ export default function JokeListItem(props: JokeListItemProps) {
                 useDefaultRight
                 rightText={"#" + joke.position}
                 onPress={() => setModalVisible(true)}
+                noBox={noBox}
             />
             <Modal modalVisible={modalVisible} onRequestClose={() => setModalVisible(false)}>
                 <ContentBox width={"100%"}>

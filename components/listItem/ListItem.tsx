@@ -116,6 +116,7 @@ interface ListItemProps {
     useDefaultRight?: boolean;
     rightText?: string | null;
     rightArrow?: boolean;
+    noBox?: boolean;
     onPress?: () => void;
 }
 
@@ -133,10 +134,13 @@ export default function ListItem(props: ListItemProps) {
         useDefaultRight,
         rightText = "",
         rightArrow = true,
+        noBox,
         onPress
     } = props;
+
+    const ParentTag = noBox ? View : ContentBox;
     return(
-        <ContentBox style={{marginBottom: 18}}>
+        <ParentTag style={{marginBottom: 18}}>
             <TouchableOpacity onPress={onPress} style={listItemStyles.container}>
                 <View style={listItemStyles.left}>
                     {left}
@@ -160,7 +164,7 @@ export default function ListItem(props: ListItemProps) {
                     )}
                 </View>
             </TouchableOpacity>
-        </ContentBox>
+        </ParentTag>
     )
 }
 

@@ -45,7 +45,7 @@ export default function Profile() {
                     topText: "Top",
                     bottomText: "Results",
                 }}>
-                    <ContestListItem contest={{
+                    <ContestListItem noBox={true} contest={{
                         date: "Feb. 26",
                         name: "Puns!",
                         position: 5,

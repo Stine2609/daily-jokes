@@ -15,10 +15,11 @@ interface ContestListItemProps {
             participants?: number;
         }
     }
+    noBox?: boolean;
 }
 
 export default function ContestListItem(props: ContestListItemProps) {
-    const { contest } = props;
+    const { contest, noBox } = props;
     return(
         <ListItem 
             left={
@@ -32,6 +33,7 @@ export default function ContestListItem(props: ContestListItemProps) {
             stats={contest.stats}
             useDefaultRight
             rightText={contest.position ? "#" + contest.position : null}
+            noBox={noBox}
         />
     )
 }
