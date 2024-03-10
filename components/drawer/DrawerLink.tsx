@@ -6,15 +6,19 @@ interface DrawerLinkProps {
     text?: string;
     icon?: string;
     linkTo: string;
+    onPress: () => void;
 }
 
 export default function DrawerLink(props: DrawerLinkProps) {
-    const { text, icon, linkTo } = props;
+    const { text, icon, linkTo, onPress } = props;
 
     const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
     return(
-        <TouchableOpacity onPress={() => navigation.navigate(linkTo)} style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => {
+            navigation.navigate(linkTo);
+            onPress();
+        }}>
             <Text>{text}</Text>
         </TouchableOpacity>
     )

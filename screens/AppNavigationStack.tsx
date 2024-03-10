@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Text from "../components/generalUI/Text";
 import { createStackNavigator } from "@react-navigation/stack";
-import HeaderOptions, { HomeHeaderOptions } from "../components/header/HeaderOptions";
+import HeaderOptions from "../components/header/HeaderOptions";
 import Home from "./Home";
 import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
@@ -19,7 +19,7 @@ export default function AppNavigationStack() {
             <Stack.Screen
                 name="Home"
                 component={Home}
-                options={({ navigation, route }) => HomeHeaderOptions({ navigation, route })}
+                options={({ navigation, route }) => HeaderOptions({ navigation, route })}
             />
             <Stack.Screen
                 name="Daily"
