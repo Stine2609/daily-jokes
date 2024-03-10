@@ -30,21 +30,31 @@ const ContestResultChecker: React.FC = ({ children }) => {
     const [contestResult, setContestResult] = useState<ContestResult | null>(null);
 
     useEffect(() => {
+        let isMounted = true; // Flag to check mount status
+
         const checkForNewContestResults = async () => {
+            if (!isMounted) return; // Prevent running if component has been unmounted
+
             try {
                 const result = await fetchContestResult();
                 if (result && result.length > 0) {
-                    setContestResult(result[0]); 
+                    setContestResult(result[0]);
                     await api("GET", `/contestresult/read/${result[0].id}`, undefined, await UserDataManager.getToken());
                 }
             } catch (error) {
                 console.error("Failed to poll for contestResult:", error);
+            } finally {
+                if (isMounted) {
+                    setTimeout(checkForNewContestResults, 1000); // Schedule the next poll
+                }
             }
         };
 
-        const timerId = setTimeout(checkForNewContestResults, 1000);
-        // Cleanup on component unmount
-        return () => clearTimeout(timerId);
+        checkForNewContestResults(); // Initial call to start polling
+
+        return () => {
+            isMounted = false; // Set flag to false to prevent future runs after component unmount
+        };
     }, []);
 
     return (
