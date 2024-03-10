@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import Text from "../components/generalUI/Text";
 import { createStackNavigator } from "@react-navigation/stack";
 import HeaderOptions from "../components/header/HeaderOptions";
 import Home from "./Home";
@@ -7,10 +5,17 @@ import Daily from "./Daily/Daily";
 import Browse from "./Browse/Browse";
 import Profile from "./Profile";
 import Notifications from "./Notifications";
-import Results from "../components/misc/Results";
 import ContestResultChecker from "../components/misc/ContestResultChecker";
 
-const Stack = createStackNavigator();
+export type StackParamsList = {
+    Home: undefined;
+    Daily: undefined;
+    Browse: undefined;
+    Profile: undefined;
+    Notifications: undefined;
+}
+
+const Stack = createStackNavigator<StackParamsList>();
 
 export default function AppNavigationStack() {
 

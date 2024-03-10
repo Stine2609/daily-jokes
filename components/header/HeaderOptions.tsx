@@ -5,13 +5,20 @@ import CircularButton from "../buttons/CircularButton";
 import Drawer from "../drawer/Drawer";
 import CoinCount from "../misc/CoinCount";
 import DrawerLink from "../drawer/DrawerLink";
+import { NavigationProp, RouteProp } from '@react-navigation/native';
+import { StackParamsList } from "../../screens/AppNavigationStack";
+
+type HeaderOptionsProps = {
+  navigation: NavigationProp<StackParamsList>;
+  route: RouteProp<StackParamsList, keyof StackParamsList>;
+};
 
 type DrawerRef = {
     openDrawer: () => void;
     closeDrawer: () => void;
 };
 
-const HeaderOptions = ({ navigation, route }) => ({
+const HeaderOptions = ({ navigation, route }: HeaderOptionsProps) => ({
     headerTransparent: true,
     headerStyle: {
       backgroundColor: "transparent",
@@ -19,7 +26,7 @@ const HeaderOptions = ({ navigation, route }) => ({
       shadowOpacity: 0, // for iOS
     },
     headerTitle: () => (
-        <HeaderCenter label={"Daily"}/>
+        <HeaderCenter label={route.name}/>
     ),
     headerTitleAlign: "center" as const, // Explicitly typing as "center"
     headerLeft: (props: any) => {

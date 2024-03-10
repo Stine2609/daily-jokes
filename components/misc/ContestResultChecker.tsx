@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { AppState } from 'react-native';
+import React, { useState, useEffect, useCallback, ReactNode } from 'react';
+import { AppState, AppStateStatus } from 'react-native';
 import { getData, storeData } from '../../utils/storage';
 import Results from './Results';
 import { api } from '../../api/api';
@@ -30,7 +30,11 @@ const fetchContestResult = async (): Promise<ContestResult[] | undefined> => {
     }
 };
 
-const ContestResultChecker: React.FC = ({ children }) => {
+interface ContestResultCheckerProps {
+    children: ReactNode;
+}
+
+export default function ContestResultChecker({ children }: ContestResultCheckerProps) {
     const [contestResult, setContestResult] = useState<ContestResult | null>(null);
 
     const checkForNewContestResults = useCallback(async () => {
@@ -52,18 +56,15 @@ const ContestResultChecker: React.FC = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        checkForNewContestResults();
-
-        const handleAppStateChange = (nextAppState: AppStateStatus) => {
+        const subscription = AppState.addEventListener('change', (nextAppState: AppStateStatus) => {
             if (nextAppState === 'active') {
                 checkForNewContestResults();
             }
-        };
-
-        AppState.addEventListener('change', handleAppStateChange);
+        });
 
         return () => {
-            AppState.removeEventListener('change', handleAppStateChange);
+            // Use the subscription object to remove the event listener
+            subscription.remove();
         };
     }, [checkForNewContestResults]);
 
@@ -85,5 +86,3 @@ const ContestResultChecker: React.FC = ({ children }) => {
         </>
     );
 };
-
-export default ContestResultChecker;

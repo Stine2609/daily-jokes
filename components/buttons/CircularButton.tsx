@@ -26,7 +26,7 @@ const variants = {
     },
 
     close: {
-        icon: require("../../assets/icons/no.png"),
+        icon: require("../../assets/icons/close.png"),
         backgroundColor: "transparent",
         highlightColor: "transparent",
     },
