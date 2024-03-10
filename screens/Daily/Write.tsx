@@ -57,7 +57,7 @@ export default function Write() {
                     paddingTop: 20,
                 }
             ]}>
-                <ContentBox style={{maxHeight: SCREEN_HEIGHT - 100}} headerColor={colors.yellow.dark}>
+                <ContentBox title="TODO: Add title" style={{maxHeight: SCREEN_HEIGHT - 100}} headerColor={colors.yellow.dark}>
                     <InputField
                         style={{maxHeight: SCREEN_HEIGHT - (350)}}
                         placeholder="Write your joke here..." 

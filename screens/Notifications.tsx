@@ -1,20 +1,19 @@
 import ScreenView from "../components/layout/ScreenView";
-import CircularButton from "../components/buttons/CircularButton";
-import MascotTip from "../components/misc/MascotTip";
-import { useState } from "react";
+import NotificationListItem from "../components/listItem/NotificationListItem";
+import ContentBox from "../components/layout/ContentBox";
 
 export default function Notifications() {
-    const [showMascot, setShowMascot] = useState(true);
 
     return(
-        <ScreenView>
-            <CircularButton onPress={() => setShowMascot(true)} variant="back" />
-            <CircularButton variant="yes" />
-            <CircularButton variant="no" />
-            <CircularButton variant="superlike" />
-            <CircularButton variant="close" />
-            <CircularButton variant="hamburger" />
-            <MascotTip visible={showMascot} onClose={() => setShowMascot(false)} />
+        <ScreenView style={{justifyContent: "flex-start"}}>
+            <ContentBox title="Latest notifications">
+                <NotificationListItem
+                    icon="coins-small"
+                    title="This is a notification"
+                    text="+1K coins"
+                    date="04/04/04"
+                />
+            </ContentBox>
         </ScreenView>
     )
 }

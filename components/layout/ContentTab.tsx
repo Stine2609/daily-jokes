@@ -50,7 +50,7 @@ export default function ContentTab(props: ContentTabProps) {
     return (
         <ActiveTabContext.Provider value={{ activeTab, setActiveTab }}>
             <View style={styles.container}>
-                <Shadow style={{ alignSelf: "center" }} height={buttonContainerHeight} shadowHeight={5} width={"80%"} borderRadius={50} />
+                <Shadow style={{ alignSelf: "center" }} height={buttonContainerHeight} shadowHeight={5} width={"88%"} borderRadius={50} />
                 <View style={styles.buttonContainer}>
                     <Animated.View style={[styles.focusedContainer, animatedStyle, { width: `${tabWidthPercent}%` }]} />
                     {tabs.map((tab, index) =>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         flexDirection: "row",
-        width: "80%",
+        width: "88%",
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "space-between",

@@ -31,12 +31,7 @@ export default function RibbonTitle(props: RibbonTitleProps) {
             Animated.sequence([
                 Animated.timing(rotateScaleAnimation, {
                     toValue: 1,
-                    duration: 5000,
-                    useNativeDriver: true,
-                }),
-                Animated.timing(rotateScaleAnimation, {
-                    toValue: 0,
-                    duration: 5000,
+                    duration: 10000,
                     useNativeDriver: true,
                 }),
             ])
@@ -45,13 +40,18 @@ export default function RibbonTitle(props: RibbonTitleProps) {
 
     // Interpolate the rotation and scale from the animated value
     const rotation = rotateScaleAnimation.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: ['-0deg', '1deg', '-1deg'],
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: ['0deg', '4deg', '0deg', '-4deg', '0deg'],
     });
 
     const scale = rotateScaleAnimation.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: [1, 1.05, 1],
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [1, 1.05, 1, 1.05, 1],
+    });
+
+    const opacity = rotateScaleAnimation.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [1, 0.6, 1, 0.6, 1],
     });
 
     return(
@@ -60,6 +60,7 @@ export default function RibbonTitle(props: RibbonTitleProps) {
                 style={[
                     styles.image, 
                     styles.shine,
+                    { opacity: opacity },
                     { transform: [{ rotate: rotation }, { scale: scale }] } // Apply the rotation and scale transformations
                 ]} 
                 source={require("../../assets/ribbon-shine.png")} 

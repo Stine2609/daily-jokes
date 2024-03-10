@@ -67,7 +67,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
     profilePictureContainer: {
         height: 75,
-        width: "80%",
+        width: "88%",
         alignSelf: "center"
     },
     

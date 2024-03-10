@@ -41,7 +41,7 @@ export default function Results(props: ResultsProps) {
                     <View style={styles.section}>
                         <Text shadow={false} style={styles.text}>Reward</Text>
                         <View style={styles.rewardContainer}>
-                            <Image style={styles.rewardImage} source={require("../../assets/coins-medium.png")} />
+                            <Image style={styles.rewardImage} source={require("../../assets/images/coins-medium.png")} />
                             <Text shadow={false} style={[styles.text, styles.textFieldText, {fontSize: 24}]}>{results.reward}</Text>
                         </View>
                     </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     textField: {
         backgroundColor: "#C2FDFF",
         borderRadius: 100,
-        minWidth: "80%",
+        minWidth: "88%",
         alignItems: "center",
         height: 34,
         justifyContent: "center"

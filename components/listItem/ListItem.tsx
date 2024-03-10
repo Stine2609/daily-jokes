@@ -39,6 +39,7 @@ const rightStyles = StyleSheet.create({
 interface CenterComponentProps {
     title?: string;
     text?: string;
+    bottomText?: string;
     titleColor?: string;
     textColor?: string;
     stats?: {
@@ -48,12 +49,15 @@ interface CenterComponentProps {
 }
 
 function CenterComponent(props: CenterComponentProps) {
-    const { title, text, titleColor = componentColors.text.black, textColor = componentColors.text.dark, stats } = props;
+    const { title, text, bottomText, titleColor = componentColors.text.black, textColor = componentColors.text.dark, stats } = props;
     return(
         <View style={centerStyles.centerContainer}>
             <Text shadow={false} numberOfLines={1} color={titleColor}>{title}</Text>
             {text && (
                 <Text shadow={false} numberOfLines={2} size={15} style={{letterSpacing: 0.5}} color={textColor}>{text}</Text>
+            )}
+            {bottomText && (
+                <Text color="rgba(73, 69, 79, 0.5)" size={15} shadow={false}>{bottomText}</Text>
             )}
             {stats && (
                 <View style={centerStyles.statsContainer}>
@@ -106,6 +110,7 @@ interface ListItemProps {
     useDefaultCenter?: boolean;
     centerTitle?: string;
     centerText?: string | null;
+    centerBottomText?: string;
     centerTitleColor?: string;
     centerTextColor?: string;
     stats?: {
@@ -127,6 +132,7 @@ export default function ListItem(props: ListItemProps) {
         useDefaultCenter,
         centerTitle,
         centerText,
+        centerBottomText,
         centerTitleColor,
         centerTextColor,
         stats,
@@ -147,7 +153,7 @@ export default function ListItem(props: ListItemProps) {
                 </View>
                 <View style={listItemStyles.center}>
                     {useDefaultCenter ? (
-                        <CenterComponent title={centerTitle} text={centerText ? centerText : ""} textColor={centerTextColor} titleColor={centerTitleColor} stats={stats} />
+                        <CenterComponent title={centerTitle} text={centerText ? centerText : ""} bottomText={centerBottomText} textColor={centerTextColor} titleColor={centerTitleColor} stats={stats} />
                     ) : (
                         <>
                             {center}

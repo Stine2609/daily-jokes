@@ -13,7 +13,7 @@ export default function SearchBar(props: SearchBarProps) {
     
     return(
         <View style={styles.container}>
-            <Shadow shadowHeight={4} height={50} width={"80%"} borderRadius={50} />
+            <Shadow shadowHeight={4} height={50} width={"88%"} borderRadius={50} />
             <View style={styles.innerContainer}>
                 {/* Use onChangeText to get text value string */}
                 <TextInput 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
 
     innerContainer: {
-        width: "80%",
+        width: "88%",
         height: 50,
         justifyContent: "center",
     },

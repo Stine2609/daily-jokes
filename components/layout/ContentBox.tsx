@@ -44,7 +44,7 @@ export default function ContentBox(props:ContentBoxProps) {
         isLoading = false,
         date,
         ribbonTitle,
-        width = "80%",
+        width = "88%",
     } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight

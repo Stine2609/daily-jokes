@@ -35,7 +35,7 @@ export default function FilterToggle({ options, activeFilter, setActiveFilter }:
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        width: "80%",
+        width: "88%",
         alignSelf: "center",
         gap: 10,
         marginTop: 6,
