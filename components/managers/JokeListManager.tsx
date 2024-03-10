@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import Text from '../generalUI/Text';
 import JokeListItem from "../../components/listItem/JokeListItem";
 import { useJokesSearch } from "../../hooks/useJokesSearch";
 import { colors } from '../misc/Colors';
 import LoadingIndicator from '../generalUI/LoadingIndicator';
+import Button from '../buttons/Button';
 
 interface joke {
     user?: {
@@ -95,8 +96,9 @@ export default function JokeListManager({ initialCriteria = { sortBy: "-createTi
                     <View style={{ height: 50 }}><LoadingIndicator isLoading={isLoading} /></View>
                 )
             )}
-
-            <Button title="Load More" onPress={loadMoreJokes} />
+            {!isLoading && (
+                <Button style={{alignSelf: "center", marginTop: 20}} width={200} label="Load More" onPress={loadMoreJokes} />
+            )}
         </View>
     );
 }

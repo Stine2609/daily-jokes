@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import Text from '../generalUI/Text';
 import ContestListItem from "../../components/listItem/ContestListItem";
 import { useContestSearch } from '../../hooks/useContestSearch';
 import { colors } from '../misc/Colors';
 import LoadingIndicator from '../generalUI/LoadingIndicator';
 import { formatTimestampToShortDate } from '../../utils/date';
+import Button from '../buttons/Button';
 
 interface contest {
     date: string;
@@ -90,7 +91,9 @@ export default function ContestListManager({ initialCriteria = { sortBy: "-date"
                 )
             )}
 
-            <Button title="Load More" onPress={loadMoreContests} />
+            {!isLoading && (
+                <Button style={{alignSelf: "center", marginTop: 20}} width={200} label="Load More" onPress={loadMoreContests} />
+            )}
         </View>
     );
 }

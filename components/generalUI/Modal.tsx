@@ -18,22 +18,14 @@ export default function Modal(props: ModalProps) {
             transparent={true}
             visible={modalVisible}
             onRequestClose={onRequestClose}>
-            {/* Overlay View to capture outside clicks */}
-            <TouchableWithoutFeedback onPress={onRequestClose}>
-                <>
-                    <View style={styles.fullScreenView}>
-                        {/* Prevent onPress from being triggered when modal content is clicked */}
-                        <TouchableWithoutFeedback>
-                            <View style={styles.modalView}>
-                                {children}
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                    <View style={styles.closeButton}>
-                        <CircularButton size={36} variant="close" onPress={onRequestClose} />
-                    </View>
-                </>
-            </TouchableWithoutFeedback>
+            <View style={styles.fullScreenView}>
+                <View style={styles.modalView}>
+                    {children}
+                </View>
+            </View>
+            <View style={styles.closeButton}>
+                <CircularButton size={36} variant="close" onPress={onRequestClose} />
+            </View>
         </RNModal>
     );
 }

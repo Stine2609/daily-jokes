@@ -23,7 +23,7 @@ interface JokeListItemProps {
 }
 
 export default function JokeListItem(props: JokeListItemProps) {
-    const { joke, titleColor, textColor } = props;
+    const { joke, titleColor = "white", textColor="white" } = props;
 
     const [modalVisible, setModalVisible] = useState(false);
 

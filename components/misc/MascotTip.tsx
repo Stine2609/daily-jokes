@@ -2,15 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 import Text from "../generalUI/Text";
 import { colors } from "./Colors";
+import Modal from '../generalUI/Modal';
 
 interface MascotTipProps {
     containerHeight?: number;
     message?: string;
     size?: number;
+    visible: boolean;
+    onClose: () => void;
 }
 
 export default function MascotTip(props: MascotTipProps) {
-    const {containerHeight = 100, message = "THERE's 3 hours and 23 minutes left!", size = 250} = props;
+    const {containerHeight = 100, message = "THERE's 3 hours and 23 minutes left!", size = 250, visible, onClose} = props;
     // Refs for animated values
     const mascotAnim = useRef(new Animated.Value(100)).current; // Initial position off-screen to the right
     const messageAnim = useRef(new Animated.Value(0)).current; // Initial scale
@@ -31,30 +34,32 @@ export default function MascotTip(props: MascotTipProps) {
     }, [mascotAnim, messageAnim]);
 
     return (
-        <View style={[styles.container, { height: containerHeight }]}>
-            <Animated.Image
-                style={[
-                    styles.mascot,
-                    {
-                        height: size,
-                        width: size / 2,
-                        top: -(size / 3),
-                        transform: [{ translateX: mascotAnim }, { rotate: '-25deg' }],
-                    },
-                ]}
-                source={require('../../assets/mascot.png')}
-            />
-            <Animated.View
-                style={[
-                    styles.message,
-                    {
-                        transform: [{ scale: messageAnim }],
-                    },
-                ]}
-            >
-                <Text style={{ textAlign: 'center' }}>{message}</Text>
-            </Animated.View>
-        </View>
+        <Modal modalVisible={visible} onRequestClose={onClose}>
+            <View style={[styles.container, { height: containerHeight }]}>
+                <Animated.Image
+                    style={[
+                        styles.mascot,
+                        {
+                            height: size,
+                            width: size / 2,
+                            top: -(size / 3),
+                            transform: [{ translateX: mascotAnim }, { rotate: '-25deg' }],
+                        },
+                    ]}
+                    source={require('../../assets/mascot.png')}
+                />
+                <Animated.View
+                    style={[
+                        styles.message,
+                        {
+                            transform: [{ scale: messageAnim }],
+                        },
+                    ]}
+                >
+                    <Text style={{ textAlign: 'center' }}>{message}</Text>
+                </Animated.View>
+            </View>
+        </Modal>
     );
 };
 
