@@ -146,7 +146,7 @@ export default function ListItem(props: ListItemProps) {
 
     const ParentTag = noBox ? View : ContentBox;
     return(
-        <ParentTag style={{marginBottom: 18}}>
+        <ParentTag style={{marginBottom: 18}} fetchEnabled={false} >
             <TouchableOpacity onPress={onPress} style={listItemStyles.container}>
                 <View style={listItemStyles.left}>
                     {left}
