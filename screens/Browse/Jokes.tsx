@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import SearchBar from "../../components/generalUI/SearchBar";
 import FilterToggle from "../../components/generalUI/FilterToggle";
@@ -9,10 +9,6 @@ import { useContest } from '../../hooks/useContest';
 export default function Jokes() {
     const [activeFilter, setActiveFilter] = useState(0);
     const contest = useContest();
-
-    useEffect(() => {
-        console.log(activeFilter);
-    }, [activeFilter]);
 
     return(
         <View style={{flex: 1}}>

@@ -8,7 +8,7 @@ import { useContestSearch } from '../../hooks/useContestSearch';
 import ContestListManager from '../../components/managers/ContestListManager';
 
 export default function Contests() {
-    const { contests, isLoading } = useContestSearch();
+    //const { contests, isLoading } = useContestSearch();
 
     return(
         <View style={{ flex: 1 }}>

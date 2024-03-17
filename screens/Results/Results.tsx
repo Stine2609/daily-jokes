@@ -7,7 +7,7 @@ import MyJokesResults from "./MyJokesResults";
 
 export default function Results() {
     const route = useRoute();
-    const date = route.params?.date ? new Date(route.params.date) : new Date();
+    const contestId = route.params?.contestId ? route.params.contestId : 50;
 
     return(
         <ScreenView>
@@ -15,11 +15,11 @@ export default function Results() {
                 tabs={[
                     {
                         name: "All Jokes",
-                        component: <AllJokesResults date={date} />,
+                        component: <AllJokesResults contestId={contestId} />,
                     },
                     {
                         name: "My Jokes",
-                        component: <MyJokesResults date={date} />,
+                        component: <MyJokesResults contestId={contestId} />,
                     },
                 ]}
             />

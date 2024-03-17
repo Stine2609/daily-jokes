@@ -13,6 +13,7 @@ interface contest {
     name: string;
     winner: string;
     topic: string;
+    id: number;
 }
 
 interface ContestListManagerProps {
@@ -76,8 +77,9 @@ export default function ContestListManager({ initialCriteria = { sortBy: "-date"
                             key={index}
                             contest={{
                                 name: contest.topic,
-                                date: formatTimestampToShortDate(contest.date),
+                                date: contest.date,
                                 winner: "TEMPORARY",
+                                id: contest.id,
                             }}
                         />
                     ))}
