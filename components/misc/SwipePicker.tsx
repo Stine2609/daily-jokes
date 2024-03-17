@@ -18,7 +18,7 @@ interface CardProps {
 
 function Card({ text, animateCardAway }: CardProps) {
     return(
-        <ContentBox headerColor={colors.green.dark} style={{overflow: "hidden"}}>
+        <ContentBox title={"Rate"} headerColor={colors.green.dark} style={{overflow: "hidden"}}>
             <ScrollView style={{maxHeight: SCREEN_HEIGHT - 250}}>
                 <Text shadow={false} color={componentColors.text.contentBox}>
                     {text}

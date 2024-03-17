@@ -26,7 +26,7 @@ const fetchContestResult = async (): Promise<ContestResult[] | undefined> => {
         const result = await api("GET", "/contestresult/unread", undefined, await UserDataManager.getToken());
         return result as ContestResult[];
     } catch (error) {
-        console.error("Failed to fetch contestResult:", error);
+        console.log("Failed to fetch contestResult:", error);
     }
 };
 
