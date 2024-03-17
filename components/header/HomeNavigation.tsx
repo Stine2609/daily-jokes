@@ -26,6 +26,7 @@ export default function HomeNavigation() {
                 <DrawerLink 
                     text="Results"
                     linkTo="Results"
+                    linkParams={{ date: new Date().toISOString() }}
                     onPress={() => navigationDrawerRef.current?.closeDrawer()}
                 />
             </Drawer>
