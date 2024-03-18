@@ -22,7 +22,7 @@ export default function Home({ navigation }: HomeProps) {
     const contest = useContest();
     const timeLeft = useTimeLeft(contest.date);
 
-    return(
+    return (
         <ScreenView style={styles.container}>
             <StylizedTitle />
             <ContentBox
@@ -30,9 +30,9 @@ export default function Home({ navigation }: HomeProps) {
                 headerColor={colors.purple.dark}
                 text={
                     <Text shadow={false}>
-                        <Text shadow={false} color={colors.purple.medium}>{"The theme for today is \n"}</Text>
+                        <Text shadow={false} color={colors.purple.medium}>{"The theme for today is \n" + contest.topic}</Text>
                         <PulseAnimation>
-                            <Text shadow={false} color={colors.purple.dark}>{contest.topic}</Text>
+                            <Text shadow={false} color={colors.purple.dark}></Text>
                         </PulseAnimation>
                     </Text>
                 }
