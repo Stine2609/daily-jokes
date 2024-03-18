@@ -3,7 +3,7 @@ import Svg, { Polygon } from "react-native-svg";
 import Text from "../generalUI/Text";
 import { componentColors } from "../misc/Colors";
 import Shadow from "../misc/Shadow";
-import {percentageOf as p} from "../../utils/utils";
+import { percentageOf as p } from "../../utils/utils";
 
 interface BaseButtonProps {
     leftColor?: string;
@@ -19,13 +19,14 @@ interface BaseButtonProps {
     fontSize?: number;
     shadowHeight?: number;
     style?: StyleProp<ViewStyle>;
+    disabled?: boolean;
 }
 
-export default function BaseButton(props:BaseButtonProps) {
-    const { 
-        leftColor = "#D6AFFE", 
-        rightColor = "#C286FF", 
-        highlightColor = "#A75CF4", 
+export default function BaseButton(props: BaseButtonProps) {
+    const {
+        leftColor = "#D6AFFE",
+        rightColor = "#C286FF",
+        highlightColor = "#A75CF4",
         borderRadius = 22,
         onPress,
         label,
@@ -35,6 +36,7 @@ export default function BaseButton(props:BaseButtonProps) {
         fontSize = 18,
         shadowHeight = 10,
         style = null,
+        disabled,
     } = props;
 
     const buttonWidth = p(widthPercentage, 100);
@@ -56,7 +58,7 @@ export default function BaseButton(props:BaseButtonProps) {
         ${p(widthPercentage, 100)},${p(heightPercentage, 100)}`;
 
     return (
-        <TouchableOpacity style={style} onPress={onPress}>
+        <TouchableOpacity disabled={disabled} style={style} onPress={onPress}>
             <Shadow height={buttonHeight + shadowHeight} width={buttonContainerWidth} borderRadius={borderRadius} />
             <View style={[
                 styles.container,
@@ -96,7 +98,7 @@ export default function BaseButton(props:BaseButtonProps) {
                             fill={rightColor}
                         />
                     </Svg>
-                    <Text shadow style={[styles.buttonText, {fontSize: fontSize}]}>{label}</Text>
+                    <Text shadow style={[styles.buttonText, { fontSize: fontSize }]}>{label}</Text>
                 </View>
             </View>
         </TouchableOpacity>

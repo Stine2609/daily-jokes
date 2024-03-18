@@ -34,7 +34,7 @@ interface ContentBoxProps {
     fetchEnabled?: boolean;
 }
 
-export default function ContentBox(props:ContentBoxProps) {
+export default function ContentBox(props: ContentBoxProps) {
     const {
         children,
         title,
@@ -60,40 +60,40 @@ export default function ContentBox(props:ContentBoxProps) {
 
     const contest = useContest(date, fetchEnabled);
 
-    return(
-        <View style={[styles.container, ribbonTitle ? {marginTop: 25} : null]}>
+    return (
+        <View style={[styles.container, ribbonTitle ? { marginTop: 25 } : null]}>
             <Shadow height={containerHeight} shadowHeight={8} width={width} borderRadius={20} />
             <View style={[
-                    styles.background,
-                    {height: containerHeight + 4},
-                    {width: width}
-                ]} />
-            <View style={[style, styles.contentBoxContainer, {width: width}]} onLayout={onLayout}>
+                styles.background,
+                { height: containerHeight + 4 },
+                { width: width }
+            ]} />
+            <View style={[styles.contentBoxContainer, { width: width }, style]} onLayout={onLayout}>
                 <>
-                {ribbonTitle && (
-                    <View style={styles.ribbonTitleConatiner}>
-                        <RibbonTitle stars={false} topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ?  ribbonTitle.bottomText : title} />
-                    </View>
-                )}
-                {isLoading ? (
-                    null // TODO: add loading indicator
-                ) : (
-                    <>
-                        {!ribbonTitle && title && (
-                            <View style={[styles.titleContainer, {backgroundColor: headerColor}]}>
-                                <Text shadow={false}>{title ? title : contest.topic }</Text>
-                            </View>
-                        )}
-                        {text && (
-                            <View style={styles.textContainer}>
-                                <Text shadow={false} color={textColor} style={{textAlign: "center"}}>{text}</Text>
-                            </View>
-                        )}
-                        <View style={[ribbonTitle ? {marginTop: 40} : null, {gap: 10}]}>
-                            {children}
+                    {ribbonTitle && (
+                        <View style={styles.ribbonTitleConatiner}>
+                            <RibbonTitle stars={false} topText={ribbonTitle.topText} bottomText={ribbonTitle.bottomText ? ribbonTitle.bottomText : title} />
                         </View>
-                    </>
-                )}
+                    )}
+                    {isLoading ? (
+                        null // TODO: add loading indicator
+                    ) : (
+                        <>
+                            {!ribbonTitle && title && (
+                                <View style={[styles.titleContainer, { backgroundColor: headerColor }]}>
+                                    <Text shadow={false}>{title ? title : contest.topic}</Text>
+                                </View>
+                            )}
+                            {text && (
+                                <View style={styles.textContainer}>
+                                    <Text shadow={false} color={textColor} style={{ textAlign: "center" }}>{text}</Text>
+                                </View>
+                            )}
+                            <View style={[ribbonTitle ? { marginTop: 40 } : null, { gap: 10 }]}>
+                                {children}
+                            </View>
+                        </>
+                    )}
                 </>
             </View>
         </View>
@@ -104,8 +104,8 @@ interface ContentBoxBottomProps {
     children?: ReactNode;
 }
 
-export function ContentBoxBottom({children}:ContentBoxBottomProps) {
-    return(
+export function ContentBoxBottom({ children }: ContentBoxBottomProps) {
+    return (
         <View style={styles.bottomContainer}>
             {children}
         </View>
