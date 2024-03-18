@@ -8,7 +8,9 @@ const RETRY_DELAY = 500;
 export const api = async (method, endpoint, body, token, useCache = true, cacheDuration = 3) => {
     console.log(method, endpoint, body, token);
 
-    const cacheKey = `${method}:${endpoint}`;
+    const serializedBody = body ? JSON.stringify(body) : '';
+    const cacheKey = `${method}:${endpoint}:${serializedBody}`;
+
     if (useCache) {
         const cachedData = await getData(cacheKey);
         if (cachedData) {
