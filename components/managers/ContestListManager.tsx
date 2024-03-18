@@ -68,6 +68,7 @@ export default function ContestListManager({ initialCriteria = { sortBy: "-date"
         setCriteria(newCriteria);
     };
 
+    // TODO: add winner
     return (
         <View>
             {localContests.length > 0 ? (
@@ -78,7 +79,7 @@ export default function ContestListManager({ initialCriteria = { sortBy: "-date"
                             contest={{
                                 name: contest.topic,
                                 date: contest.date,
-                                winner: "TEMPORARY",
+                                winner: "",
                                 id: contest.id,
                             }}
                         />

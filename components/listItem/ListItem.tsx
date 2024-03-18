@@ -61,7 +61,7 @@ function CenterComponent(props: CenterComponentProps) {
             )}
             {stats && (
                 <View style={centerStyles.statsContainer}>
-                    {stats.likes && (
+                    {stats.likes !== undefined && stats.likes !== null && (
                         <View style={centerStyles.stat}>
                             <Image style={centerStyles.icon} source={require("../../assets/icons/likes.png")} />
                             <Text shadow={false} color="#49454F" size={16}>{stats.likes}</Text>

@@ -16,7 +16,7 @@ export const api = async (method, endpoint, body, token, useCache = true, cacheD
             if (now - cachedData.timestamp < cacheDuration * 1000) {
                 return cachedData.response;
             } else {
-                await removeData(cacheKey); // Invalidate the expired cache
+                await removeData(cacheKey);
             }
         }
     }

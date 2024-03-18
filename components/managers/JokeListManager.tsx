@@ -16,6 +16,7 @@ interface joke {
     userId: string;
     textBody: string;
     position: number;
+    score?: number;
 }
 
 interface JokeListManagerProps {
@@ -83,7 +84,7 @@ export default function JokeListManager({ initialCriteria = { sortBy: "-createTi
                                 text: joke.textBody,
                                 position: 1,
                                 stats: {
-                                    likes: 20,
+                                    likes: joke.score,
                                 }
                             }}
                         />
