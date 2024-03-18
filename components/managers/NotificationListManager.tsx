@@ -14,6 +14,9 @@ interface notification {
     body: string;
     type: string;
     createdAt: string;
+    data?: {
+        contestId: number;
+    };
 }
 
 interface NotificationListManagerProps {
@@ -79,6 +82,8 @@ export default function NotificationListManager({ initialCriteria = { sortBy: "-
                             title={notification.title}
                             text={notification.body}
                             date={formatTimestampToShortDate(notification.createdAt)}
+                            data={notification.data}
+                            type={notification.type}
                         />
                     ))}
                     {isLoading && <View style={{ height: 50 }}><LoadingIndicator isLoading={isLoading} /></View>}

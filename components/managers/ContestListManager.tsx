@@ -24,6 +24,7 @@ interface ContestListManagerProps {
         sortBy?: string;
         filters?: object;
         exclude?: object;
+        searchQuery?: string;
     };
 }
 

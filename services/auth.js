@@ -98,6 +98,11 @@ export const initialize = async () => {
         return;
     }
 
+    if (token) {
+        console.log("COULD NOT VALIDATE LOCAL TOKEN");
+        return;
+    }
+
     let localDeviceID = await UserDataManager.getDeviceID();
 
     if (!localDeviceID) {

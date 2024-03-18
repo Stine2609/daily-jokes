@@ -1,6 +1,7 @@
 import ListItem from "./ListItem";
 import { View, Image, StyleSheet } from "react-native";
 import { colors } from "../misc/Colors";
+import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 
 const images = {
     "coins-small": require("../../assets/images/coins-small.png"),
@@ -15,10 +16,29 @@ interface NotificationListItemProps {
     title: string;
     text?: string;
     date?: string;
+    data?: {
+        contestId: number;
+    };
+    type?: string;
 }
 
 export default function NotificationListItem(props: NotificationListItemProps) {
-    const { icon, title, text, date } = props;
+    const { icon, title, text, date, data, type } = props;
+
+    const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
+    const onPress = () => {
+        if (type === "contestResult") {
+            if (data?.contestId !== undefined && data?.contestId !== null) {
+                navigateToContestResult(data.contestId)
+            }
+        }
+    }
+
+    const navigateToContestResult = (contestId: number) => {
+        navigation.navigate("Results", { contestId: contestId });
+    }
+
     return(
         <ListItem
             noBox
@@ -31,6 +51,7 @@ export default function NotificationListItem(props: NotificationListItemProps) {
             centerTitle={title}
             centerText={text}
             centerBottomText={date}
+            onPress={onPress}
             useDefaultRight
         />
     )

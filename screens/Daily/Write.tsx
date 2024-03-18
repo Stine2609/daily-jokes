@@ -24,6 +24,8 @@ export default function Write() {
     let submitJoke = async () => {
         let result = await uploadJoke(inputValue);
 
+        setInputValue('');
+
         jokesLeftIndicatorRef.current?.refreshIndicator();
     }
 
@@ -61,6 +63,7 @@ export default function Write() {
                     <InputField
                         style={{maxHeight: SCREEN_HEIGHT - (350)}}
                         placeholder="Write your joke here..." 
+                        value={inputValue}
                         onChangeText={setInputValue}
                     />
                     <View style={{alignItems: "center"}}>
