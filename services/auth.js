@@ -2,6 +2,7 @@ import { api } from "../api/api";
 import { UserDataManager } from "./userDataManager";
 import { generateRandomCredentials } from "../utils/random";
 import { registerForPushNotificationsAsync } from "./notification";
+import { loadProfileToState } from "../state-management/profile";
 
 export const login = async (email, password) => {
     try {
@@ -11,6 +12,7 @@ export const login = async (email, password) => {
         });
 
         if (response.user.email === email) {
+            await loadProfileToState(response.user);
             UserDataManager.storeUserData(response.user);
         } else {
             throw new Error('Login failed');
@@ -26,6 +28,7 @@ export const loginWithToken = async (token) => {
         let response = await api("POST", "/auth/loginWithToken", undefined, token);
 
         if (response.user?.token === token) {
+            await loadProfileToState(response.user);
             UserDataManager.storeUserData(response.user);
             return response.user;
         } else {

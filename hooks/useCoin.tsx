@@ -3,6 +3,8 @@ import { api } from "../api/api";
 import { useIsFocused } from '@react-navigation/native';
 import { storeData, getData } from '../utils/storage'; 
 import { UserDataManager } from '../services/userDataManager';
+import { updateCoins } from '../state-management/coinSlice';
+import { store } from '../state-management/reduxStore';
 
 export const useCoin = () => {
     const [coin, setCoin] = useState({ coins: 0 });
@@ -15,6 +17,7 @@ export const useCoin = () => {
             const storedCoin = await getData('coin');
             if (storedCoin && isMounted) {
                 setCoin(storedCoin);
+                store.dispatch(updateCoins(storedCoin.coins));
             }
 
             if (isFocused && isMounted) {
@@ -23,6 +26,7 @@ export const useCoin = () => {
                     if (!coin_result.coins) coin_result.coins = 0;
                     if (isMounted) {
                         setCoin(coin_result);
+                        store.dispatch(updateCoins(coin_result.coins));
                         await storeData('coin', coin_result);
                     }
                 } catch (error) {

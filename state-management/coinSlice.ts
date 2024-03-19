@@ -15,6 +15,9 @@ export const coinSlice = createSlice({
         updateCoins: (state, action: PayloadAction<number>) => {
             state.coins = action.payload;
         },
+        decrementCoins: (state, action: PayloadAction<number>) => {
+            state.coins -= action.payload;
+        },
         resetState: (state) => {
             // Directly return the initialState
             return initialState;
@@ -24,6 +27,6 @@ export const coinSlice = createSlice({
 });
 
 // Export the generated action creators
-export const { updateCoins } = coinSlice.actions;
+export const { updateCoins, decrementCoins } = coinSlice.actions;
 
 export default coinSlice.reducer;

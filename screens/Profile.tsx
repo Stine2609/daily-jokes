@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ScreenView, { HEADER_HEIGHT, SCREEN_HEIGHT } from '../components/layout/ScreenView';
 import Text from '../components/generalUI/Text';
@@ -15,6 +15,7 @@ import AvatarSelection from '../components/profile/AvatarSelection';
 import BackgroundSelection from '../components/profile/BackgroundSelection';
 import { RootState } from '../state-management/reduxStore';
 import { useSelector } from 'react-redux';
+import { useProfile } from '../hooks/useProfile';
 
 
 type DrawerRef = {
@@ -23,6 +24,12 @@ type DrawerRef = {
 };
 
 export default function Profile() {
+
+    const profile = useProfile();
+
+    useEffect(() => {
+        console.log(profile);
+    }, [profile])
 
     const customizeDrawer = useRef<DrawerRef>(null);
 
@@ -47,7 +54,7 @@ export default function Profile() {
                 <View style={styles.profilePictureContainer}>
                     <View style={styles.profilePictureInner}>
                         <ProfilePicture id={avatarId} />
-                        <Text size={20}>Crazy Askeir</Text>
+                        <Text size={20}>{profile.user.name}</Text>
                     </View>
                 </View>
                 <ContentBox ribbonTitle={{
@@ -55,7 +62,7 @@ export default function Profile() {
                     bottomText: "Results",
                 }}>
                     <ContestListItem noBox={true} contest={{
-                        date: "Feb. 26",
+                        date: "2022-03-25",
                         name: "Puns!",
                         position: 5,
                         id: 1,
