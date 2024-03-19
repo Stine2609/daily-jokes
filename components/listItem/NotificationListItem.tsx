@@ -4,8 +4,8 @@ import { colors } from "../misc/Colors";
 import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 
 const images = {
-    "coins-small": require("../../assets/images/coins-small.png"),
-    "coins-medium": require("../../assets/images/coins-medium.png"),
+    "coins-small": require("../../assets/images/coins-small-notification.png"),
+    "coins-medium": require("../../assets/images/coins-medium-notification.png"),
     "coins-big": require("../../assets/images/coins-big.png"),
     "coins-chest": require("../../assets/images/coins-chest.png"),
     "info": require("../../assets/icons/info.png"),
@@ -39,7 +39,7 @@ export default function NotificationListItem(props: NotificationListItemProps) {
         navigation.navigate("Results", { contestId: contestId });
     }
 
-    return(
+    return (
         <ListItem
             noBox
             left={

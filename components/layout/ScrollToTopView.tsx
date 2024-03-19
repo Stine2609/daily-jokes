@@ -1,14 +1,15 @@
 import React, { useState, useRef, ReactNode } from "react";
-import { ScrollView, Pressable, Image, StyleSheet} from "react-native";
+import { ScrollView, Pressable, Image, StyleSheet, ViewStyle, StyleProp } from "react-native";
 import { colors } from "../misc/Colors";
 
 interface ScrollToTopViewProps {
     children?: ReactNode;
-    scrollToTopThreshold?: number
+    scrollToTopThreshold?: number;
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 export default function ScrollToTopView(props: ScrollToTopViewProps) {
-    const { children, scrollToTopThreshold = 200 } = props;
+    const { children, scrollToTopThreshold = 200, containerStyle } = props;
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [scrollingBack, setScrollingBack] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
@@ -28,13 +29,13 @@ export default function ScrollToTopView(props: ScrollToTopViewProps) {
         setScrollingBack(true);
         scrollViewRef.current?.scrollTo({ y: 0, animated: true });
     };
-    return(
+    return (
         <>
             <ScrollView
                 ref={scrollViewRef}
                 onScroll={handleScroll}
                 scrollEventThrottle={16} // Adjust as needed for smoother or more responsive scrolling
-                contentContainerStyle={{ paddingBottom: 100 }}
+                contentContainerStyle={[{ paddingBottom: 100 }, containerStyle]}
             >
                 {children}
             </ScrollView>
@@ -69,6 +70,6 @@ const styles = StyleSheet.create({
     scrollToTopIcon: {
         width: 20,
         height: 20,
-        transform: [{rotate: "90deg"}],
+        transform: [{ rotate: "90deg" }],
     }
 });
