@@ -5,7 +5,7 @@ const apiUrl = getApiUrl();
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 500;
 
-export const api = async (method, endpoint, body, token, useCache = true, cacheDuration = 3) => {
+export const api = async (method, endpoint, body, token, useCache = true, cacheDuration = 3, retry = true) => {
     console.log(method, endpoint, body, token);
 
     const serializedBody = body ? JSON.stringify(body) : '';
@@ -47,10 +47,11 @@ export const api = async (method, endpoint, body, token, useCache = true, cacheD
                 }
                 return jsonResponse;
             } else {
-                throw new Error('Request failed: ' + response.status);
+                const jsonResponse = await response.json();
+                throw jsonResponse;
             }
         } catch (error) {
-            if (attempts < MAX_RETRIES) {
+            if (attempts < MAX_RETRIES && retry) {
                 const backoff = RETRY_DELAY * Math.pow(2, attempts) + Math.random() * RETRY_DELAY;
                 console.log(`Attempt ${attempts + 1}: ${error.message}. Retrying in ${backoff}ms...`);
                 attempts++;

@@ -64,6 +64,7 @@ export const register = async (email, password, name, deviceID = "") => {
         });
 
         if (response.user.email === email) {
+            await loadProfileToState(response.user);
             UserDataManager.storeUserData(response.user);
             return response.user;
         } else {

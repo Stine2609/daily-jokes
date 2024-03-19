@@ -28,11 +28,11 @@ const initialState: InitialState = {
     backgroundPrice: 100,
     color: "white",
 
-    ownedAvatars: [0, 1, 2, 3, 4, 5], // These avatars are permanently unlocked by default
-    remainingAvatars: [6, 7, 8, 9, 10, 11, 12],
+    ownedAvatars: [], // These avatars are permanently unlocked by default
+    remainingAvatars: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 
-    ownedBackgrounds: [0, 1], // These backgrounds are permanently unlocked by default
-    remainingBackgrounds: [2],
+    ownedBackgrounds: [], // These backgrounds are permanently unlocked by default
+    remainingBackgrounds: [0, 1, 2],
 }
 
 export const profileSlice = createSlice({

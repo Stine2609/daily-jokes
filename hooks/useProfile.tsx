@@ -22,7 +22,6 @@ export const useProfile = () => {
                     const profile_result = await api("POST", "/auth/loginWithToken", undefined, await UserDataManager.getToken());
                     if (isMounted) {
                         setProfile(profile_result);
-                        console.log(profile_result);
                         await storeData('profile', profile_result);
                     }
                 } catch (error) {

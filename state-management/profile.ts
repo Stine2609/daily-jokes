@@ -57,42 +57,60 @@ export async function loadProfileToState(profile: profileTypes) {
     }
 }
 
+
 export async function buyAvatar(id: number) {
     try {
-        let result = await api("POST", "/auth/purchaseProfilePicture", { pictureId: id+"" }, await UserDataManager.getToken());
+        const result = await secureApiCall("/auth/purchaseProfilePicture", "POST", { pictureId: String(id) });
         store.dispatch(addOwnedAvatar(id));
         selectAvatar(id);
         store.dispatch(decrementCoins(result.price));
+        showToast("Avatar purchased successfully!");
     } catch (error) {
-        console.log(error);
+        
     }
 }
 
-export function selectAvatar(id: number) {
-    store.dispatch(updateAvatar(id));
-    updateProfilePictureInDatabase(id);
-}
+export async function selectAvatar(id: number) {
+    try {
+        await secureApiCall("/auth/changeProfilePicture", "POST", { pictureId: String(id) });
+        store.dispatch(updateAvatar(id));
+        showToast("Avatar changed successfully!");
+    } catch (error) {
 
-async function updateProfilePictureInDatabase(id: number) {
-    await api("POST" , "/auth/changeProfilePicture", { pictureId: id+"" }, await UserDataManager.getToken());
+    }
 }
 
 export async function buyBackground(id: number) {
     try {
-        let result = await api("POST", "/auth/purchaseBackground", { backgroundId: id+"" }, await UserDataManager.getToken());
+        const result = await secureApiCall("/auth/purchaseBackground", "POST", { backgroundId: String(id) });
         store.dispatch(addOwnedBackground(id));
         selectBackground(id);
         store.dispatch(decrementCoins(result.price));
+        showToast("Background purchased successfully!");
     } catch (error) {
-        console.log(error);
+        
     }
 }
 
-export function selectBackground(id: number) {
-    store.dispatch(updateBackground(id));
-    updateProfileBackgroundInDatabase(id);
+export async function selectBackground(id: number) {
+    try {
+        await secureApiCall("/auth/changeBackground", "POST", { backgroundId: String(id) });
+        store.dispatch(updateBackground(id));
+        showToast("Background changed successfully!");
+    } catch (error) {
+        
+    }
 }
 
-async function updateProfileBackgroundInDatabase(id: number) {
-    await api("POST" , "/auth/changeBackground", { backgroundId: id+"" }, await UserDataManager.getToken());
+async function secureApiCall(endpoint: string, method: string, data: object) {
+    try {
+        const token = await UserDataManager.getToken();
+        const result = await api(method, endpoint, data, token, true, 3, false);
+        return result;
+    } catch (error) {
+        if (error?.error) {
+            showToast(error.error);
+        }
+        throw new Error('');
+    }
 }

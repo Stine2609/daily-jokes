@@ -27,10 +27,6 @@ export default function Profile() {
 
     const profile = useProfile();
 
-    useEffect(() => {
-        console.log(profile);
-    }, [profile])
-
     const customizeDrawer = useRef<DrawerRef>(null);
 
     const { avatarId } = useSelector((state: RootState) => state.profile);
