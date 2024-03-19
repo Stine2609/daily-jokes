@@ -1,15 +1,16 @@
 import { ReactNode } from "react";
 import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
 import { componentColors } from "../misc/Colors";
-import {percentageOf as p} from "../../utils/utils";
- 
+import { percentageOf as p } from "../../utils/utils";
+
 interface CircularButtonProps {
     onPress?: () => void;
-    variant?: "yes" | "no" | "close" | "back" | "hamburger" | "superlike";
+    variant?: "yes" | "no" | "close" | "back" | "hamburger" | "superlike" | "no-ads" | "chest" | "boost";
     iconComponent?: ReactNode;
     backgroundColor?: string;
     highlightColor?: string;
     size?: number;
+    noPress?: boolean;
 }
 
 const variants = {
@@ -48,19 +49,37 @@ const variants = {
         backgroundColor: componentColors.superlikeButton.background,
         highlightColor: componentColors.superlikeButton.highlight,
     },
+
+    "no-ads": {
+        icon: require("../../assets/icons/no-ads.png"),
+        backgroundColor: componentColors.yesButton.background,
+        highlightColor: componentColors.yesButton.highlight,
+    },
+
+    chest: {
+        icon: require("../../assets/images/coins-chest.png"),
+        backgroundColor: componentColors.yesButton.background,
+        highlightColor: componentColors.yesButton.highlight,
+    },
+
+    boost: {
+        icon: require("../../assets/icons/boost.png"),
+        backgroundColor: componentColors.yesButton.background,
+        highlightColor: componentColors.yesButton.highlight,
+    },
 }
 
 export default function CircularButton(props: CircularButtonProps) {
-    const { onPress, variant, iconComponent, backgroundColor, highlightColor, size = 40 } = props;
+    const { onPress, variant, iconComponent, backgroundColor, highlightColor, size = 40, noPress } = props;
 
     const borderWidth = p(7.5, size);
     const backgroundOffset = p(7, size);
 
-    return(
-        <TouchableOpacity onPress={onPress}>
+    return (
+        <TouchableOpacity disabled={noPress} onPress={onPress}>
             <View style={[
                 styles.container,
-                {width: size}
+                { width: size }
             ]}>
                 <View style={[
                     styles.background,

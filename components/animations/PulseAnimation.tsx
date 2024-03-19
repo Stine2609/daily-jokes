@@ -8,7 +8,7 @@ interface PulseAnimationProps {
     maxSize?: number;
 }
 
-export default function PulseAnimation({children, duration = 4000, minSize = 1, maxSize = 1.075}: PulseAnimationProps) {
+export default function PulseAnimation({ children, duration = 4000, minSize = 1, maxSize = 1.075 }: PulseAnimationProps) {
     const pulseAnim = useRef(new Animated.Value(minSize)).current;
 
     useEffect(() => {
@@ -28,8 +28,8 @@ export default function PulseAnimation({children, duration = 4000, minSize = 1, 
         ).start();
     }, [pulseAnim]);
 
-    return(
-        <Animated.View style={{transform: [{scale: pulseAnim}]}}>
+    return (
+        <Animated.View style={[{ transform: [{ scale: pulseAnim }] }, { alignItems: "center", justifyContent: "center" }]}>
             {children}
         </Animated.View>
     )

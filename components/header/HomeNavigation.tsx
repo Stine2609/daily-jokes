@@ -33,6 +33,13 @@ export default function HomeNavigation() {
                     linkParams={{ date: new Date().toISOString() }}
                     onPress={() => navigationDrawerRef.current?.closeDrawer()}
                 />
+                <DrawerLink
+                    text="Store"
+                    linkTo="Store"
+                    icon={<AntDesign name="star" size={20} color={"white"} />}
+                    linkParams={{ date: new Date().toISOString() }}
+                    onPress={() => navigationDrawerRef.current?.closeDrawer()}
+                />
             </Drawer>
         </>
     )

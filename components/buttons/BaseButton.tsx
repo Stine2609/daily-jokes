@@ -34,7 +34,7 @@ export default function BaseButton(props: BaseButtonProps) {
         heightPercentage = 40,
         borderWidth = 2.5,
         fontSize = 18,
-        shadowHeight = 10,
+        shadowHeight = 8,
         style = null,
         disabled,
     } = props;

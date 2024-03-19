@@ -6,6 +6,7 @@ import Browse from "./Browse/Browse";
 import Results from "./Results/Results";
 import Profile from "./Profile";
 import Notifications from "./Notifications";
+import Store from "./Store";
 import ContestResultChecker from "../components/misc/ContestResultChecker";
 
 export type StackParamsList = {
@@ -15,6 +16,7 @@ export type StackParamsList = {
     Results: undefined;
     Profile: undefined;
     Notifications: undefined;
+    Store: undefined;
 }
 
 const Stack = createStackNavigator<StackParamsList>();
@@ -52,6 +54,11 @@ export default function AppNavigationStack() {
                 <Stack.Screen
                     name="Notifications"
                     component={Notifications}
+                    options={({ navigation, route }) => HeaderOptions({ navigation, route })}
+                />
+                <Stack.Screen
+                    name="Store"
+                    component={Store}
                     options={({ navigation, route }) => HeaderOptions({ navigation, route })}
                 />
             </Stack.Navigator>

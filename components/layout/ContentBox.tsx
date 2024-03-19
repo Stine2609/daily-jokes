@@ -32,6 +32,7 @@ interface ContentBoxProps {
     }
     width?: DimensionValue;
     fetchEnabled?: boolean;
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 export default function ContentBox(props: ContentBoxProps) {
@@ -47,6 +48,7 @@ export default function ContentBox(props: ContentBoxProps) {
         ribbonTitle,
         width = "88%",
         fetchEnabled = true,
+        containerStyle,
     } = props;
 
     const [containerHeight, setContainerHeight] = useState(200); // Default minHeight
@@ -61,7 +63,7 @@ export default function ContentBox(props: ContentBoxProps) {
     const contest = useContest(date, fetchEnabled);
 
     return (
-        <View style={[styles.container, ribbonTitle ? { marginTop: 25 } : null]}>
+        <View style={[styles.container, ribbonTitle ? { marginTop: 25 } : null, containerStyle]}>
             <Shadow height={containerHeight} shadowHeight={8} width={width} borderRadius={20} />
             <View style={[
                 styles.background,
