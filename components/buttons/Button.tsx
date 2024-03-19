@@ -11,7 +11,8 @@ interface ButtonProps {
     shadowHeight?: number;
     style?: StyleProp<ViewStyle>;
     borderRadius?: number;
-    variant?: "play" | "toggle" | "submit" | "blue" | "pink"
+    variant?: "play" | "toggle" | "submit" | "blue" | "pink";
+    disabled?: boolean;
 }
 
 const variants = {
@@ -44,23 +45,31 @@ const variants = {
         rightColor: colors.pink.medium,
         highlightColor: colors.pink.dark,
         borderRadius: 10,
+    },
+
+    "inactive": {
+        leftColor: "gainsboro",
+        rightColor: "silver",
+        highlightColor: "darkgray",
+        borderRadius: 10,
     }
 }
 
-export default function Button({ label, onPress, height, width, fontSize, shadowHeight, style, borderRadius, variant = "play" }: ButtonProps) {
+export default function Button({ label, onPress, height, width, fontSize, shadowHeight, style, borderRadius, variant = "play", disabled }: ButtonProps) {
     return (
         <BaseButton
             onPress={onPress}
             label={label}
-            leftColor={variants[variant].leftColor}
-            rightColor={variants[variant].rightColor}
-            highlightColor={variants[variant].highlightColor}
-            borderRadius={borderRadius ? borderRadius : variants[variant].borderRadius}
+            leftColor={disabled ? variants.inactive.leftColor : variants[variant].leftColor}
+            rightColor={disabled ? variants.inactive.rightColor : variants[variant].rightColor}
+            highlightColor={disabled ? variants.inactive.highlightColor : variants[variant].highlightColor}
+            borderRadius={disabled ? variants.inactive.borderRadius : (borderRadius ? borderRadius : variants[variant].borderRadius)}
             heightPercentage={height}
             widthPercentage={width}
             fontSize={fontSize}
             shadowHeight={shadowHeight}
             style={style}
+            disabled={disabled}
         />
     );
 }

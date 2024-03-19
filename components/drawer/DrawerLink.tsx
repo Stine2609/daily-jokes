@@ -1,10 +1,11 @@
+import { ReactNode } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Text from "../generalUI/Text";
 import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 
 interface DrawerLinkProps {
     text?: string;
-    icon?: string;
+    icon?: ReactNode;
     linkTo: string;
     linkParams?: object;
     onPress: () => void;
@@ -15,11 +16,12 @@ export default function DrawerLink(props: DrawerLinkProps) {
 
     const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
-    return(
+    return (
         <TouchableOpacity style={styles.container} onPress={() => {
-            navigation.navigate(linkTo, linkParams); 
+            navigation.navigate(linkTo, linkParams);
             onPress();
         }}>
+            {icon}
             <Text>{text}</Text>
         </TouchableOpacity>
     )
@@ -28,5 +30,8 @@ export default function DrawerLink(props: DrawerLinkProps) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        gap: 10,
+        margin: 8,
+        marginHorizontal: 14,
     }
 })

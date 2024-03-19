@@ -8,7 +8,14 @@ import ContestListItem from '../components/listItem/ContestListItem';
 import ProfileBackground from '../components/profile/ProfileBackground';
 import ScrollToTopView from '../components/layout/ScrollToTopView';
 import Button from '../components/buttons/Button';
+import CircularButton from '../components/buttons/CircularButton';
 import Drawer from '../components/drawer/Drawer';
+import ContentTab from '../components/layout/ContentTab';
+import AvatarSelection from '../components/profile/AvatarSelection';
+import BackgroundSelection from '../components/profile/BackgroundSelection';
+import { RootState } from '../state-management/reduxStore';
+import { useSelector } from 'react-redux';
+
 
 type DrawerRef = {
     openDrawer: () => void;
@@ -16,10 +23,12 @@ type DrawerRef = {
 };
 
 export default function Profile() {
-    
+
     const customizeDrawer = useRef<DrawerRef>(null);
 
-    return(
+    const { avatarId } = useSelector((state: RootState) => state.profile);
+
+    return (
         <ScreenView style={{
             marginTop: 0,
             maxHeight: HEADER_HEIGHT + SCREEN_HEIGHT,
@@ -37,7 +46,7 @@ export default function Profile() {
                 </ProfileBackground>
                 <View style={styles.profilePictureContainer}>
                     <View style={styles.profilePictureInner}>
-                        <ProfilePicture id={6} />
+                        <ProfilePicture id={avatarId} />
                         <Text size={20}>Crazy Askeir</Text>
                     </View>
                 </View>
@@ -49,18 +58,40 @@ export default function Profile() {
                         date: "Feb. 26",
                         name: "Puns!",
                         position: 5,
+                        id: 1,
                         stats: {
                             likes: 234,
                             participants: 32,
                         }
-                    }}/>
+                    }} />
                 </ContentBox>
             </ScrollToTopView>
 
-            <Drawer width="100%" ref={customizeDrawer}>
-                <Button label="Close Drawer" onPress={() => customizeDrawer.current?.closeDrawer()} />
+            <Drawer width="94%" ref={customizeDrawer}>
+                <View style={{ alignSelf: "center", width: "86%", marginVertical: 10 }}>
+                    <View style={{ alignItems: "flex-start" }}>
+                        <CircularButton variant="back" onPress={() => customizeDrawer.current?.closeDrawer()} />
+                    </View>
+                </View>
+                <ContentTab
+                    contentSpacing={10}
+                    tabs={[
+                        {
+                            name: "Avatars",
+                            component: (
+                                <AvatarSelection />
+                            )
+                        },
+                        {
+                            name: "Backgrounds",
+                            component: (
+                                <BackgroundSelection />
+                            )
+                        },
+                    ]}
+                />
             </Drawer>
-        </ScreenView>
+        </ScreenView >
     )
 }
 
@@ -70,7 +101,7 @@ const styles = StyleSheet.create({
         width: "88%",
         alignSelf: "center"
     },
-    
+
     profilePictureInner: {
         bottom: "50%",
         position: "absolute",
