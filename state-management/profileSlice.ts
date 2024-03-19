@@ -28,11 +28,11 @@ const initialState: InitialState = {
     backgroundPrice: 100,
     color: "white",
 
-    ownedAvatars: [0, 1, 2, 3, 4, 5],
+    ownedAvatars: [0, 1, 2, 3, 4, 5], // These avatars are permanently unlocked by default
     remainingAvatars: [6, 7, 8, 9, 10, 11, 12],
 
-    ownedBackgrounds: [0],
-    remainingBackgrounds: [1, 2],
+    ownedBackgrounds: [0, 1], // These backgrounds are permanently unlocked by default
+    remainingBackgrounds: [2],
 }
 
 export const profileSlice = createSlice({
@@ -42,18 +42,23 @@ export const profileSlice = createSlice({
         updateAvatar: (state, action: PayloadAction<number>) => {
             state.avatarId = action.payload;
         },
+
         updateBackground: (state, action: PayloadAction<number>) => {
             state.backgroundId = action.payload;
         },
+
         updateAvatarPrice: (state, action: PayloadAction<number>) => {
             state.avatarPrice = action.payload;
         },
+
         updateBackgroundPrice: (state, action: PayloadAction<number>) => {
             state.backgroundPrice = action.payload;
         },
+
         updateColor: (state, action: PayloadAction<string>) => {
             state.color = action.payload;
         },
+
         addOwnedAvatar: (state, action: PayloadAction<number>) => {
             const avatarId = action.payload;
             // Check if the avatar ID already exists to avoid duplicates in ownedAvatars
@@ -66,6 +71,7 @@ export const profileSlice = createSlice({
                 }
             }
         },
+
         addOwnedBackground: (state, action: PayloadAction<number>) => {
             const backgroundId = action.payload;
             // Check if the background ID already exists to avoid duplicates in ownedBackgrounds

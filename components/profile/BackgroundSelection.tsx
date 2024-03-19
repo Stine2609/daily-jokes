@@ -4,37 +4,36 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { RootState } from "../../state-management/reduxStore";
 import Button from "../buttons/Button";
-import { ProfilePicture } from './Avatar';
+import ProfileBackground from './ProfileBackground';
 import PriceDisplay from '../misc/PriceDisplay';
-import { buyAvatar, selectAvatar } from '../../state-management/profile';
+import { buyBackground, selectBackground } from '../../state-management/profile';
 
-export default function AvatarSelection() {
-    const { ownedAvatars, remainingAvatars, avatarId, avatarPrice } = useSelector((state: RootState) => state.profile);
+export default function BackgroundSelection() {
+    const { ownedBackgrounds, remainingBackgrounds, backgroundId, backgroundPrice } = useSelector((state: RootState) => state.profile);
 
     return (
         <ScrollView contentContainerStyle={{ paddingBottom: 50 }}>
             <View style={styles.container}>
-                {/* Loop through ownedAvatars */}
+
                 <View style={styles.sectionContainer}>
-                    {ownedAvatars.map((id) => (
-                        <View key={id} style={styles.avatarContainer}>
-                            <ProfilePicture size={100} id={id} />
-                            {id == avatarId ? (
+                    {ownedBackgrounds.map((id) => (
+                        <View key={id} style={styles.backgroundContainer}>
+                            <ProfileBackground sizePercentage={40} imageId={id} />
+                            {id == backgroundId ? (
                                 <Button disabled={true} height={34} label="Selected" variant="pink" />
                             ) : (
-                                <Button onPress={() => selectAvatar(id)} height={34} label="Select" variant="pink" />
+                                <Button onPress={() => selectBackground(id)} height={34} label="Select" variant="pink" />
                             )}
                         </View>
                     ))}
                 </View>
 
-                {/* Loop through remainingAvatars */}
                 <View style={styles.sectionContainer}>
-                    {remainingAvatars.map((id) => (
-                        <View key={id} style={styles.avatarContainer}>
-                            <ProfilePicture size={100} id={id} />
-                            <PriceDisplay price={avatarPrice} />
-                            <Button onPress={() => buyAvatar(id)} height={34} label="Buy" variant="blue" />
+                    {remainingBackgrounds.map((id) => (
+                        <View key={id} style={styles.backgroundContainer}>
+                            <ProfileBackground sizePercentage={40} imageId={id} />
+                            <PriceDisplay price={backgroundPrice} />
+                            <Button onPress={() => buyBackground(id)} height={34} label="Buy" variant="blue" />
                         </View>
                     ))}
                 </View>
@@ -53,13 +52,12 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         justifyContent: "center",
         gap: 10,
-        rowGap: 20,
     },
 
-
-    avatarContainer: {
+    backgroundContainer: {
         gap: 10,
-        justifyContent: "center",
         margin: 5,
+        flex: 1,
+        alignItems: "center",
     },
 });

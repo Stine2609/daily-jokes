@@ -12,6 +12,7 @@ import CircularButton from '../components/buttons/CircularButton';
 import Drawer from '../components/drawer/Drawer';
 import ContentTab from '../components/layout/ContentTab';
 import AvatarSelection from '../components/profile/AvatarSelection';
+import BackgroundSelection from '../components/profile/BackgroundSelection';
 import { RootState } from '../state-management/reduxStore';
 import { useSelector } from 'react-redux';
 
@@ -84,7 +85,7 @@ export default function Profile() {
                         {
                             name: "Backgrounds",
                             component: (
-                                <></>
+                                <BackgroundSelection />
                             )
                         },
                     ]}
