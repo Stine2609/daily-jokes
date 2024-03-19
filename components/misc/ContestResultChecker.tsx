@@ -16,6 +16,7 @@ type ContestResult = {
         topic: string;
         date: string;
     };
+    contestId: number;
 };
 
 const LAST_POLL_TIME_KEY = 'LAST_POLL_TIME';
@@ -80,6 +81,7 @@ export default function ContestResultChecker({ children }: ContestResultCheckerP
                         rank: "#" + contestResult.rank.toString(),
                         theme: contestResult.contest.topic,
                         reward: contestResult.coins,
+                        contestId: contestResult.contestId,
                     }}
                 />
             )}

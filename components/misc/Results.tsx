@@ -4,6 +4,7 @@ import Text from "../generalUI/Text";
 import Button from "../buttons/Button";
 import Modal from "../generalUI/Modal";
 import { percentageOf as p } from "../../utils/utils";
+import { useNavigation, NavigationProp, ParamListBase } from "@react-navigation/native";
 
 interface ResultsProps {
     visible: boolean;
@@ -13,11 +14,15 @@ interface ResultsProps {
         theme?: string;
         rank?: string;
         reward?: number | string;
+        contestId?: number;
     }
 }
 
 export default function Results(props: ResultsProps) {
     const { visible, results, onRequestClose } = props;
+
+    const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
     return(
         <Modal modalVisible={visible} onRequestClose={onRequestClose} >
             <ContentBox ribbonTitle={{
@@ -45,7 +50,10 @@ export default function Results(props: ResultsProps) {
                             <Text shadow={false} style={[styles.text, styles.textFieldText, {fontSize: 24}]}>{results.reward}</Text>
                         </View>
                     </View>
-                    <Button variant="toggle" fontSize={24} label="View"></Button>
+                    <Button variant="toggle" fontSize={24} label="View" onPress={() => {
+                        navigation.navigate("Results", { contestId: results.contestId });
+                        onRequestClose();
+                    }}></Button>
                 </View>
             </ContentBox>
         </Modal>
