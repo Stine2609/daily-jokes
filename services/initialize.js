@@ -4,6 +4,6 @@ import { initialize as initializeIAP } from "./IAP.js";
 
 export const initialize = async () => {
     await initializeAuth();
-    initializeIAP();
     initializeContestResult();
+    initializeIAP();
 };
